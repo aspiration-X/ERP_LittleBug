@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.littlebug.dao.DeviceMapper">
+  <resultMap id="BaseResultMap" type="com.littlebug.bean.Device">
+    <id column="device_id" jdbcType="VARCHAR" property="deviceId" />
+    <result column="device_name" jdbcType="VARCHAR" property="deviceName" />
+    <result column="device_type_id" jdbcType="VARCHAR" property="deviceTypeId" />
+    <result column="device_status_id" jdbcType="VARCHAR" property="deviceStatusId" />
+    <result column="device_status" jdbcType="VARCHAR" property="deviceStatus" />
+    <result column="device_purchase_date" jdbcType="TIMESTAMP" property="devicePurchaseDate" />
+    <result column="device_purchase_price" jdbcType="DECIMAL" property="devicePurchasePrice" />
+    <result column="device_manufacture_date" jdbcType="TIMESTAMP" property="deviceManufactureDate" />
+    <result column="device_service_life" jdbcType="TIMESTAMP" property="deviceServiceLife" />
+    <result column="device_keeper_id" jdbcType="VARCHAR" property="deviceKeeperId" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    device_id, device_name, device_type_id, device_status_id, device_status, device_purchase_date, 
+    device_purchase_price, device_manufacture_date, device_service_life, device_keeper_id, 
+    note
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from device
+    where device_id = #{deviceId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from device
+    where device_id = #{deviceId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.littlebug.bean.Device">
+    insert into device (device_id, device_name, device_type_id, 
+      device_status_id, device_status, device_purchase_date, 
+      device_purchase_price, device_manufacture_date, 
+      device_service_life, device_keeper_id, note
+      )
+    values (#{deviceId,jdbcType=VARCHAR}, #{deviceName,jdbcType=VARCHAR}, #{deviceTypeId,jdbcType=VARCHAR}, 
+      #{deviceStatusId,jdbcType=VARCHAR}, #{deviceStatus,jdbcType=VARCHAR}, #{devicePurchaseDate,jdbcType=TIMESTAMP}, 
+      #{devicePurchasePrice,jdbcType=DECIMAL}, #{deviceManufactureDate,jdbcType=TIMESTAMP}, 
+      #{deviceServiceLife,jdbcType=TIMESTAMP}, #{deviceKeeperId,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.littlebug.bean.Device">
+    insert into device
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="deviceId != null">
+        device_id,
+      </if>
+      <if test="deviceName != null">
+        device_name,
+      </if>
+      <if test="deviceTypeId != null">
+        device_type_id,
+      </if>
+      <if test="deviceStatusId != null">
+        device_status_id,
+      </if>
+      <if test="deviceStatus != null">
+        device_status,
+      </if>
+      <if test="devicePurchaseDate != null">
+        device_purchase_date,
+      </if>
+      <if test="devicePurchasePrice != null">
+        device_purchase_price,
+      </if>
+      <if test="deviceManufactureDate != null">
+        device_manufacture_date,
+      </if>
+      <if test="deviceServiceLife != null">
+        device_service_life,
+      </if>
+      <if test="deviceKeeperId != null">
+        device_keeper_id,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="deviceId != null">
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceName != null">
+        #{deviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeId != null">
+        #{deviceTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceStatusId != null">
+        #{deviceStatusId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceStatus != null">
+        #{deviceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="devicePurchaseDate != null">
+        #{devicePurchaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="devicePurchasePrice != null">
+        #{devicePurchasePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="deviceManufactureDate != null">
+        #{deviceManufactureDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deviceServiceLife != null">
+        #{deviceServiceLife,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deviceKeeperId != null">
+        #{deviceKeeperId,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.littlebug.bean.Device">
+    update device
+    <set>
+      <if test="deviceName != null">
+        device_name = #{deviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeId != null">
+        device_type_id = #{deviceTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceStatusId != null">
+        device_status_id = #{deviceStatusId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceStatus != null">
+        device_status = #{deviceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="devicePurchaseDate != null">
+        device_purchase_date = #{devicePurchaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="devicePurchasePrice != null">
+        device_purchase_price = #{devicePurchasePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="deviceManufactureDate != null">
+        device_manufacture_date = #{deviceManufactureDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deviceServiceLife != null">
+        device_service_life = #{deviceServiceLife,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deviceKeeperId != null">
+        device_keeper_id = #{deviceKeeperId,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where device_id = #{deviceId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.littlebug.bean.Device">
+    update device
+    set device_name = #{deviceName,jdbcType=VARCHAR},
+      device_type_id = #{deviceTypeId,jdbcType=VARCHAR},
+      device_status_id = #{deviceStatusId,jdbcType=VARCHAR},
+      device_status = #{deviceStatus,jdbcType=VARCHAR},
+      device_purchase_date = #{devicePurchaseDate,jdbcType=TIMESTAMP},
+      device_purchase_price = #{devicePurchasePrice,jdbcType=DECIMAL},
+      device_manufacture_date = #{deviceManufactureDate,jdbcType=TIMESTAMP},
+      device_service_life = #{deviceServiceLife,jdbcType=TIMESTAMP},
+      device_keeper_id = #{deviceKeeperId,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR}
+    where device_id = #{deviceId,jdbcType=VARCHAR}
+  </update>
+</mapper>

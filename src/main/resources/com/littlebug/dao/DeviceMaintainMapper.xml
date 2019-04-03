@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.littlebug.dao.DeviceMaintainMapper">
+  <resultMap id="BaseResultMap" type="com.littlebug.bean.DeviceMaintain">
+    <id column="device_maintain_id" jdbcType="VARCHAR" property="deviceMaintainId" />
+    <result column="device_fault_id" jdbcType="VARCHAR" property="deviceFaultId" />
+    <result column="device_maintain_emp_id" jdbcType="VARCHAR" property="deviceMaintainEmpId" />
+    <result column="device_maintain_date" jdbcType="TIMESTAMP" property="deviceMaintainDate" />
+    <result column="device_maintain_result" jdbcType="VARCHAR" property="deviceMaintainResult" />
+    <result column="device_maintain_cost" jdbcType="DECIMAL" property="deviceMaintainCost" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    device_maintain_id, device_fault_id, device_maintain_emp_id, device_maintain_date, 
+    device_maintain_result, device_maintain_cost, note
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from device_maintain
+    where device_maintain_id = #{deviceMaintainId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from device_maintain
+    where device_maintain_id = #{deviceMaintainId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.littlebug.bean.DeviceMaintain">
+    insert into device_maintain (device_maintain_id, device_fault_id, 
+      device_maintain_emp_id, device_maintain_date, 
+      device_maintain_result, device_maintain_cost, 
+      note)
+    values (#{deviceMaintainId,jdbcType=VARCHAR}, #{deviceFaultId,jdbcType=VARCHAR}, 
+      #{deviceMaintainEmpId,jdbcType=VARCHAR}, #{deviceMaintainDate,jdbcType=TIMESTAMP}, 
+      #{deviceMaintainResult,jdbcType=VARCHAR}, #{deviceMaintainCost,jdbcType=DECIMAL}, 
+      #{note,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.littlebug.bean.DeviceMaintain">
+    insert into device_maintain
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="deviceMaintainId != null">
+        device_maintain_id,
+      </if>
+      <if test="deviceFaultId != null">
+        device_fault_id,
+      </if>
+      <if test="deviceMaintainEmpId != null">
+        device_maintain_emp_id,
+      </if>
+      <if test="deviceMaintainDate != null">
+        device_maintain_date,
+      </if>
+      <if test="deviceMaintainResult != null">
+        device_maintain_result,
+      </if>
+      <if test="deviceMaintainCost != null">
+        device_maintain_cost,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="deviceMaintainId != null">
+        #{deviceMaintainId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceFaultId != null">
+        #{deviceFaultId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceMaintainEmpId != null">
+        #{deviceMaintainEmpId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceMaintainDate != null">
+        #{deviceMaintainDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deviceMaintainResult != null">
+        #{deviceMaintainResult,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceMaintainCost != null">
+        #{deviceMaintainCost,jdbcType=DECIMAL},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.littlebug.bean.DeviceMaintain">
+    update device_maintain
+    <set>
+      <if test="deviceFaultId != null">
+        device_fault_id = #{deviceFaultId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceMaintainEmpId != null">
+        device_maintain_emp_id = #{deviceMaintainEmpId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceMaintainDate != null">
+        device_maintain_date = #{deviceMaintainDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deviceMaintainResult != null">
+        device_maintain_result = #{deviceMaintainResult,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceMaintainCost != null">
+        device_maintain_cost = #{deviceMaintainCost,jdbcType=DECIMAL},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where device_maintain_id = #{deviceMaintainId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.littlebug.bean.DeviceMaintain">
+    update device_maintain
+    set device_fault_id = #{deviceFaultId,jdbcType=VARCHAR},
+      device_maintain_emp_id = #{deviceMaintainEmpId,jdbcType=VARCHAR},
+      device_maintain_date = #{deviceMaintainDate,jdbcType=TIMESTAMP},
+      device_maintain_result = #{deviceMaintainResult,jdbcType=VARCHAR},
+      device_maintain_cost = #{deviceMaintainCost,jdbcType=DECIMAL},
+      note = #{note,jdbcType=VARCHAR}
+    where device_maintain_id = #{deviceMaintainId,jdbcType=VARCHAR}
+  </update>
+</mapper>

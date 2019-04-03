@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.littlebug.dao.WorkMapper">
+  <resultMap id="BaseResultMap" type="com.littlebug.bean.Work">
+    <id column="work_id" jdbcType="VARCHAR" property="workId" />
+    <result column="process_number" jdbcType="VARCHAR" property="processNumber" />
+    <result column="product_id" jdbcType="VARCHAR" property="productId" />
+    <result column="process_id" jdbcType="VARCHAR" property="processId" />
+    <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+    <result column="rating" jdbcType="INTEGER" property="rating" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    work_id, process_number, product_id, process_id, device_id, rating
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from work
+    where work_id = #{workId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from work
+    where work_id = #{workId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.littlebug.bean.Work">
+    insert into work (work_id, process_number, product_id, 
+      process_id, device_id, rating
+      )
+    values (#{workId,jdbcType=VARCHAR}, #{processNumber,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, 
+      #{processId,jdbcType=VARCHAR}, #{deviceId,jdbcType=VARCHAR}, #{rating,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.littlebug.bean.Work">
+    insert into work
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="workId != null">
+        work_id,
+      </if>
+      <if test="processNumber != null">
+        process_number,
+      </if>
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="processId != null">
+        process_id,
+      </if>
+      <if test="deviceId != null">
+        device_id,
+      </if>
+      <if test="rating != null">
+        rating,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="workId != null">
+        #{workId,jdbcType=VARCHAR},
+      </if>
+      <if test="processNumber != null">
+        #{processNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="processId != null">
+        #{processId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null">
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="rating != null">
+        #{rating,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.littlebug.bean.Work">
+    update work
+    <set>
+      <if test="processNumber != null">
+        process_number = #{processNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="processId != null">
+        process_id = #{processId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null">
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="rating != null">
+        rating = #{rating,jdbcType=INTEGER},
+      </if>
+    </set>
+    where work_id = #{workId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.littlebug.bean.Work">
+    update work
+    set process_number = #{processNumber,jdbcType=VARCHAR},
+      product_id = #{productId,jdbcType=VARCHAR},
+      process_id = #{processId,jdbcType=VARCHAR},
+      device_id = #{deviceId,jdbcType=VARCHAR},
+      rating = #{rating,jdbcType=INTEGER}
+    where work_id = #{workId,jdbcType=VARCHAR}
+  </update>
+</mapper>

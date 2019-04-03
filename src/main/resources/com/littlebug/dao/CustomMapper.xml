@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.littlebug.dao.CustomMapper">
+  <resultMap id="BaseResultMap" type="com.littlebug.bean.Custom">
+    <id column="custom_id" jdbcType="VARCHAR" property="customId" />
+    <result column="custom_name" jdbcType="VARCHAR" property="customName" />
+    <result column="full_name" jdbcType="VARCHAR" property="fullName" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="fax" jdbcType="VARCHAR" property="fax" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="owner_name" jdbcType="VARCHAR" property="ownerName" />
+    <result column="owner_tel" jdbcType="VARCHAR" property="ownerTel" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    custom_id, custom_name, full_name, address, fax, email, owner_name, owner_tel, status, 
+    note
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from custom
+    where custom_id = #{customId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from custom
+    where custom_id = #{customId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.littlebug.bean.Custom">
+    insert into custom (custom_id, custom_name, full_name, 
+      address, fax, email, 
+      owner_name, owner_tel, status, 
+      note)
+    values (#{customId,jdbcType=VARCHAR}, #{customName,jdbcType=VARCHAR}, #{fullName,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{ownerName,jdbcType=VARCHAR}, #{ownerTel,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{note,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.littlebug.bean.Custom">
+    insert into custom
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="customId != null">
+        custom_id,
+      </if>
+      <if test="customName != null">
+        custom_name,
+      </if>
+      <if test="fullName != null">
+        full_name,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="fax != null">
+        fax,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="ownerName != null">
+        owner_name,
+      </if>
+      <if test="ownerTel != null">
+        owner_tel,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="customId != null">
+        #{customId,jdbcType=VARCHAR},
+      </if>
+      <if test="customName != null">
+        #{customName,jdbcType=VARCHAR},
+      </if>
+      <if test="fullName != null">
+        #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerName != null">
+        #{ownerName,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerTel != null">
+        #{ownerTel,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.littlebug.bean.Custom">
+    update custom
+    <set>
+      <if test="customName != null">
+        custom_name = #{customName,jdbcType=VARCHAR},
+      </if>
+      <if test="fullName != null">
+        full_name = #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+        fax = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerName != null">
+        owner_name = #{ownerName,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerTel != null">
+        owner_tel = #{ownerTel,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where custom_id = #{customId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.littlebug.bean.Custom">
+    update custom
+    set custom_name = #{customName,jdbcType=VARCHAR},
+      full_name = #{fullName,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      fax = #{fax,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      owner_name = #{ownerName,jdbcType=VARCHAR},
+      owner_tel = #{ownerTel,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      note = #{note,jdbcType=VARCHAR}
+    where custom_id = #{customId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.littlebug.dao.ProcessMapper">
+  <resultMap id="BaseResultMap" type="com.littlebug.bean.Process">
+    <id column="process_id" jdbcType="VARCHAR" property="processId" />
+    <result column="technology_plan_id" jdbcType="VARCHAR" property="technologyPlanId" />
+    <result column="sequence" jdbcType="INTEGER" property="sequence" />
+    <result column="quota" jdbcType="INTEGER" property="quota" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    process_id, technology_plan_id, sequence, quota
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from process
+    where process_id = #{processId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from process
+    where process_id = #{processId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.littlebug.bean.Process">
+    insert into process (process_id, technology_plan_id, sequence, 
+      quota)
+    values (#{processId,jdbcType=VARCHAR}, #{technologyPlanId,jdbcType=VARCHAR}, #{sequence,jdbcType=INTEGER}, 
+      #{quota,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.littlebug.bean.Process">
+    insert into process
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="processId != null">
+        process_id,
+      </if>
+      <if test="technologyPlanId != null">
+        technology_plan_id,
+      </if>
+      <if test="sequence != null">
+        sequence,
+      </if>
+      <if test="quota != null">
+        quota,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="processId != null">
+        #{processId,jdbcType=VARCHAR},
+      </if>
+      <if test="technologyPlanId != null">
+        #{technologyPlanId,jdbcType=VARCHAR},
+      </if>
+      <if test="sequence != null">
+        #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="quota != null">
+        #{quota,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.littlebug.bean.Process">
+    update process
+    <set>
+      <if test="technologyPlanId != null">
+        technology_plan_id = #{technologyPlanId,jdbcType=VARCHAR},
+      </if>
+      <if test="sequence != null">
+        sequence = #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="quota != null">
+        quota = #{quota,jdbcType=INTEGER},
+      </if>
+    </set>
+    where process_id = #{processId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.littlebug.bean.Process">
+    update process
+    set technology_plan_id = #{technologyPlanId,jdbcType=VARCHAR},
+      sequence = #{sequence,jdbcType=INTEGER},
+      quota = #{quota,jdbcType=INTEGER}
+    where process_id = #{processId,jdbcType=VARCHAR}
+  </update>
+</mapper>

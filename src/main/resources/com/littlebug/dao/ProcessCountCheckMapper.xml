@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.littlebug.dao.ProcessCountCheckMapper">
+  <resultMap id="BaseResultMap" type="com.littlebug.bean.ProcessCountCheck">
+    <id column="p_count_check_id" jdbcType="VARCHAR" property="pCountCheckId" />
+    <result column="process_id" jdbcType="VARCHAR" property="processId" />
+    <result column="check_item" jdbcType="VARCHAR" property="checkItem" />
+    <result column="sample" jdbcType="INTEGER" property="sample" />
+    <result column="check_number" jdbcType="INTEGER" property="checkNumber" />
+    <result column="unqualify" jdbcType="INTEGER" property="unqualify" />
+    <result column="qualify" jdbcType="DECIMAL" property="qualify" />
+    <result column="cdate" jdbcType="TIMESTAMP" property="cdate" />
+    <result column="measure_data" jdbcType="VARCHAR" property="measureData" />
+    <result column="emp_id" jdbcType="VARCHAR" property="empId" />
+    <result column="result" jdbcType="VARCHAR" property="result" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    p_count_check_id, process_id, check_item, sample, check_number, unqualify, qualify, 
+    cdate, measure_data, emp_id, result, note
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from process_count_check
+    where p_count_check_id = #{pCountCheckId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from process_count_check
+    where p_count_check_id = #{pCountCheckId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.littlebug.bean.ProcessCountCheck">
+    insert into process_count_check (p_count_check_id, process_id, check_item, 
+      sample, check_number, unqualify, 
+      qualify, cdate, measure_data, 
+      emp_id, result, note
+      )
+    values (#{pCountCheckId,jdbcType=VARCHAR}, #{processId,jdbcType=VARCHAR}, #{checkItem,jdbcType=VARCHAR}, 
+      #{sample,jdbcType=INTEGER}, #{checkNumber,jdbcType=INTEGER}, #{unqualify,jdbcType=INTEGER}, 
+      #{qualify,jdbcType=DECIMAL}, #{cdate,jdbcType=TIMESTAMP}, #{measureData,jdbcType=VARCHAR}, 
+      #{empId,jdbcType=VARCHAR}, #{result,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.littlebug.bean.ProcessCountCheck">
+    insert into process_count_check
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pCountCheckId != null">
+        p_count_check_id,
+      </if>
+      <if test="processId != null">
+        process_id,
+      </if>
+      <if test="checkItem != null">
+        check_item,
+      </if>
+      <if test="sample != null">
+        sample,
+      </if>
+      <if test="checkNumber != null">
+        check_number,
+      </if>
+      <if test="unqualify != null">
+        unqualify,
+      </if>
+      <if test="qualify != null">
+        qualify,
+      </if>
+      <if test="cdate != null">
+        cdate,
+      </if>
+      <if test="measureData != null">
+        measure_data,
+      </if>
+      <if test="empId != null">
+        emp_id,
+      </if>
+      <if test="result != null">
+        result,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pCountCheckId != null">
+        #{pCountCheckId,jdbcType=VARCHAR},
+      </if>
+      <if test="processId != null">
+        #{processId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkItem != null">
+        #{checkItem,jdbcType=VARCHAR},
+      </if>
+      <if test="sample != null">
+        #{sample,jdbcType=INTEGER},
+      </if>
+      <if test="checkNumber != null">
+        #{checkNumber,jdbcType=INTEGER},
+      </if>
+      <if test="unqualify != null">
+        #{unqualify,jdbcType=INTEGER},
+      </if>
+      <if test="qualify != null">
+        #{qualify,jdbcType=DECIMAL},
+      </if>
+      <if test="cdate != null">
+        #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="measureData != null">
+        #{measureData,jdbcType=VARCHAR},
+      </if>
+      <if test="empId != null">
+        #{empId,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null">
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.littlebug.bean.ProcessCountCheck">
+    update process_count_check
+    <set>
+      <if test="processId != null">
+        process_id = #{processId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkItem != null">
+        check_item = #{checkItem,jdbcType=VARCHAR},
+      </if>
+      <if test="sample != null">
+        sample = #{sample,jdbcType=INTEGER},
+      </if>
+      <if test="checkNumber != null">
+        check_number = #{checkNumber,jdbcType=INTEGER},
+      </if>
+      <if test="unqualify != null">
+        unqualify = #{unqualify,jdbcType=INTEGER},
+      </if>
+      <if test="qualify != null">
+        qualify = #{qualify,jdbcType=DECIMAL},
+      </if>
+      <if test="cdate != null">
+        cdate = #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="measureData != null">
+        measure_data = #{measureData,jdbcType=VARCHAR},
+      </if>
+      <if test="empId != null">
+        emp_id = #{empId,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null">
+        result = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where p_count_check_id = #{pCountCheckId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.littlebug.bean.ProcessCountCheck">
+    update process_count_check
+    set process_id = #{processId,jdbcType=VARCHAR},
+      check_item = #{checkItem,jdbcType=VARCHAR},
+      sample = #{sample,jdbcType=INTEGER},
+      check_number = #{checkNumber,jdbcType=INTEGER},
+      unqualify = #{unqualify,jdbcType=INTEGER},
+      qualify = #{qualify,jdbcType=DECIMAL},
+      cdate = #{cdate,jdbcType=TIMESTAMP},
+      measure_data = #{measureData,jdbcType=VARCHAR},
+      emp_id = #{empId,jdbcType=VARCHAR},
+      result = #{result,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR}
+    where p_count_check_id = #{pCountCheckId,jdbcType=VARCHAR}
+  </update>
+</mapper>

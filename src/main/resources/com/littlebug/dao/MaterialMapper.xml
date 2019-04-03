@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.littlebug.dao.MaterialMapper">
+  <resultMap id="BaseResultMap" type="com.littlebug.bean.Material">
+    <id column="material_id" jdbcType="VARCHAR" property="materialId" />
+    <result column="material_type" jdbcType="VARCHAR" property="materialType" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="remaining" jdbcType="INTEGER" property="remaining" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    material_id, material_type, status, remaining, note
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from material
+    where material_id = #{materialId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from material
+    where material_id = #{materialId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.littlebug.bean.Material">
+    insert into material (material_id, material_type, status, 
+      remaining, note)
+    values (#{materialId,jdbcType=VARCHAR}, #{materialType,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{remaining,jdbcType=INTEGER}, #{note,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.littlebug.bean.Material">
+    insert into material
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="materialId != null">
+        material_id,
+      </if>
+      <if test="materialType != null">
+        material_type,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="remaining != null">
+        remaining,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="materialId != null">
+        #{materialId,jdbcType=VARCHAR},
+      </if>
+      <if test="materialType != null">
+        #{materialType,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="remaining != null">
+        #{remaining,jdbcType=INTEGER},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.littlebug.bean.Material">
+    update material
+    <set>
+      <if test="materialType != null">
+        material_type = #{materialType,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="remaining != null">
+        remaining = #{remaining,jdbcType=INTEGER},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where material_id = #{materialId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.littlebug.bean.Material">
+    update material
+    set material_type = #{materialType,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      remaining = #{remaining,jdbcType=INTEGER},
+      note = #{note,jdbcType=VARCHAR}
+    where material_id = #{materialId,jdbcType=VARCHAR}
+  </update>
+</mapper>

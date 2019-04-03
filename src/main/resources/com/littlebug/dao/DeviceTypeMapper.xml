@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.littlebug.dao.DeviceTypeMapper">
+  <resultMap id="BaseResultMap" type="com.littlebug.bean.DeviceType">
+    <id column="device_type_id" jdbcType="VARCHAR" property="deviceTypeId" />
+    <result column="device_type_name" jdbcType="VARCHAR" property="deviceTypeName" />
+    <result column="device_type_model" jdbcType="VARCHAR" property="deviceTypeModel" />
+    <result column="device_type_spec" jdbcType="VARCHAR" property="deviceTypeSpec" />
+    <result column="device_type_supplier" jdbcType="VARCHAR" property="deviceTypeSupplier" />
+    <result column="device_type_producer" jdbcType="VARCHAR" property="deviceTypeProducer" />
+    <result column="device_type_quantity" jdbcType="INTEGER" property="deviceTypeQuantity" />
+    <result column="device_type_warranty" jdbcType="TIMESTAMP" property="deviceTypeWarranty" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    device_type_id, device_type_name, device_type_model, device_type_spec, device_type_supplier, 
+    device_type_producer, device_type_quantity, device_type_warranty
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from device_type
+    where device_type_id = #{deviceTypeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from device_type
+    where device_type_id = #{deviceTypeId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.littlebug.bean.DeviceType">
+    insert into device_type (device_type_id, device_type_name, device_type_model, 
+      device_type_spec, device_type_supplier, device_type_producer, 
+      device_type_quantity, device_type_warranty
+      )
+    values (#{deviceTypeId,jdbcType=VARCHAR}, #{deviceTypeName,jdbcType=VARCHAR}, #{deviceTypeModel,jdbcType=VARCHAR}, 
+      #{deviceTypeSpec,jdbcType=VARCHAR}, #{deviceTypeSupplier,jdbcType=VARCHAR}, #{deviceTypeProducer,jdbcType=VARCHAR}, 
+      #{deviceTypeQuantity,jdbcType=INTEGER}, #{deviceTypeWarranty,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.littlebug.bean.DeviceType">
+    insert into device_type
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="deviceTypeId != null">
+        device_type_id,
+      </if>
+      <if test="deviceTypeName != null">
+        device_type_name,
+      </if>
+      <if test="deviceTypeModel != null">
+        device_type_model,
+      </if>
+      <if test="deviceTypeSpec != null">
+        device_type_spec,
+      </if>
+      <if test="deviceTypeSupplier != null">
+        device_type_supplier,
+      </if>
+      <if test="deviceTypeProducer != null">
+        device_type_producer,
+      </if>
+      <if test="deviceTypeQuantity != null">
+        device_type_quantity,
+      </if>
+      <if test="deviceTypeWarranty != null">
+        device_type_warranty,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="deviceTypeId != null">
+        #{deviceTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeName != null">
+        #{deviceTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeModel != null">
+        #{deviceTypeModel,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeSpec != null">
+        #{deviceTypeSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeSupplier != null">
+        #{deviceTypeSupplier,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeProducer != null">
+        #{deviceTypeProducer,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeQuantity != null">
+        #{deviceTypeQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="deviceTypeWarranty != null">
+        #{deviceTypeWarranty,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.littlebug.bean.DeviceType">
+    update device_type
+    <set>
+      <if test="deviceTypeName != null">
+        device_type_name = #{deviceTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeModel != null">
+        device_type_model = #{deviceTypeModel,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeSpec != null">
+        device_type_spec = #{deviceTypeSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeSupplier != null">
+        device_type_supplier = #{deviceTypeSupplier,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeProducer != null">
+        device_type_producer = #{deviceTypeProducer,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeQuantity != null">
+        device_type_quantity = #{deviceTypeQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="deviceTypeWarranty != null">
+        device_type_warranty = #{deviceTypeWarranty,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where device_type_id = #{deviceTypeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.littlebug.bean.DeviceType">
+    update device_type
+    set device_type_name = #{deviceTypeName,jdbcType=VARCHAR},
+      device_type_model = #{deviceTypeModel,jdbcType=VARCHAR},
+      device_type_spec = #{deviceTypeSpec,jdbcType=VARCHAR},
+      device_type_supplier = #{deviceTypeSupplier,jdbcType=VARCHAR},
+      device_type_producer = #{deviceTypeProducer,jdbcType=VARCHAR},
+      device_type_quantity = #{deviceTypeQuantity,jdbcType=INTEGER},
+      device_type_warranty = #{deviceTypeWarranty,jdbcType=TIMESTAMP}
+    where device_type_id = #{deviceTypeId,jdbcType=VARCHAR}
+  </update>
+</mapper>

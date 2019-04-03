@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.littlebug.dao.DeviceFaultMapper">
+  <resultMap id="BaseResultMap" type="com.littlebug.bean.DeviceFault">
+    <id column="device_fault_id" jdbcType="VARCHAR" property="deviceFaultId" />
+    <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+    <result column="device_fault_cause" jdbcType="VARCHAR" property="deviceFaultCause" />
+    <result column="device_fault_detail" jdbcType="VARCHAR" property="deviceFaultDetail" />
+    <result column="device_fault_date" jdbcType="TIMESTAMP" property="deviceFaultDate" />
+    <result column="device_fault_maintenance" jdbcType="VARCHAR" property="deviceFaultMaintenance" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    device_fault_id, device_id, device_fault_cause, device_fault_detail, device_fault_date, 
+    device_fault_maintenance
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from device_fault
+    where device_fault_id = #{deviceFaultId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from device_fault
+    where device_fault_id = #{deviceFaultId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.littlebug.bean.DeviceFault">
+    insert into device_fault (device_fault_id, device_id, device_fault_cause, 
+      device_fault_detail, device_fault_date, device_fault_maintenance
+      )
+    values (#{deviceFaultId,jdbcType=VARCHAR}, #{deviceId,jdbcType=VARCHAR}, #{deviceFaultCause,jdbcType=VARCHAR}, 
+      #{deviceFaultDetail,jdbcType=VARCHAR}, #{deviceFaultDate,jdbcType=TIMESTAMP}, #{deviceFaultMaintenance,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.littlebug.bean.DeviceFault">
+    insert into device_fault
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="deviceFaultId != null">
+        device_fault_id,
+      </if>
+      <if test="deviceId != null">
+        device_id,
+      </if>
+      <if test="deviceFaultCause != null">
+        device_fault_cause,
+      </if>
+      <if test="deviceFaultDetail != null">
+        device_fault_detail,
+      </if>
+      <if test="deviceFaultDate != null">
+        device_fault_date,
+      </if>
+      <if test="deviceFaultMaintenance != null">
+        device_fault_maintenance,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="deviceFaultId != null">
+        #{deviceFaultId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null">
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceFaultCause != null">
+        #{deviceFaultCause,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceFaultDetail != null">
+        #{deviceFaultDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceFaultDate != null">
+        #{deviceFaultDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deviceFaultMaintenance != null">
+        #{deviceFaultMaintenance,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.littlebug.bean.DeviceFault">
+    update device_fault
+    <set>
+      <if test="deviceId != null">
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceFaultCause != null">
+        device_fault_cause = #{deviceFaultCause,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceFaultDetail != null">
+        device_fault_detail = #{deviceFaultDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceFaultDate != null">
+        device_fault_date = #{deviceFaultDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deviceFaultMaintenance != null">
+        device_fault_maintenance = #{deviceFaultMaintenance,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where device_fault_id = #{deviceFaultId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.littlebug.bean.DeviceFault">
+    update device_fault
+    set device_id = #{deviceId,jdbcType=VARCHAR},
+      device_fault_cause = #{deviceFaultCause,jdbcType=VARCHAR},
+      device_fault_detail = #{deviceFaultDetail,jdbcType=VARCHAR},
+      device_fault_date = #{deviceFaultDate,jdbcType=TIMESTAMP},
+      device_fault_maintenance = #{deviceFaultMaintenance,jdbcType=VARCHAR}
+    where device_fault_id = #{deviceFaultId,jdbcType=VARCHAR}
+  </update>
+</mapper>

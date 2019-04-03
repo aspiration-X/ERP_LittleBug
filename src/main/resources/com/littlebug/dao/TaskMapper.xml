@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.littlebug.dao.TaskMapper">
+  <resultMap id="BaseResultMap" type="com.littlebug.bean.Task">
+    <id column="task_id" jdbcType="VARCHAR" property="taskId" />
+    <result column="manufacture_sn" jdbcType="VARCHAR" property="manufactureSn" />
+    <result column="work_id" jdbcType="VARCHAR" property="workId" />
+    <result column="task_quantity" jdbcType="INTEGER" property="taskQuantity" />
+    <result column="working_hours" jdbcType="DECIMAL" property="workingHours" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    task_id, manufacture_sn, work_id, task_quantity, working_hours
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from task
+    where task_id = #{taskId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from task
+    where task_id = #{taskId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.littlebug.bean.Task">
+    insert into task (task_id, manufacture_sn, work_id, 
+      task_quantity, working_hours)
+    values (#{taskId,jdbcType=VARCHAR}, #{manufactureSn,jdbcType=VARCHAR}, #{workId,jdbcType=VARCHAR}, 
+      #{taskQuantity,jdbcType=INTEGER}, #{workingHours,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.littlebug.bean.Task">
+    insert into task
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="manufactureSn != null">
+        manufacture_sn,
+      </if>
+      <if test="workId != null">
+        work_id,
+      </if>
+      <if test="taskQuantity != null">
+        task_quantity,
+      </if>
+      <if test="workingHours != null">
+        working_hours,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="taskId != null">
+        #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="manufactureSn != null">
+        #{manufactureSn,jdbcType=VARCHAR},
+      </if>
+      <if test="workId != null">
+        #{workId,jdbcType=VARCHAR},
+      </if>
+      <if test="taskQuantity != null">
+        #{taskQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="workingHours != null">
+        #{workingHours,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.littlebug.bean.Task">
+    update task
+    <set>
+      <if test="manufactureSn != null">
+        manufacture_sn = #{manufactureSn,jdbcType=VARCHAR},
+      </if>
+      <if test="workId != null">
+        work_id = #{workId,jdbcType=VARCHAR},
+      </if>
+      <if test="taskQuantity != null">
+        task_quantity = #{taskQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="workingHours != null">
+        working_hours = #{workingHours,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where task_id = #{taskId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.littlebug.bean.Task">
+    update task
+    set manufacture_sn = #{manufactureSn,jdbcType=VARCHAR},
+      work_id = #{workId,jdbcType=VARCHAR},
+      task_quantity = #{taskQuantity,jdbcType=INTEGER},
+      working_hours = #{workingHours,jdbcType=DECIMAL}
+    where task_id = #{taskId,jdbcType=VARCHAR}
+  </update>
+</mapper>

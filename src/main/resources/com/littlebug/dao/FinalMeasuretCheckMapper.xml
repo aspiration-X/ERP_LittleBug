@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.littlebug.dao.FinalMeasuretCheckMapper">
+  <resultMap id="BaseResultMap" type="com.littlebug.bean.FinalMeasuretCheck">
+    <id column="f_measure_check_id" jdbcType="VARCHAR" property="fMeasureCheckId" />
+    <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="check_item" jdbcType="VARCHAR" property="checkItem" />
+    <result column="cdate" jdbcType="TIMESTAMP" property="cdate" />
+    <result column="measure_data" jdbcType="VARCHAR" property="measureData" />
+    <result column="emp_id" jdbcType="VARCHAR" property="empId" />
+    <result column="result" jdbcType="VARCHAR" property="result" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    f_measure_check_id, order_id, check_item, cdate, measure_data, emp_id, result, note
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from final_measuret_check
+    where f_measure_check_id = #{fMeasureCheckId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from final_measuret_check
+    where f_measure_check_id = #{fMeasureCheckId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.littlebug.bean.FinalMeasuretCheck">
+    insert into final_measuret_check (f_measure_check_id, order_id, check_item, 
+      cdate, measure_data, emp_id, 
+      result, note)
+    values (#{fMeasureCheckId,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, #{checkItem,jdbcType=VARCHAR}, 
+      #{cdate,jdbcType=TIMESTAMP}, #{measureData,jdbcType=VARCHAR}, #{empId,jdbcType=VARCHAR}, 
+      #{result,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.littlebug.bean.FinalMeasuretCheck">
+    insert into final_measuret_check
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fMeasureCheckId != null">
+        f_measure_check_id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="checkItem != null">
+        check_item,
+      </if>
+      <if test="cdate != null">
+        cdate,
+      </if>
+      <if test="measureData != null">
+        measure_data,
+      </if>
+      <if test="empId != null">
+        emp_id,
+      </if>
+      <if test="result != null">
+        result,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fMeasureCheckId != null">
+        #{fMeasureCheckId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkItem != null">
+        #{checkItem,jdbcType=VARCHAR},
+      </if>
+      <if test="cdate != null">
+        #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="measureData != null">
+        #{measureData,jdbcType=VARCHAR},
+      </if>
+      <if test="empId != null">
+        #{empId,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null">
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.littlebug.bean.FinalMeasuretCheck">
+    update final_measuret_check
+    <set>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkItem != null">
+        check_item = #{checkItem,jdbcType=VARCHAR},
+      </if>
+      <if test="cdate != null">
+        cdate = #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="measureData != null">
+        measure_data = #{measureData,jdbcType=VARCHAR},
+      </if>
+      <if test="empId != null">
+        emp_id = #{empId,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null">
+        result = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where f_measure_check_id = #{fMeasureCheckId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.littlebug.bean.FinalMeasuretCheck">
+    update final_measuret_check
+    set order_id = #{orderId,jdbcType=VARCHAR},
+      check_item = #{checkItem,jdbcType=VARCHAR},
+      cdate = #{cdate,jdbcType=TIMESTAMP},
+      measure_data = #{measureData,jdbcType=VARCHAR},
+      emp_id = #{empId,jdbcType=VARCHAR},
+      result = #{result,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR}
+    where f_measure_check_id = #{fMeasureCheckId,jdbcType=VARCHAR}
+  </update>
+</mapper>

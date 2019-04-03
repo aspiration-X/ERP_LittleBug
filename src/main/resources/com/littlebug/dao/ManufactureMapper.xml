@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.littlebug.dao.ManufactureMapper">
+  <resultMap id="BaseResultMap" type="com.littlebug.bean.Manufacture">
+    <id column="manufacture_sn" jdbcType="VARCHAR" property="manufactureSn" />
+    <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="technology_id" jdbcType="VARCHAR" property="technologyId" />
+    <result column="launch_quantity" jdbcType="INTEGER" property="launchQuantity" />
+    <result column="begin_date" jdbcType="TIMESTAMP" property="beginDate" />
+    <result column="end_date" jdbcType="TIMESTAMP" property="endDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    manufacture_sn, order_id, technology_id, launch_quantity, begin_date, end_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from manufacture
+    where manufacture_sn = #{manufactureSn,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from manufacture
+    where manufacture_sn = #{manufactureSn,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.littlebug.bean.Manufacture">
+    insert into manufacture (manufacture_sn, order_id, technology_id, 
+      launch_quantity, begin_date, end_date
+      )
+    values (#{manufactureSn,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, #{technologyId,jdbcType=VARCHAR}, 
+      #{launchQuantity,jdbcType=INTEGER}, #{beginDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.littlebug.bean.Manufacture">
+    insert into manufacture
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="manufactureSn != null">
+        manufacture_sn,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="technologyId != null">
+        technology_id,
+      </if>
+      <if test="launchQuantity != null">
+        launch_quantity,
+      </if>
+      <if test="beginDate != null">
+        begin_date,
+      </if>
+      <if test="endDate != null">
+        end_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="manufactureSn != null">
+        #{manufactureSn,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="technologyId != null">
+        #{technologyId,jdbcType=VARCHAR},
+      </if>
+      <if test="launchQuantity != null">
+        #{launchQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="beginDate != null">
+        #{beginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.littlebug.bean.Manufacture">
+    update manufacture
+    <set>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="technologyId != null">
+        technology_id = #{technologyId,jdbcType=VARCHAR},
+      </if>
+      <if test="launchQuantity != null">
+        launch_quantity = #{launchQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="beginDate != null">
+        begin_date = #{beginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null">
+        end_date = #{endDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where manufacture_sn = #{manufactureSn,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.littlebug.bean.Manufacture">
+    update manufacture
+    set order_id = #{orderId,jdbcType=VARCHAR},
+      technology_id = #{technologyId,jdbcType=VARCHAR},
+      launch_quantity = #{launchQuantity,jdbcType=INTEGER},
+      begin_date = #{beginDate,jdbcType=TIMESTAMP},
+      end_date = #{endDate,jdbcType=TIMESTAMP}
+    where manufacture_sn = #{manufactureSn,jdbcType=VARCHAR}
+  </update>
+</mapper>
