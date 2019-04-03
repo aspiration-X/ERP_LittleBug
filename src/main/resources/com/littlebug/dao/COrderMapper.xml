@@ -174,4 +174,8 @@
       status = #{status,jdbcType=INTEGER}
     where order_id = #{orderId,jdbcType=VARCHAR}
   </update>
+
+    <select id="findOrderByIndexs" resultMap="BaseResultMap">
+        select * from c_order limit #{start},#{end}
+    </select>
 </mapper>
