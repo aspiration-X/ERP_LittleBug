@@ -23,4 +23,12 @@ public class UserMessage {
     public void setMsg(String msg) {
         this.msg = msg;
     }
+
+    @Override
+    public String toString() {
+        return "UserMessage{" +
+                "status=" + status +
+                ", msg='" + msg + '\'' +
+                '}';
+    }
 }

@@ -3,6 +3,8 @@ package com.littlebug.controller;
 
 import com.littlebug.bean.Technology;
 import com.littlebug.service.TechnologyService;
+import com.littlebug.util.TransferString;
+import com.littlebug.util.UserMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -10,12 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -84,13 +81,50 @@ public class TechnologyController {
    @RequestMapping("edit_judge")
    @ResponseBody
    public String edit_judge(){
-      return "technology_edit";
+      return "{}";
    }
    @RequestMapping("edit")
    public String edit(){
       return "technology_edit";
    }
+   @RequestMapping("update_all")
+   @ResponseBody
+   public UserMessage update_all(Technology technology){
+      UserMessage userMessage = new UserMessage();
+      boolean flag = technologyService.update_all(technology);
+      if(flag){
+         userMessage.setStatus(200);
+         userMessage.setMsg("OK");
+      }else {
+         userMessage.setStatus(500);
+         userMessage.setMsg("修改失败");
+      }
+      return userMessage;
+   }
 
-
+   /**
+    * 删除一项或几项工艺
+    * @return
+    */
+   @RequestMapping("delete_judge")
+   @ResponseBody
+   public String delete_judge(){
+      return "{}";
+   }
+   @RequestMapping("delete_batch")
+   @ResponseBody
+   public UserMessage delete_batch(String ids) {
+      List<String> technologyIds = TransferString.transferString(ids);
+      UserMessage userMessage = new UserMessage();
+      boolean flag = technologyService.delete_batch(technologyIds);
+      if(flag){
+         userMessage.setStatus(200);
+         userMessage.setMsg("OK");
+      }else {
+         userMessage.setStatus(500);
+         userMessage.setMsg("删除失败");
+      }
+      return userMessage;
+   }
 
 }

@@ -26,7 +26,6 @@ public class TechnologyServiceImpl implements TechnologyService {
      * 查询所有的工艺
      * @return List<Technology>
      */
-
     @Override
     public List<Technology> findAllTechnologies() {
         List<Technology> technologyList = technologyMapper.findAllTechnologies();
@@ -41,5 +40,26 @@ public class TechnologyServiceImpl implements TechnologyService {
     public boolean insertTechnology(Technology technology) {
         int insert = technologyMapper.insert(technology);
         return insert == 1;
+    }
+
+    /**
+     * 修改一项工艺的某些属性
+     * @return
+     */
+    @Override
+    public boolean update_all(Technology technology) {
+        int i = technologyMapper.updateByPrimaryKeySelective(technology);
+        return i == 1;
+    }
+
+    /**
+     * 删除一个或多个工艺
+     * @param ids
+     * @return
+     */
+    @Override
+    public boolean delete_batch(List<String> ids) {
+        int i = technologyMapper.delete_batch(ids);
+        return i != 0;
     }
 }
