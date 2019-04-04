@@ -7,12 +7,8 @@ import com.littlebug.util.TransferString;
 import com.littlebug.util.UserMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -127,4 +123,27 @@ public class TechnologyController {
       return userMessage;
    }
 
+   /**
+    * 通过工艺id模糊查询符合要求的所有工艺
+    * @param searchValue
+    * @return
+    */
+   @RequestMapping("search_technology_by_technologyId")
+   @ResponseBody
+   public List<Technology> search_technology_by_technologyId(String searchValue) {
+      List<Technology> technologyList = technologyService.search_technology_by_technologyId(searchValue);
+      return technologyList;
+   }
+
+   /**
+    * 通过工艺名称模糊查询符合要求的所有工艺
+    * @param searchValue
+    * @return
+    */
+   @RequestMapping("search_technology_by_technologyName")
+   @ResponseBody
+   public List<Technology> search_technology_by_technologyName(String searchValue) {
+      List<Technology> technologyList = technologyService.search_technology_by_technologyName(searchValue);
+      return technologyList;
+   }
 }

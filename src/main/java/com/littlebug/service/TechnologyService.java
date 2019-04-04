@@ -1,6 +1,7 @@
 package com.littlebug.service;
 
 import com.littlebug.bean.Technology;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -33,4 +34,19 @@ public interface TechnologyService {
      * @return
      */
     boolean delete_batch(List<String> ids);
+
+    /**
+     * 通过工艺id模糊查询符合要求的所有工艺
+     * @param searchValue
+     * @return
+     */
+    List<Technology> search_technology_by_technologyId( String searchValue);
+
+    /**
+     * 通过工艺名称模糊查询符合要求的所有工艺
+     * @param searchValue
+     * @return
+     */
+    List<Technology> search_technology_by_technologyName(String searchValue);
+
 }
