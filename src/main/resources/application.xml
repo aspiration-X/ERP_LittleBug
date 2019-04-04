@@ -24,11 +24,10 @@
 
     <bean id="datasource" class="com.alibaba.druid.pool.DruidDataSource">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/production_ssm?serverTimezone=GMT"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/production_ssm?serverTimezone=GMT&amp;useSSL=false"/>
         <property name="username" value="root"/>
         <property name="password" value="123456"/>
     </bean>
-
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!--扫描包-->
@@ -37,15 +36,11 @@
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
-
     <!--事务支持-->
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="datasource"/>
     </bean>
     <!--事务驱动-->
     <tx:annotation-driven transaction-manager="txManager"/>
-
-
-
 
 </beans>

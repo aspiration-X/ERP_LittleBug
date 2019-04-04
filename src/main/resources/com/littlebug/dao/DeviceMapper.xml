@@ -14,6 +14,9 @@
     <result column="device_keeper_id" jdbcType="VARCHAR" property="deviceKeeperId" />
     <result column="note" jdbcType="VARCHAR" property="note" />
   </resultMap>
+  <select id="selectAllDevices" resultMap="BaseResultMap">
+    select * from device;
+  </select>
   <sql id="Base_Column_List">
     device_id, device_name, device_type_id, device_status_id, device_status, device_purchase_date, 
     device_purchase_price, device_manufacture_date, device_service_life, device_keeper_id, 

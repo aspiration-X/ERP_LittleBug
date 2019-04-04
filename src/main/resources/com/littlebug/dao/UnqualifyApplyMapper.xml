@@ -126,4 +126,20 @@
       note = #{note,jdbcType=VARCHAR}
     where unqualify_apply_id = #{unqualifyApplyId,jdbcType=VARCHAR}
   </update>
+
+
+
+
+
+
+
+
+
+
+  <!--分页查询质量监控-不合格品管理-->
+  <select id="selectPagination" resultType="unqualifyapply">
+    select
+    <include refid="Base_Column_List" />
+     from unqualify_apply limit #{limit} offset #{offset};
+  </select>
 </mapper>

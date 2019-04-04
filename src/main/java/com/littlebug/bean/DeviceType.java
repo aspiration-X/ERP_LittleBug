@@ -19,6 +19,20 @@ public class DeviceType {
 
     private Date deviceTypeWarranty;
 
+    @Override
+    public String toString() {
+        return "DeviceType{" +
+                "deviceTypeId='" + deviceTypeId + '\'' +
+                ", deviceTypeName='" + deviceTypeName + '\'' +
+                ", deviceTypeModel='" + deviceTypeModel + '\'' +
+                ", deviceTypeSpec='" + deviceTypeSpec + '\'' +
+                ", deviceTypeSupplier='" + deviceTypeSupplier + '\'' +
+                ", deviceTypeProducer='" + deviceTypeProducer + '\'' +
+                ", deviceTypeQuantity=" + deviceTypeQuantity +
+                ", deviceTypeWarranty=" + deviceTypeWarranty +
+                '}';
+    }
+
     public String getDeviceTypeId() {
         return deviceTypeId;
     }
