@@ -4,13 +4,17 @@ import com.littlebug.bean.*;
 import com.littlebug.service.PlanService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Author Darling
@@ -24,7 +28,7 @@ public class PlanController {
     @Autowired
     PlanService planService;
 
-/*------------------------------------------------ order ---------------------------------------------------*/
+    /*------------------------------------------------ order ---------------------------------------------------*/
     @RequestMapping("order/list")
     @ResponseBody
     public List<COrder> findByPage(@Param("page") int page, @Param("rows") int rows, HttpServletRequest request) {
@@ -37,12 +41,12 @@ public class PlanController {
     }
 
     @RequestMapping("order/find")
-    public String turn() {
+    public String goOrderList() {
         return "order_list";
     }
 
     @RequestMapping("order/delete_judge")
-    public boolean deleteJudge(String[] ids){
+    public boolean deleteJudge(String[] ids) {
         boolean result = planService.deleteJudge(ids);
         return result;
     }
@@ -60,30 +64,54 @@ public class PlanController {
         return "{}";
     }
 
+//    @RequestMapping("*/*_judge")
+//    @ResponseBody
+//    public String edit_judge() {
+//        return "{}";
+//    }
+
     @RequestMapping("order/add_judge")
     @ResponseBody
     public String add_judge(){
         return "{}";
     }
 
-   @RequestMapping("order/edit")
-   public String goEditOrderPage(){
-       return "order_edit";
-   }
+    @RequestMapping("order/edit")
+    public String goEditOrderPage() {
+        return "order_edit";
+    }
 
 
     @RequestMapping("order/add")
-    public String goAddOrderPage(){
+    public String goAddOrderPage() {
         return "order_add";
     }
 
-    @RequestMapping("order/update_all")
-    public void edit(COrder order){
+//    @RequestMapping(value = "order/update_all",
+//            method = RequestMethod.POST,
+//            produces = {"application/json;charset=UTF-8"},
+//            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+//    @ResponseBody
+//    public String edit(COrder order, HttpServletRequest request,  @RequestBody String apps) {
+//        request.getAttribute("order");
+//        planService.updateOrder(order);
+//        String body = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+//        return BaseResponse.success();
+//        return "";
+//    }
+
+
+    @RequestMapping(value = "order/update_all")
+    @ResponseBody
+    public String edit(COrder order, HttpServletRequest request) {
+        request.getAttribute("order");
         planService.updateOrder(order);
+        return "message:ok";
     }
 
+
     @RequestMapping("order/insert")
-    public void addOrder(COrder order){
+    public void addOrder(COrder order) {
         planService.addOrder(order);
     }
 
@@ -96,7 +124,7 @@ public class PlanController {
 
     @ResponseBody
     @RequestMapping("product/get_data")
-    public List<Product> getProductData(){
+    public List<Product> getProductData() {
         List<Product> productList = planService.showProductList();
 
         return productList;
@@ -104,7 +132,7 @@ public class PlanController {
 
     @ResponseBody
     @RequestMapping("product/get")
-    public List<Product> getProductInfoById(){
+    public List<Product> getProductInfoById() {
         List<Product> productList = planService.showProductList();
 
         return productList;
@@ -120,23 +148,10 @@ public class PlanController {
 
     @ResponseBody
     @RequestMapping("custom/get_data")
-    public List<Custom> getCustomData(){
+    public List<Custom> getCustomData() {
         List<Custom> customList = planService.showCustomList();
         return customList;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @RequestMapping("custom/list")

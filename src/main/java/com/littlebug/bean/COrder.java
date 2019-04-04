@@ -28,6 +28,10 @@ public class COrder {
 
     private Integer status;
 
+    private Custom custom;
+
+    private Product product;
+
     public COrder(String orderId, String customId) {
         this.orderId = orderId;
         this.customId = customId;
@@ -130,5 +134,21 @@ public class COrder {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Custom getCustom() {
+        return custom;
+    }
+
+    public void setCustom(Custom custom) {
+        this.custom = custom;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

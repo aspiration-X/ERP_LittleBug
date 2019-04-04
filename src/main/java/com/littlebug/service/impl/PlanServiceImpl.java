@@ -51,7 +51,7 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public void updateOrder(COrder order) {
-        int update = orderMapper.updateByPrimaryKey(order);
+        orderMapper.updateByPrimaryKey(order);
     }
 
     @Override
