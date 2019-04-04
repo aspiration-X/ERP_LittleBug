@@ -124,4 +124,8 @@ public class QualifyController {
 
     }
 
+    public void suibian(){
+
+    }
+
 }

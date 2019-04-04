@@ -146,4 +146,5 @@ public class TechnologyController {
       List<Technology> technologyList = technologyService.search_technology_by_technologyName(searchValue);
       return technologyList;
    }
+
 }
