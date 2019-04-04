@@ -11,6 +11,9 @@
     <result column="device_type_quantity" jdbcType="INTEGER" property="deviceTypeQuantity" />
     <result column="device_type_warranty" jdbcType="TIMESTAMP" property="deviceTypeWarranty" />
   </resultMap>
+  <select id="selectAllDeviceTypes" resultMap="BaseResultMap">
+    select * from device_type;
+  </select>
   <sql id="Base_Column_List">
     device_type_id, device_type_name, device_type_model, device_type_spec, device_type_supplier, 
     device_type_producer, device_type_quantity, device_type_warranty
