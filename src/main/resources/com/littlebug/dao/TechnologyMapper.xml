@@ -146,4 +146,13 @@
     from technology
   </select>
 
+  <update id="delete_batch" >
+    delete from technology
+    where technology_id in (
+    <foreach collection="list" item="ids" separator=",">
+      #{ids}
+    </foreach>
+    )
+  </update>
+
 </mapper>

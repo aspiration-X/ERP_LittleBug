@@ -1,6 +1,7 @@
 package com.littlebug.bean;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class Technology {
     private String technologyId;
@@ -20,6 +21,7 @@ public class Technology {
     private Integer doubleCapacity;
 
     private Integer overfulfilCapacity;
+
 
     public String getTechnologyId() {
         return technologyId;

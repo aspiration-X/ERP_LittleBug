@@ -20,4 +20,17 @@ public interface TechnologyService {
      * @param technology
      */
     boolean insertTechnology(Technology technology);
+
+    /**
+     * 修改一项工艺的某些属性
+     * @return
+     */
+    boolean update_all(Technology technology);
+
+    /**
+     * 删除一个或多个工艺
+     * @param ids
+     * @return
+     */
+    boolean delete_batch(List<String> ids);
 }

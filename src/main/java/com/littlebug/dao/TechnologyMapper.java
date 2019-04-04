@@ -17,5 +17,16 @@ public interface TechnologyMapper {
 
     int updateByPrimaryKey(Technology record);
 
+    /**
+     * 查询所有的工艺
+     * @return List<Technology>
+     */
     List<Technology> findAllTechnologies();
+
+    /**
+     * 删除一个或多个工艺
+     * @param ids
+     * @return
+     */
+    int delete_batch(List<String> ids);
 }
