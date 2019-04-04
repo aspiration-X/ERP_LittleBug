@@ -3,15 +3,12 @@ package com.littlebug.controller;
 import com.littlebug.bean.Device;
 import com.littlebug.bean.DeviceType;
 import com.littlebug.service.DeviceService;
+import com.littlebug.util.UserMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,12 +22,6 @@ public class DeviceController {
 
     @RequestMapping("/device/deviceType")
     public String deviceType1() {
-        /*HttpSession session = request.getSession();
-        ArrayList<String> sysPermissionList = new ArrayList<>();
-        sysPermissionList.add("deviceType:add");
-        sysPermissionList.add("deviceType:edit");
-        sysPermissionList.add("deviceType:delete");
-        session.setAttribute("sysPermissionList", sysPermissionList);*/
         return "deviceType";
     }
 
@@ -41,9 +32,10 @@ public class DeviceController {
         return deviceType;
     }
 
-    @RequestMapping("deviceType/add_judge")
-    public String addDeviceType1() {
-        return "deviceType_add";
+    @RequestMapping("*/*_judge")
+    @ResponseBody
+    public UserMessage judge() {
+        return new UserMessage();
     }
 
     @RequestMapping("deviceType/add")
@@ -52,8 +44,59 @@ public class DeviceController {
     }
 
     @RequestMapping("/deviceType/insert")
-    public String addDeviceType3() {
-        return "deviceType_add";
+    @ResponseBody
+    public UserMessage addDeviceType3(DeviceType deviceType) {
+        boolean b = deviceService.addDeviceType(deviceType);
+        UserMessage userMessage = new UserMessage();
+        if (b) {
+            userMessage.setMsg("ok");
+            userMessage.setStatus(200);
+        }
+        return userMessage;
+    }
+
+    @RequestMapping("deviceType/edit")
+    public String deviceTypeEdit1() {
+        return "deviceType_edit";
+    }
+
+    @RequestMapping("deviceType/update")
+    @ResponseBody
+    public UserMessage deviceTypeEdit2(DeviceType deviceType, String deviceTypeId) {
+        boolean b = deviceService.editDeviceType(deviceType, deviceTypeId);
+        UserMessage userMessage = new UserMessage();
+        if (b) {
+            userMessage.setMsg("ok");
+            userMessage.setStatus(200);
+        }
+        return userMessage;
+    }
+
+    @RequestMapping("deviceType/delete_batch")
+    @ResponseBody
+    public UserMessage deviceTypeDelete(String ids) {
+        String[] strings = ids.split(",");
+        boolean b = deviceService.deleteDeviceTypeByIds(strings);
+        UserMessage userMessage = new UserMessage();
+        if (b) {
+            userMessage.setMsg("ok");
+            userMessage.setStatus(200);
+        }
+        return userMessage;
+    }
+
+    @RequestMapping("deviceType/search_deviceType_by_deviceTypeId")
+    @ResponseBody
+    public List<DeviceType> searchDeviceTypeListById(String searchValue) {
+        List<DeviceType> deviceType = deviceService.findDeviceTypeById(searchValue);
+        return deviceType;
+    }
+
+    @RequestMapping("deviceType/search_deviceType_by_deviceTypeName")
+    @ResponseBody
+    public List<DeviceType> searchDeviceTypeListByName(String searchValue) {
+        List<DeviceType> deviceType = deviceService.findDeviceTypeListByName(searchValue);
+        return deviceType;
     }
 
     @RequestMapping("/device/deviceList")
