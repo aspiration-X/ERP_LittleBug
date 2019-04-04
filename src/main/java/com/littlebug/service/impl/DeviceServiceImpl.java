@@ -17,19 +17,51 @@ import java.util.List;
 @Service
 public class DeviceServiceImpl implements DeviceService {
     @Autowired
-    DeviceMapper deviceMapper;
+    DeviceTypeMapper deviceTypeMapper;
 
     @Autowired
-    DeviceTypeMapper deviceTypeMapper;
-    @Override
-    public List<Device> findAllDevices() {
-        List<Device> deviceList = deviceMapper.selectAllDevices();
-        return deviceList;
-    }
+    DeviceMapper deviceMapper;
 
     @Override
     public List<DeviceType> findAllDeviceTypes() {
         List<DeviceType> deviceTypeList = deviceTypeMapper.selectAllDeviceTypes();
         return deviceTypeList;
+    }
+
+    @Override
+    public boolean addDeviceType(DeviceType deviceType) {
+        int insert = deviceTypeMapper.insert(deviceType);
+        return insert == 1;
+    }
+
+    @Override
+    public boolean editDeviceType(DeviceType deviceType, String deviceTypeId) {
+        deviceType.setDeviceTypeId(deviceTypeId);
+        int i = deviceTypeMapper.updateByPrimaryKeySelective(deviceType);
+        return i == 1;
+    }
+
+    @Override
+    public boolean deleteDeviceTypeByIds(String[] ids) {
+        int i = deviceTypeMapper.deleteByIds(ids);
+        return i != 0;
+    }
+
+    @Override
+    public List<DeviceType> findDeviceTypeById(String deviceTypeId) {
+        List<DeviceType> deviceType = deviceTypeMapper.selectById(deviceTypeId);
+        return deviceType;
+    }
+
+    @Override
+    public List<DeviceType> findDeviceTypeListByName(String deviceTypeName) {
+        List<DeviceType> deviceTypeList = deviceTypeMapper.selectByName(deviceTypeName);
+        return deviceTypeList;
+    }
+
+    @Override
+    public List<Device> findAllDevices() {
+        List<Device> deviceList = deviceMapper.selectAllDevices();
+        return deviceList;
     }
 }
