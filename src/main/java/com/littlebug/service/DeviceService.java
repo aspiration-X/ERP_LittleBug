@@ -10,9 +10,17 @@ import java.util.List;
  * Date 2019/4/3 Times 19:34
  */
 public interface DeviceService {
-    List<Device> findAllDevices();
-
     List<DeviceType> findAllDeviceTypes();
 
+    boolean editDeviceType(DeviceType deviceType, String deviceTypeId);
+
     boolean addDeviceType(DeviceType deviceType);
+
+    boolean deleteDeviceTypeByIds(String[] ids);
+
+    List<DeviceType> findDeviceTypeById(String deviceTypeId);
+
+    List<DeviceType> findDeviceTypeListByName(String deviceTypeName);
+
+    List<Device> findAllDevices();
 }
