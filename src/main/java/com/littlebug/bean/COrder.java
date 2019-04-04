@@ -28,6 +28,14 @@ public class COrder {
 
     private Integer status;
 
+    public COrder(String orderId, String customId) {
+        this.orderId = orderId;
+        this.customId = customId;
+    }
+
+    public COrder() {
+    }
+
     public String getOrderId() {
         return orderId;
     }

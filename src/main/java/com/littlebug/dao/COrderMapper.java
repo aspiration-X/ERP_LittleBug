@@ -1,6 +1,9 @@
 package com.littlebug.dao;
 
 import com.littlebug.bean.COrder;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface COrderMapper {
     int deleteByPrimaryKey(String orderId);
@@ -14,4 +17,6 @@ public interface COrderMapper {
     int updateByPrimaryKeySelective(COrder record);
 
     int updateByPrimaryKey(COrder record);
+
+    List<COrder> findOrderByIndexs(@Param("start")int start, @Param("end")int end);
 }
