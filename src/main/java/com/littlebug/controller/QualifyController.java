@@ -124,7 +124,7 @@ public class QualifyController {
 
     }
 
-    public void suibian(){
+    public void suibia(){
 
     }
 
