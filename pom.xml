@@ -129,6 +129,11 @@
       <artifactId>spring-aspects</artifactId>
       <version>4.1.3.RELEASE</version>
     </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>4.1.3.RELEASE</version>
+    </dependency>
     <!-- JSP相关 -->
     <dependency>
       <groupId>jstl</groupId>

@@ -15,15 +15,6 @@
     <context:component-scan base-package="com.littlebug.controller"/>
 
 
-    <!--&lt;!&ndash;mvc的配置&ndash;&gt;-->
-    <mvc:annotation-driven conversion-service="conversionService"/>
-    <bean id="dateConversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
-        <property name="converters">
-            <set>
-                <bean class="com.littlebug.converter.MyDateConverter"/>
-            </set>
-        </property>
-    </bean>
     <!--mvc的配置-->
     <mvc:annotation-driven conversion-service="conversionService"/>
 
