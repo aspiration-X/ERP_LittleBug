@@ -19,6 +19,17 @@ public class UnqualifyApply {
 
     private String note;
 
+    private Product product;
+
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     public String getUnqualifyApplyId() {
         return unqualifyApplyId;
     }
@@ -82,4 +93,5 @@ public class UnqualifyApply {
     public void setNote(String note) {
         this.note = note == null ? null : note.trim();
     }
+
 }

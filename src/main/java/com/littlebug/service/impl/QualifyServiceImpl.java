@@ -13,7 +13,7 @@ import java.util.List;
  * Date2019/4/4 Time 10:38
  */
 @Service
-public class queryUnqualifyListImpl implements QualifyService {
+public class QualifyServiceImpl implements QualifyService {
     @Autowired
     UnqualifyApplyMapper unqualifyApplyMapper;
 
