@@ -12,11 +12,17 @@ public interface COrderMapper {
 
     int insertSelective(COrder record);
 
-    COrder selectByPrimaryKey(String orderId);
-
     int updateByPrimaryKeySelective(COrder record);
 
     int updateByPrimaryKey(COrder record);
 
+    COrder selectByPrimaryKey(String id);
+
     List<COrder> findOrderByIndexs(@Param("start")int start, @Param("end")int end);
+
+    List<COrder> selectByIdLike(String likeId, int offset, int limit);
+
+    List<COrder> selectOrderByProduct(String productName, int offset, int limit);
+
+    List<COrder> selectOrderByCustom(String customName, int offset, int limit);
 }

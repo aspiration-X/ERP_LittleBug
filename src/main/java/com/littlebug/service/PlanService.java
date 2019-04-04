@@ -16,11 +16,15 @@ public interface PlanService {
 
     boolean deleteJudge(String[] ids);
 
-    void deleteBatchOrders(String[] ids);
+    boolean deleteBatchOrders(String[] ids);
 
     void updateOrder(COrder order);
 
-    COrder selectOrderById(String id);
+    List<COrder> selectOrderById(String id, int page, int rows);
+
+    List<COrder> selectOrderByProduct(String productName, int page, int rows);
+
+    List<COrder> selectOrderByCustom(String customName, int page, int rows);
 
     List<COrder> showAllOrdersByIndexs(int start, int end);
 
