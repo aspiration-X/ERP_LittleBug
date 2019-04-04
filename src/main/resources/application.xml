@@ -29,7 +29,6 @@
         <property name="password" value="123456"/>
     </bean>
 
-
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!--扫描包-->
         <property name="basePackage" value="com.littlebug.dao"/>
@@ -37,15 +36,11 @@
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
-
     <!--事务支持-->
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="datasource"/>
     </bean>
     <!--事务驱动-->
     <tx:annotation-driven transaction-manager="txManager"/>
-
-
-
 
 </beans>

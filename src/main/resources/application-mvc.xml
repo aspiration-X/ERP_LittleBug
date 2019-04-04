@@ -13,20 +13,18 @@
         http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
 
     <context:component-scan base-package="com.littlebug.controller"/>
+
     <!--mvc的配置-->
     <mvc:annotation-driven/>
+
     <!--springmvc的视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
 
-
-
-
     <!--<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="50000"/>
     </bean>-->
     <mvc:resources mapping="/**" location="/WEB-INF/"/>
-    <!--<mvc:default-servlet-handler/>-->
 </beans>
