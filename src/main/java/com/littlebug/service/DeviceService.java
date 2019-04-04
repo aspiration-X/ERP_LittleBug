@@ -13,4 +13,6 @@ public interface DeviceService {
     List<Device> findAllDevices();
 
     List<DeviceType> findAllDeviceTypes();
+
+    boolean addDeviceType(DeviceType deviceType);
 }

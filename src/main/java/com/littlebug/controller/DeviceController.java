@@ -3,12 +3,15 @@ package com.littlebug.controller;
 import com.littlebug.bean.Device;
 import com.littlebug.bean.DeviceType;
 import com.littlebug.service.DeviceService;
+import com.littlebug.util.UserMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.jws.soap.SOAPBinding;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -41,9 +44,11 @@ public class DeviceController {
         return deviceType;
     }
 
+
     @RequestMapping("deviceType/add_judge")
-    public String addDeviceType1() {
-        return "deviceType_add";
+    @ResponseBody
+    public UserMessage addDeviceType1() {
+        return new UserMessage();
     }
 
     @RequestMapping("deviceType/add")
@@ -52,8 +57,16 @@ public class DeviceController {
     }
 
     @RequestMapping("/deviceType/insert")
-    public String addDeviceType3() {
-        return "deviceType_add";
+    @ResponseBody
+    public UserMessage addDeviceType3(DeviceType deviceType) {
+        System.out.println(deviceType);
+        boolean b = deviceService.addDeviceType(deviceType);
+        UserMessage userMessage = new UserMessage();
+        if (b == true) {
+            userMessage.setMsg("ok");
+            userMessage.setStatus(200);
+        }
+        return userMessage;
     }
 
     @RequestMapping("/device/deviceList")

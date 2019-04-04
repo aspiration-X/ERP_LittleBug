@@ -17,19 +17,26 @@ import java.util.List;
 @Service
 public class DeviceServiceImpl implements DeviceService {
     @Autowired
-    DeviceMapper deviceMapper;
+    DeviceTypeMapper deviceTypeMapper;
 
     @Autowired
-    DeviceTypeMapper deviceTypeMapper;
-    @Override
-    public List<Device> findAllDevices() {
-        List<Device> deviceList = deviceMapper.selectAllDevices();
-        return deviceList;
-    }
+    DeviceMapper deviceMapper;
 
     @Override
     public List<DeviceType> findAllDeviceTypes() {
         List<DeviceType> deviceTypeList = deviceTypeMapper.selectAllDeviceTypes();
         return deviceTypeList;
+    }
+
+    @Override
+    public boolean addDeviceType(DeviceType deviceType) {
+        int insert = deviceTypeMapper.insert(deviceType);
+        return insert == 1;
+    }
+
+    @Override
+    public List<Device> findAllDevices() {
+        List<Device> deviceList = deviceMapper.selectAllDevices();
+        return deviceList;
     }
 }

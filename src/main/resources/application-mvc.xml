@@ -15,7 +15,7 @@
     <context:component-scan base-package="com.littlebug.controller"/>
 
     <!--mvc的配置-->
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven conversion-service="conversionService"/>
 
     <!--springmvc的视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -27,4 +27,12 @@
         <property name="maxUploadSize" value="50000"/>
     </bean>-->
     <mvc:resources mapping="/**" location="/WEB-INF/"/>
+
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="com.littlebug.convertor.MyConvertor"/>
+            </set>
+        </property>
+    </bean>
 </beans>
