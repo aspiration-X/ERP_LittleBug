@@ -3,6 +3,7 @@ package com.littlebug.service.impl;
 import com.littlebug.bean.Technology;
 import com.littlebug.dao.TechnologyMapper;
 import com.littlebug.service.TechnologyService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -61,5 +62,33 @@ public class TechnologyServiceImpl implements TechnologyService {
     public boolean delete_batch(List<String> ids) {
         int i = technologyMapper.delete_batch(ids);
         return i != 0;
+    }
+
+    /**
+     * 通过工艺id模糊查询符合要求的所有工艺
+     * @param searchValue
+     * @return
+     */
+    @Override
+    public List<Technology> search_technology_by_technologyId(String searchValue) {
+        if(null != searchValue) {
+            searchValue = "%" + searchValue + "%";
+        }
+        List<Technology> technologies = technologyMapper.search_technology_by_technologyId( searchValue);
+        return technologies;
+    }
+
+    /**
+     * 通过工艺名称模糊查询符合要求的所有工艺
+     * @param searchValue
+     * @return
+     */
+    @Override
+    public List<Technology> search_technology_by_technologyName(String searchValue) {
+        if(null != searchValue) {
+            searchValue = "%" + searchValue + "%";
+        }
+        List<Technology> technologies = technologyMapper.search_technology_by_technologyName( searchValue);
+        return technologies;
     }
 }
