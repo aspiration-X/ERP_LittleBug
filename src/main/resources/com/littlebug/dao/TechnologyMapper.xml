@@ -107,7 +107,7 @@
         price = #{price,jdbcType=DECIMAL},
       </if>
       <if test="vitalProcessPeriod != null">
-        vital_process_period = #{vitalProcessPeriod,jdbcType=VARCHAR},
+       vital_process_period = #{vitalProcessPeriod,jdbcType=VARCHAR},
       </if>
       <if test="standardCapacity != null">
         standard_capacity = #{standardCapacity,jdbcType=INTEGER},
@@ -139,4 +139,11 @@
       overfulfil_capacity = #{overfulfilCapacity,jdbcType=INTEGER}
     where technology_id = #{technologyId,jdbcType=VARCHAR}
   </update>
+
+  <select id="findAllTechnologies" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from technology
+  </select>
+
 </mapper>

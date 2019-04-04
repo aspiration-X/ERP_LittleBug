@@ -2,6 +2,8 @@ package com.littlebug.dao;
 
 import com.littlebug.bean.Technology;
 
+import java.util.List;
+
 public interface TechnologyMapper {
     int deleteByPrimaryKey(String technologyId);
 
@@ -14,4 +16,6 @@ public interface TechnologyMapper {
     int updateByPrimaryKeySelective(Technology record);
 
     int updateByPrimaryKey(Technology record);
+
+    List<Technology> findAllTechnologies();
 }
