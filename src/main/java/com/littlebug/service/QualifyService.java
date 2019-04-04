@@ -19,4 +19,15 @@ public interface QualifyService {
      * @return
      */
     public List<UnqualifyApply> queryUnqualifyList(int page, int rows) ;
+
+    /**
+     * 编辑不合格产品
+     * @param unqualifyApply 更新后的不合格产品
+     * @return true ：更新成功
+     *         false：更失败
+     *
+     */
+    boolean updateAll(UnqualifyApply unqualifyApply);
+
+    boolean deleteBatch(String ids);
 }

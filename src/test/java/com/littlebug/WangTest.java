@@ -16,7 +16,7 @@ import java.util.List;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:application.xml")
-public class MainTest {
+public class WangTest {
 
     @Autowired
     UnqualifyApplyMapper unqualifyApplyMapper;
