@@ -1,9 +1,7 @@
 package com.littlebug.dao;
 
 import com.littlebug.bean.UnqualifyApply;
-
 import org.apache.ibatis.annotations.Param;
-
 
 import java.util.List;
 

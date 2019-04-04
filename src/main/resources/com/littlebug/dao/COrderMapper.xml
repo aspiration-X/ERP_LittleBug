@@ -14,7 +14,33 @@
     <result column="image" jdbcType="VARCHAR" property="image" />
     <result column="file" jdbcType="VARCHAR" property="file" />
     <result column="status" jdbcType="INTEGER" property="status" />
+      <association property="custom" resultMap="customMap"/>
+      <association property="product" resultMap="productMap"/>
   </resultMap>
+
+    <resultMap id="productMap" type="com.littlebug.bean.Product">
+        <result column="product_id" jdbcType="VARCHAR" property="productId"/>
+        <result column="product_name" jdbcType="VARCHAR" property="productName"/>
+        <result column="product_type" jdbcType="VARCHAR" property="productType"/>
+        <result column="image" jdbcType="VARCHAR" property="image"/>
+        <result column="note" jdbcType="VARCHAR" property="note"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+    </resultMap>
+
+    <resultMap id="customMap" type="com.littlebug.bean.Custom">
+        <result column="custom_id" jdbcType="VARCHAR" property="customId"/>
+        <result column="custom_name" jdbcType="VARCHAR" property="customName"/>
+        <result column="full_name" jdbcType="VARCHAR" property="fullName"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="fax" jdbcType="VARCHAR" property="fax"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="owner_name" jdbcType="VARCHAR" property="ownerName"/>
+        <result column="owner_tel" jdbcType="VARCHAR" property="ownerTel"/>
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="note" jdbcType="VARCHAR" property="note"/>
+    </resultMap>
+
+
   <sql id="Base_Column_List">
     order_id, custom_id, product_id, order_date, request_date, note, quantity, unit_price, 
     unit, image, file, status
@@ -176,6 +202,24 @@
   </update>
 
     <select id="findOrderByIndexs" resultMap="BaseResultMap">
-        select * from c_order limit #{start},#{end}
+        select
+        order_id, c.custom_id,c.custom_name,c.full_name,c.address,c.fax,c.email,c.owner_name,c.owner_tel,c.status,c.note,
+        p.product_id,p.product_name,p.product_type,p.image,p.note,p.status,
+        order_date, request_date, o.note, quantity, unit_price,unit, o.image, file, o.status
+        from c_order o left join custom c on
+        o.custom_id = c.custom_id
+        left join product p on
+        o.product_id = p.product_id
+        limit
+        #{start},#{end}
     </select>
+
+    <!--<select id="findOrderByIndexs2" resultMap="BaseResultMap">-->
+        <!--select -->
+    <!--</select>-->
+
+    
+
+
+
 </mapper>

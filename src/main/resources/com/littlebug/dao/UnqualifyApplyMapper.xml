@@ -15,6 +15,10 @@
     unqualify_apply_id, product_id, unqualify_item, unqualify_count, assembly_date, emp_id, 
     apply_date, note
   </sql>
+    <sql id="Base_Column_List_">
+    unqualify_apply_id, product_id, unqualify_item, unqualify_count, assembly_date, emp_id,
+    apply_date, note
+  </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -132,14 +136,38 @@
 
 
 
+    <sql id="UnqualifyApply_As_u">
+    u.unqualify_apply_id, u.product_id as uproduct_id, u.unqualify_item, u.unqualify_count, u.assembly_date, u.emp_id,
+    u.apply_date, u.note as unote
+  </sql>
+    <sql id="Product_As_p">
+    p.product_id, p.product_name, p.product_type, p.image, p.note, p.status
+  </sql>
 
-
-
+    <resultMap id="BaseAndProductName" type="com.littlebug.bean.UnqualifyApply">
+        <id column="unqualify_apply_id" jdbcType="VARCHAR" property="unqualifyApplyId" />
+        <result column="uproduct_id" jdbcType="VARCHAR" property="productId" />
+        <result column="unqualify_item" jdbcType="VARCHAR" property="unqualifyItem" />
+        <result column="unqualify_count" jdbcType="INTEGER" property="unqualifyCount" />
+        <result column="assembly_date" jdbcType="TIMESTAMP" property="assemblyDate" />
+        <result column="emp_id" jdbcType="VARCHAR" property="empId" />
+        <result column="apply_date" jdbcType="TIMESTAMP" property="applyDate" />
+        <result column="unote" jdbcType="VARCHAR" property="note" />
+        <association property="product" jdbcType="VARCHAR" javaType="product">
+            <result column="product_id" jdbcType="VARCHAR" property="productId" />
+            <result column="product_name" jdbcType="VARCHAR" property="productName" />
+            <result column="product_type" jdbcType="VARCHAR" property="productType" />
+            <result column="image" jdbcType="VARCHAR" property="image" />
+            <result column="note" jdbcType="VARCHAR" property="note" />
+            <result column="status" jdbcType="INTEGER" property="status" />
+        </association>
+    </resultMap>
 
   <!--分页查询质量监控-不合格品管理-->
-  <select id="selectPagination" resultType="unqualifyapply">
+  <select id="selectPagination" resultMap="BaseAndProductName">
     select
-    <include refid="Base_Column_List" />
-     from unqualify_apply limit #{limit} offset #{offset};
+      <include refid="UnqualifyApply_As_u"/> ,
+      <include refid="Product_As_p"/>
+     from unqualify_apply u LEFT JOIN product p on u.product_id = p.product_id limit #{limit} offset #{offset};
   </select>
 </mapper>

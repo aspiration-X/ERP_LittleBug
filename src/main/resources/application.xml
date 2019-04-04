@@ -27,6 +27,7 @@
         <property name="url" value="jdbc:mysql://localhost:3306/production_ssm?serverTimezone=GMT&amp;useSSL=false"/>
         <property name="username" value="root"/>
         <property name="password" value="123456"/>
+        <property name="filters" value="stat"/>
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
