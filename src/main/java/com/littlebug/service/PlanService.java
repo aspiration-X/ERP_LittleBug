@@ -1,9 +1,6 @@
 package com.littlebug.service;
 
 import com.littlebug.bean.*;
-import com.littlebug.util.tag.PageModel;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -15,12 +12,43 @@ import java.util.List;
  */
 public interface PlanService {
 
+    boolean addOrder(COrder order);
+
+    boolean deleteJudge(String[] ids);
+
+    void deleteBatchOrders(String[] ids);
+
+    void updateOrder(COrder order);
+
+    COrder selectOrderById(String id);
+
     List<COrder> showAllOrdersByIndexs(int start, int end);
 
 
+
+    /*--------------------------------------------------- product ------------------------------------------------------*/
+    List<Product> showProductList();
+
+
+
+    /*--------------------------------------------------- custom ------------------------------------------------------*/
+
+    List<Custom> showCustomList();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //
-//    List<Custom> showCustomList(@Param("page") int page, @Param("rows") int rows);
-//    List<Product> showProductList(@Param("page") int page, @Param("rows") int rows);
 //    List<Work> showWorkList(@Param("page") int page, @Param("rows") int rows);
 //    List<Task> showTaskList(@Param("page") int page, @Param("rows") int rows);
 //    List<Manufacture> showManufactureList(@Param("page") int page, @Param("rows") int rows);
