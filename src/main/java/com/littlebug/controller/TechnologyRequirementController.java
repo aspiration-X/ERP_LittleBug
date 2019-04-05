@@ -101,4 +101,28 @@ public class TechnologyRequirementController {
         boolean flag = technologyRequirementService.delete_batch(split);
         return DuplicatedCodeUtil.consequenceMessageReturn(flag);
     }
+
+    /**
+     * 通过工艺要求编号模糊查询符合要求的所有工艺
+     * @param searchValue
+     * @return
+     */
+    @RequestMapping("search_technologyRequirement_by_technologyRequirementId")
+    @ResponseBody
+    public List<TechnologyRequirement> search_technologyRequirement_by_technologyRequirementId(String searchValue){
+        List<TechnologyRequirement> technologyRequirements = technologyRequirementService.search_technologyRequirement_by_technologyRequirementId(searchValue);
+        return technologyRequirements;
+    }
+
+    /**
+     * 通过工艺名称模糊查询符合要求的所有工艺
+     * @param searchValue
+     * @return
+     */
+    @RequestMapping("search_technologyRequirement_by_technologyName")
+    @ResponseBody
+    public List<TechnologyRequirement> search_technologyRequirement_by_technologyName(String searchValue){
+        List<TechnologyRequirement> technologyRequirements = technologyRequirementService.search_technologyRequirement_by_technologyName(searchValue);
+        return technologyRequirements;
+    }
 }

@@ -48,4 +48,18 @@ public interface TechnologyRequirementService {
      * @return
      */
     boolean delete_batch(String[] split);
+
+    /**
+     * 通过工艺要求编号模糊查询符合要求的所有工艺要求
+     * @param searchValue
+     * @return
+     */
+    List<TechnologyRequirement> search_technologyRequirement_by_technologyRequirementId(String searchValue);
+
+    /**
+     * 通过工艺名称模糊查询符合要求的所有工艺要求
+     * @param searchValue
+     * @return
+     */
+    List<TechnologyRequirement> search_technologyRequirement_by_technologyName(String searchValue);
 }

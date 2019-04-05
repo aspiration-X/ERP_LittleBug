@@ -91,4 +91,32 @@ public class TechnologyRequirementServiceImpl implements TechnologyRequirementSe
         int i = technologyRequirementMapper.delete_batch(split);
         return i != 0;
     }
+
+    /**
+     * 通过工艺要求编号模糊查询符合要求的所有工艺要求
+     * @param searchValue
+     * @return
+     */
+    @Override
+    public List<TechnologyRequirement> search_technologyRequirement_by_technologyRequirementId(String searchValue) {
+        if(null != searchValue) {
+            searchValue = "%" + searchValue + "%";
+        }
+        List<TechnologyRequirement> technologyRequirements = technologyRequirementMapper.search_technologyRequirement_by_technologyRequirementId(searchValue);
+        return technologyRequirements;
+    }
+
+    /**
+     * 通过工艺名称模糊查询符合要求的所有工艺要求
+     * @param searchValue
+     * @return
+     */
+    @Override
+    public List<TechnologyRequirement> search_technologyRequirement_by_technologyName(String searchValue) {
+        if(null != searchValue) {
+            searchValue = "%" + searchValue + "%";
+        }
+        List<TechnologyRequirement> technologyRequirements = technologyRequirementMapper.search_technologyRequirement_by_technologyName(searchValue);
+        return technologyRequirements;
+    }
 }
