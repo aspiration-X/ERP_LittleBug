@@ -12,9 +12,11 @@ import java.util.List;
  */
 public interface PlanService {
 
-    boolean addOrder(COrder order);
 
-    boolean deleteJudge(String[] ids);
+    /*-------------------------------------------------- order ----------------------------------------------------------*/
+
+
+    boolean addOrder(COrder order);
 
     boolean deleteBatchOrders(String[] ids);
 
@@ -31,25 +33,34 @@ public interface PlanService {
 
 
     /*--------------------------------------------------- product ------------------------------------------------------*/
+
+
     List<Product> showProductList();
 
+    Product selectProductByProductId(String productId);
 
 
     /*--------------------------------------------------- custom ------------------------------------------------------*/
 
+    int countAllCustoms();
+
+    int countCustomOnCondition(Custom custom,int page,int rows);
+
     List<Custom> showCustomList();
 
+    Custom selectCustomByCustomId(String customId);
 
+    List<Custom> showAllCustomsByIndexs(int offset, int limit);
 
+    List<Custom> selectCustomOnCondition(Custom custom, int offset, int rows);
 
+    boolean addCustom(Custom custom);
 
+    boolean deleteBatchCustoms(String[] customIds);
 
+    boolean editCustom(Custom custom);
 
-
-
-
-
-
+    boolean updateCustom(Custom custom);
 
 
 //
