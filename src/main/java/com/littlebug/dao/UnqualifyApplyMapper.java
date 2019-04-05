@@ -26,4 +26,9 @@ public interface UnqualifyApplyMapper {
      * @return
      */
     List<UnqualifyApply> selectPagination(@Param("limit") int limit, @Param("offset") int offset);
+
+    List<UnqualifyApply> searchUnqualifyByUnqualifyId(@Param("searchValue") String searchValue, @Param("limit") int limit,@Param("offset") int offset);
+
+    List<UnqualifyApply> searchUnqualifyByProductName(@Param("searchValue") String searchValue, @Param("limit") int limit,@Param("offset") int offset);
+
 }

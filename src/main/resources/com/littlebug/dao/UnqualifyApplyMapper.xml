@@ -142,6 +142,9 @@
 <sql id="LimitAndOffset">
   limit #{limit} offset #{offset}
 </sql>
+  <sql id="LikeSearchValue">
+  like #{searchValue}
+</sql>
 
     <resultMap id="ProductName" type="string">
       <result column="product_name" jdbcType="VARCHAR" property="productName" />
@@ -149,7 +152,7 @@
   <resultMap id="EmpName" type="string">
     <result column="e.emp_name" jdbcType="VARCHAR" property="empName" />
   </resultMap>
-    <resultMap id="BaseAndProductName" type="com.littlebug.bean.UnqualifyApply">
+    <resultMap id="QualifyApplyAndProductName" type="com.littlebug.bean.UnqualifyApply">
         <id column="unqualify_apply_id" jdbcType="VARCHAR" property="unqualifyApplyId" />
         <result column="uproduct_id" jdbcType="VARCHAR" property="productId" />
         <result column="unqualify_item" jdbcType="VARCHAR" property="unqualifyItem" />
@@ -163,7 +166,7 @@
     </resultMap>
 
   <!--分页查询质量监控-不合格品管理-->
-  <select id="selectPagination" resultMap="BaseAndProductName">
+  <select id="selectPagination" resultMap="QualifyApplyAndProductName">
     select
       <include refid="UnqualifyApply_As_u"/> ,
     product_name,
@@ -173,5 +176,38 @@
     LEFT JOIN employee e 	on e.emp_id = u.emp_id
     <include refid="LimitAndOffset"/>
     ;
+  </select>
+
+
+  <!--通过unqualiftApplyId模糊查找其集合-->
+  <select id="searchUnqualifyByUnqualifyId" resultMap="QualifyApplyAndProductName">
+    select
+    <include refid="UnqualifyApply_As_u"/> ,
+    product_name,
+    e.emp_name
+    from unqualify_apply u
+    LEFT JOIN product p on u.product_id = p.product_id
+    LEFT JOIN employee e 	on e.emp_id = u.emp_id
+    <where>
+      u.unqualify_apply_id <include refid="LikeSearchValue"/>
+    </where>
+    <include refid="LimitAndOffset"/>
+
+  </select>
+
+  <!--通过product_name模糊查找对应的不合格产品集合-->
+  <select id="searchUnqualifyByProductName" resultMap="QualifyApplyAndProductName">
+    select
+    <include refid="UnqualifyApply_As_u"/> ,
+    product_name,
+    e.emp_name
+    from unqualify_apply u
+    LEFT JOIN product p on u.product_id = p.product_id
+    LEFT JOIN employee e 	on e.emp_id = u.emp_id
+    <where>
+      product_name <include refid="LikeSearchValue"/>
+    </where>
+    <include refid="LimitAndOffset"/>
+
   </select>
 </mapper>
