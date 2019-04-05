@@ -33,7 +33,7 @@
   <select id="queryByEmployeeId" resultMap="BaseResultMap">
     select *
     from employee
-    where emp_name like "%"#{empId}"%"
+    where emp_id like "%"#{empId}"%"
   </select>
 
   <select id="getEmployeeByEmployeeId" resultMap="BaseResultMap">
@@ -71,6 +71,16 @@
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from employee
     where emp_id = #{empId,jdbcType=VARCHAR}
+  </delete>
+
+  <delete id="deleteEmployee" >
+    delete
+    from employee
+    <where>
+      <foreach collection="array"  item="id" close=";">
+        or emp_id = #{id}
+      </foreach>
+    </where>
   </delete>
 
   <insert id="insert" parameterType="com.littlebug.bean.Employee">

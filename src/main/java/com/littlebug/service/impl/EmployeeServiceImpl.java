@@ -34,5 +34,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeMapper.updateByPrimaryKey(employee);
     }
 
+    @Override
+    public int deleteEmployee(String[] ids) {
+        return employeeMapper.deleteEmployee(ids);
+    }
+
+    @Override
+    public List<Employee> queryByEmployeeId(String empId) {
+        return employeeMapper.queryByEmployeeId(empId);
+    }
+
 
 }

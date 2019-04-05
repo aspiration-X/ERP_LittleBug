@@ -16,5 +16,9 @@ public interface EmployeeService {
 
     int updateByPrimaryKey(Employee employee);
 
+    int deleteEmployee(String[] ids);
+
+    List<Employee>  queryByEmployeeId(String empId);
+
 
 }
