@@ -9,6 +9,8 @@ public interface EmployeeMapper {
 
     List<Employee> findAllEmployee();
 
+    List<Employee> selectEmployeeList();
+
     int deleteByPrimaryKey(String empId);
 
     int insert(Employee record);

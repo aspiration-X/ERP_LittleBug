@@ -5,11 +5,32 @@
     <id column="device_maintain_id" jdbcType="VARCHAR" property="deviceMaintainId" />
     <result column="device_fault_id" jdbcType="VARCHAR" property="deviceFaultId" />
     <result column="device_maintain_emp_id" jdbcType="VARCHAR" property="deviceMaintainEmpId" />
+    <result column="emp_name" jdbcType="VARCHAR" property="deviceMaintainEmp" />
     <result column="device_maintain_date" jdbcType="TIMESTAMP" property="deviceMaintainDate" />
     <result column="device_maintain_result" jdbcType="VARCHAR" property="deviceMaintainResult" />
     <result column="device_maintain_cost" jdbcType="DECIMAL" property="deviceMaintainCost" />
     <result column="note" jdbcType="VARCHAR" property="note" />
   </resultMap>
+  <select id="selectDeviceMaintainList" resultMap="BaseResultMap">
+    select device_maintain_id, device_fault_id, dm.device_maintain_emp_id, e.emp_name, device_maintain_date,
+    device_maintain_result, device_maintain_cost, note from device_maintain dm left join employee e on e.emp_id = dm.device_maintain_emp_id
+  </select>
+  <select id="selectDeviceMaintainListById" resultMap="BaseResultMap">
+    select device_maintain_id, device_fault_id, dm.device_maintain_emp_id, e.emp_name, device_maintain_date,
+    device_maintain_result, device_maintain_cost, note from device_maintain dm left join employee e on e.emp_id = dm.device_maintain_emp_id
+    where dm.device_maintain_id = #{id}
+  </select>
+  <select id="selectDeviceMaintainListByDeviceFaultId" resultMap="BaseResultMap">
+    select device_maintain_id, device_fault_id, dm.device_maintain_emp_id, e.emp_name, device_maintain_date,
+    device_maintain_result, device_maintain_cost, note from device_maintain dm left join employee e on e.emp_id = dm.device_maintain_emp_id
+    where dm.device_fault_id = #{deviceFaultId}
+  </select>
+  <delete id="deleteDeviceMaintainByIds">
+    delete from device_maintain where device_maintain_id in (
+    <foreach collection="ids" separator="," item="id">
+      #{id}
+    </foreach>)
+  </delete>
   <sql id="Base_Column_List">
     device_maintain_id, device_fault_id, device_maintain_emp_id, device_maintain_date, 
     device_maintain_result, device_maintain_cost, note

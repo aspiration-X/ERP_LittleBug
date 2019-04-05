@@ -23,6 +23,10 @@
     where department.department_id = employee
   </select>
 
+  <select id="selectEmployeeList" resultMap="BaseResultMap">
+    select * from employee
+  </select>
+
   <sql id="Base_Column_List">
     emp_id, emp_name, sex, id_code, birthday, join_date, status, education, degree, major, 
     graduate_school, education_form, department_id

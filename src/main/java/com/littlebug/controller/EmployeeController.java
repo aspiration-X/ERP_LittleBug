@@ -48,4 +48,11 @@ public class EmployeeController {
         return employees;
     }
 
+    @RequestMapping("get_data")
+    @ResponseBody
+    public List<Employee> deviceType3() {
+        List<Employee> employeeList = employeeService.findEmployeeList();
+        return employeeList;
+    }
+
 }
