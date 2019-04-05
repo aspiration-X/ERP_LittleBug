@@ -16,10 +16,18 @@
     <result column="education_form" jdbcType="VARCHAR" property="educationForm" />
     <result column="department_id" jdbcType="VARCHAR" property="departmentId" />
   </resultMap>
+
+  <select id="findAllEmployee" resultMap="BaseResultMap">
+    select employee.*, department.department_name
+    from employee, department
+    where department.department_id = employee
+  </select>
+
   <sql id="Base_Column_List">
     emp_id, emp_name, sex, id_code, birthday, join_date, status, education, degree, major, 
     graduate_school, education_form, department_id
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -30,6 +38,7 @@
     delete from employee
     where emp_id = #{empId,jdbcType=VARCHAR}
   </delete>
+
   <insert id="insert" parameterType="com.littlebug.bean.Employee">
     insert into employee (emp_id, emp_name, sex, 
       id_code, birthday, join_date, 
@@ -127,6 +136,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.littlebug.bean.Employee">
     update employee
     <set>
