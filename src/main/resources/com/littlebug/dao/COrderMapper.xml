@@ -45,16 +45,71 @@
     order_id, custom_id, product_id, order_date, request_date, note, quantity, unit_price, 
     unit, image, file, status
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+
+    <sql id="OrderResultSet">
+        order_id, c.custom_id,c.custom_name,c.full_name,c.address,c.fax,c.email,c.owner_name,c.owner_tel,c.status,c.note,
+        p.product_id,p.product_name,p.product_type,p.image,p.note,p.status,
+        order_date, request_date, o.note, quantity, unit_price,unit, o.image, file, o.status
+    </sql>
+
+    <sql id="ProductResultSet">
+        c.custom_id,c.custom_name,c.full_name,c.address,c.fax,c.email,c.owner_name,c.owner_tel,c.status,c.note
+    </sql>
+
+    <sql id="CustomResultSet">
+        order_date, request_date, o.note, quantity, unit_price,unit, o.image, file, o.status
+    </sql>
+
+    <sql id="leftJoinSql">
+        c_order o left join custom c on
+        o.custom_id = c.custom_id
+        left join product p on
+        o.product_id = p.product_id
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from c_order
+        where order_id = #{orderId,jdbcType=VARCHAR}
+    </select>
+
+
+    <select id="selectByIdLike" resultMap="BaseResultMap">
     select 
-    <include refid="Base_Column_List" />
-    from c_order
-    where order_id = #{orderId,jdbcType=VARCHAR}
+    <include refid="OrderResultSet" />
+    from
+    <include refid="leftJoinSql"/>
+    where order_id like #{param1}
+    limit #{param2},#{param3}
   </select>
+
+
+    <select id="selectOrderByProduct" resultMap="BaseResultMap">
+        select
+        <include refid="OrderResultSet" />
+        from
+        <include refid="leftJoinSql"/>
+        where
+        p.product_name = #{param1}
+        limit #{param2},#{param3}
+    </select>
+
+    <select id="selectOrderByCustom" resultMap="BaseResultMap">
+        select
+        <include refid="OrderResultSet" />
+        from
+        <include refid="leftJoinSql"/>
+        where
+        c.custom_name = #{param1}
+        limit #{param2},#{param3}
+    </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from c_order
     where order_id = #{orderId,jdbcType=VARCHAR}
   </delete>
+
   <insert id="insert" parameterType="com.littlebug.bean.COrder">
     insert into c_order (order_id, custom_id, product_id, 
       order_date, request_date, note, 

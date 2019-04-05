@@ -28,4 +28,15 @@ public class QualifyServiceImpl implements QualifyService {
         List<UnqualifyApply> unqualifyApplyList = unqualifyApplyMapper.selectPagination(limit,offset);
         return unqualifyApplyList;
     }
+
+    @Override
+    public boolean updateAll(UnqualifyApply unqualifyApply) {
+        return 1 == unqualifyApplyMapper.updateByPrimaryKey(unqualifyApply);
+
+    }
+
+    @Override
+    public boolean deleteBatch(String ids) {
+        return 1 == unqualifyApplyMapper.deleteByPrimaryKey(String.valueOf(ids));
+    }
 }

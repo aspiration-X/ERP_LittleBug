@@ -19,15 +19,24 @@ public class UnqualifyApply {
 
     private String note;
 
-    private Product product;
+    private String productName;
 
+    private String empName;
 
-    public Product getProduct() {
-        return product;
+    public String getEmpName() {
+        return empName;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setEmpName(String empName) {
+        this.empName = empName;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public String getUnqualifyApplyId() {

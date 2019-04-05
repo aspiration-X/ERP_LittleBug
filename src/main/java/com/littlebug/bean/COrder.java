@@ -151,4 +151,24 @@ public class COrder {
     public void setProduct(Product product) {
         this.product = product;
     }
+
+    @Override
+    public String toString() {
+        return "COrder{" +
+                "orderId='" + orderId + '\'' +
+                ", customId='" + customId + '\'' +
+                ", productId='" + productId + '\'' +
+                ", orderDate=" + orderDate +
+                ", requestDate=" + requestDate +
+                ", note='" + note + '\'' +
+                ", quantity=" + quantity +
+                ", unitPrice=" + unitPrice +
+                ", unit='" + unit + '\'' +
+                ", image='" + image + '\'' +
+                ", file='" + file + '\'' +
+                ", status=" + status +
+                ", custom=" + custom +
+                ", product=" + product +
+                '}';
+    }
 }

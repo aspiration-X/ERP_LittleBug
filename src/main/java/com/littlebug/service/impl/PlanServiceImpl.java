@@ -43,10 +43,15 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public void deleteBatchOrders(String[] ids) {
+    public boolean deleteBatchOrders(String[] ids) {
+
         for (String id:ids) {
-            orderMapper.deleteByPrimaryKey(id);
+            int delete = orderMapper.deleteByPrimaryKey(id);
+            if (delete != 1){
+                return false;
+            }
         }
+        return true;
     }
 
     @Override
@@ -55,10 +60,20 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public COrder selectOrderById(String id) {
-        COrder cOrder = orderMapper.selectByPrimaryKey(id);
-        return cOrder;
+    public List<COrder> selectOrderById(String id, int page, int rows) {
+        int offset = 0, limit = 0;
+
+        if (page >= 1){
+            offset = (page -1) * rows;
+        }
+        if (rows >= 1){
+            limit = offset + rows;
+        }
+        String likeId = "%" + id + "%";
+        List<COrder> orders = orderMapper.selectByIdLike(likeId, offset, limit);
+        return orders;
     }
+
 
     @Override
     public boolean addOrder(COrder order) {
@@ -83,6 +98,7 @@ public class PlanServiceImpl implements PlanService {
 
 
 
+
     /*--------------------------------------------------- product ------------------------------------------------------*/
 
     @Override
@@ -91,17 +107,51 @@ public class PlanServiceImpl implements PlanService {
         return productsList;
     }
 
+    @Override
+    public List<COrder> selectOrderByProduct(String productName, int page, int rows) {
+
+        int offset = 0, limit = 0;
+
+        if (page >= 1){
+            offset = (page -1) * rows;
+        }
+        if (rows >= 1){
+            limit = offset + rows;
+        }
+
+        List<COrder> orders = orderMapper.selectOrderByProduct(productName, offset, limit);
+
+        return orders;
+    }
+
+
 
 
     /*--------------------------------------------------- custom ------------------------------------------------------*/
 
     @Override
     public List<Custom> showCustomList() {
+
+
         List<Custom> customsList = customMapper.selectAllCustoms();
         return customsList;
     }
 
 
+
+    @Override
+    public List<COrder> selectOrderByCustom(String customName, int page, int rows) {
+        int offset = 0, limit = 0;
+
+        if (page >= 1){
+            offset = (page -1) * rows;
+        }
+        if (rows >= 1){
+            limit = offset + rows;
+        }
+        List<COrder> orders =  orderMapper.selectOrderByCustom(customName, offset, limit);
+        return orders;
+    }
 
 
 
