@@ -150,7 +150,56 @@
       note = #{note,jdbcType=VARCHAR}
     where custom_id = #{customId,jdbcType=VARCHAR}
   </update>
+
+
+
+
     <select id="selectAllCustoms" resultMap="BaseResultMap">
         select * from `custom`
     </select>
+
+    <select id="showAllCustomsByIndexs" resultMap="BaseResultMap">
+        select * from custom
+        limit #{param1}, #{param2}
+    </select>
+
+
+    <sql id="selectOnConditionSql">
+        <if test="param1.customId != null">
+            custom_id = #{param1.customId,jdbcType=VARCHAR}
+        </if>
+        <if test="param1.customName != null">
+            <if test="param1.customId != null">
+                ,
+            </if>
+        </if>
+        <if test="param1.customName != null">
+            custom_name = #{param1.customName,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+
+    <select id="countCustomOnCondition" resultType="integer">
+        select count(custom_id) from custom
+        where
+         <include refid="selectOnConditionSql"/>
+        limit #{param2},#{param3}
+    </select>
+
+    <select id="selectCustomOnCondition" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from custom
+        where
+        <include refid="selectOnConditionSql"/>
+        limit #{param2},#{param3}
+    </select>
+
+    <select id="countAllCustoms" resultType="integer">
+        select count(custom_id) from custom
+    </select>
+
+
+
+
 </mapper>
