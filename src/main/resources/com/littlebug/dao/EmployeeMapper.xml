@@ -15,17 +15,53 @@
     <result column="graduate_school" jdbcType="VARCHAR" property="graduateSchool" />
     <result column="education_form" jdbcType="VARCHAR" property="educationForm" />
     <result column="department_id" jdbcType="VARCHAR" property="departmentId" />
+    <association property="department" column="department_Id"
+                 select="com.littlebug.dao.DepartmentMapper.getDepartmentById"/>
   </resultMap>
 
   <select id="findAllEmployee" resultMap="BaseResultMap">
-    select employee.*, department.department_name
-    from employee, department
-    where department.department_id = employee
+    select *
+    from employee
   </select>
 
+  <select id="queryByEmployeeName" resultMap="BaseResultMap">
+    select *
+    from employee
+    where emp_name like "%"#{empName}"%"
+  </select>
+
+  <select id="queryByEmployeeId" resultMap="BaseResultMap">
+    select *
+    from employee
+    where emp_id like "%"#{empId}"%"
+  </select>
+
+  <select id="getEmployeeByEmployeeId" resultMap="BaseResultMap">
+    select *
+    from employee
+    where emp_id = #{empId}
+  </select>
+
+<<<<<<< HEAD
   <select id="selectEmployeeList" resultMap="BaseResultMap">
     select * from employee
   </select>
+=======
+  <insert id="insertEmployee" >
+    insert into employee (emp_id, emp_name, sex,
+      id_code, birthday, join_date,
+      status, education, degree,
+      major, graduate_school, education_form,
+      department_id)
+    values (#{employee.empId,jdbcType=VARCHAR}, #{employee.empName,jdbcType=VARCHAR}, #{employee.sex,jdbcType=CHAR},
+      #{employee.idCode,jdbcType=VARCHAR}, #{employee.birthday,jdbcType=DATE}, #{employee.joinDate,jdbcType=DATE},
+      #{employee.status,jdbcType=VARCHAR}, #{employee.education,jdbcType=VARCHAR}, #{employee.degree,jdbcType=VARCHAR},
+      #{employee.major,jdbcType=VARCHAR}, #{employee.graduateSchool,jdbcType=VARCHAR}, #{employee.educationForm,jdbcType=VARCHAR},
+      #{departmentId,jdbcType=VARCHAR})
+  </insert>
+
+
+>>>>>>> 027c8febc4680dbc6d1fda21b8b6e05ad36ba6cd
 
   <sql id="Base_Column_List">
     emp_id, emp_name, sex, id_code, birthday, join_date, status, education, degree, major, 
@@ -41,6 +77,16 @@
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from employee
     where emp_id = #{empId,jdbcType=VARCHAR}
+  </delete>
+
+  <delete id="deleteEmployee" >
+    delete
+    from employee
+    <where>
+      <foreach collection="array"  item="id" close=";">
+        or emp_id = #{id}
+      </foreach>
+    </where>
   </delete>
 
   <insert id="insert" parameterType="com.littlebug.bean.Employee">

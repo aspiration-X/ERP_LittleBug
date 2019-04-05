@@ -74,4 +74,12 @@ public class LiTest {
         int insert = departmentService.insert(department);
     }
 
+    @Test
+    public void myTest6(){
+        List<Employee> employees = employeeMapper.findAllEmployee();
+        for (Employee employee : employees) {
+            System.out.println(employee);
+        }
+    }
+
 }

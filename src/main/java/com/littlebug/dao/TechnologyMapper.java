@@ -1,6 +1,7 @@
 package com.littlebug.dao;
 
 import com.littlebug.bean.Technology;
+import com.littlebug.bean.TechnologyRequirement;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public interface TechnologyMapper {
      * @param ids
      * @return
      */
-    int delete_batch(List<String> ids);
+    int delete_batchTechnology(String[] ids);
 
     /**
      * 通过工艺id模糊查询符合要求的所有工艺
@@ -44,4 +45,13 @@ public interface TechnologyMapper {
      * @return
      */
     List<Technology> search_technology_by_technologyName(@Param("technologyName") String searchValue);
+
+    /**
+     * 通过工艺ID查询工艺名
+     * @param technologyId
+     * @return
+     */
+    String selectTechnologyNameByPrimaryKey(@Param("technologyId") String technologyId);
+
+
 }

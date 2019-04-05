@@ -142,6 +142,12 @@ public class DepartmentController {
         return map;
     }
 
+    @RequestMapping("/get_data")
+    @ResponseBody
+    public List<Department> getDepartmentData() {
+        List<Department> departments = departmentService.findAllDepartment();
+        return departments;
+    }
 
 
 

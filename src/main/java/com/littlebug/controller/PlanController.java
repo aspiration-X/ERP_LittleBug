@@ -1,16 +1,17 @@
 package com.littlebug.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.littlebug.bean.*;
 import com.littlebug.service.PlanService;
+import com.littlebug.util.PageWraper;
 import com.littlebug.util.UserMessage;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -29,21 +30,127 @@ public class PlanController {
     @Autowired
     PlanService planService;
 
+/*----------------------------------------------通用处理-------------------------------------------------*/
+
+
+    /*注意： 其他以find 作为路径结尾的请求可能也会被此方法拦截*/
+    @RequestMapping("/{application}/find")
+    public String goToFindPage(@PathVariable("application") String application){
+        String resultPage = "";
+        switch (application){
+            case "order":
+                resultPage = "order_list";
+                break;
+            case "custom":
+                resultPage = "custom_list";
+                break;
+            case "product":
+                resultPage = "product_list";
+                break;
+            case "work":
+                resultPage = "work_list";
+                break;
+            case "manufacture":
+                resultPage = "manufacture_list";
+                break;
+            case "task":
+                resultPage = "task_list";
+                break;
+            default:
+                break;
+        }
+        return resultPage;
+    }
+
+    @RequestMapping("/{application}/edit")
+    public String goToEditPage(@PathVariable("application") String application){
+        String resultPage = "";
+        switch (application){
+            case "order":
+                resultPage = "order_edit";
+                break;
+            case "custom":
+                resultPage = "custom_edit";
+                break;
+            case "product":
+                resultPage = "product_edit";
+                break;
+            case "work":
+                resultPage = "work_edit";
+                break;
+            case "manufacture":
+                resultPage = "manufacture_edit";
+                break;
+            case "task":
+                resultPage = "task_edit";
+                break;
+            default:
+                break;
+        }
+
+        return resultPage;
+    }
+
+
+
+    @RequestMapping("/{application}/add")
+    public String goToAddPage(@PathVariable("application") String application){
+        String resultPage = "";
+        switch (application){
+            case "order":
+                resultPage = "order_add";
+                break;
+            case "custom":
+                resultPage = "custom_add";
+                break;
+            case "product":
+                resultPage = "product_add";
+                break;
+            case "work":
+                resultPage = "work_add";
+                break;
+            case "manufacture":
+                resultPage = "manufacture_add";
+                break;
+            case "task":
+                resultPage = "task_add";
+                break;
+            default:
+                break;
+        }
+
+        return resultPage;
+    }
+
+
+
+
     /*------------------------------------------------ order ---------------------------------------------------*/
+
+
     @RequestMapping("order/list")
     @ResponseBody
-    public List<COrder> findByPage(@Param("page") int page, @Param("rows") int rows, HttpServletRequest request) {
+    public List<COrder> findByPage(@RequestParam("page") int page, @RequestParam("rows") int rows) {
+
+        PageWraper<COrder> pageWraper = new PageWraper<>();
+
         int start = (page - 1) * rows;
         int end = start + rows;
         List<COrder> orderList = planService.showAllOrdersByIndexs(start, end);
         int allRecords = orderList.size();
-        int pages = allRecords / rows;
-        return orderList;
-    }
 
-    @RequestMapping("order/find")
-    public String goOrderList() {
-        return "order_list";
+        int pages = allRecords / rows;
+        pageWraper.setRows(orderList);
+        pageWraper.setTotal(allRecords);
+
+
+        Page page1 = PageHelper.startPage(0, 3);
+//        Page<COrder>
+
+
+        Page<COrder> pageHelper = new Page<>();
+        pageHelper.getResult();
+        return orderList;
     }
 
 
@@ -62,20 +169,6 @@ public class PlanController {
         return userMessage;
     }
 
-//    @RequestMapping("order/edit_judge")
-//    @ResponseBody
-//    public String edit_judge(){
-////        return "redirect:order/edit";
-//        return "{}";
-//    }
-
-
-
-//    @RequestMapping("order/add_judge")
-//    @ResponseBody
-//    public String add_judge(){
-//        return "{}";
-//    }
 
     @RequestMapping("order/edit")
     public String goEditOrderPage() {
@@ -87,19 +180,6 @@ public class PlanController {
     public String goAddOrderPage() {
         return "order_add";
     }
-
-//    @RequestMapping(value = "order/update_all",
-//            method = RequestMethod.POST,
-//            produces = {"application/json;charset=UTF-8"},
-//            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-//    @ResponseBody
-//    public String edit(COrder order, HttpServletRequest request,  @RequestBody String apps) {
-//        request.getAttribute("order");
-//        planService.updateOrder(order);
-//        String body = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
-//        return BaseResponse.success();
-//        return "";
-//    }
 
 
     @RequestMapping(value = "order/update_all")
@@ -128,25 +208,28 @@ public class PlanController {
         return userMessage;
     }
 
+
+    @ResponseBody
     @RequestMapping("order/search_order_by_orderId")
-    public List<COrder> searchOrderByOrderId(@Param("searchValue") String searchValue,
-                                             @Param("page") int page, @Param("rows") int rows){
+    public List<COrder> searchOrderByOrderId(String searchValue,
+                                             int page,  int rows){
 
         List<COrder> orders = planService.selectOrderById(searchValue, page, rows);
         return orders;
     }
 
+    @ResponseBody
     @RequestMapping("order/search_order_by_orderCustom")
-    public List<COrder> searchOrderByOrderCustom(@Param("searchValue") String searchValue,
-                                             @Param("page") int page, @Param("rows") int rows){
+    public List<COrder> searchOrderByOrderCustom(String searchValue,
+                                             int page, int rows){
 
         List<COrder> orders = planService.selectOrderByCustom(searchValue, page, rows);
         return orders;
     }
-
+    @ResponseBody
     @RequestMapping("order/search_order_by_orderProduct")
-    public List<COrder> searchOrderByOrderProduct(@Param("searchValue") String searchValue,
-                                             @Param("page") int page, @Param("rows") int rows){
+    public List<COrder> searchOrderByOrderProduct( String searchValue,
+                                            int page, int rows){
 
         List<COrder> orders = planService.selectOrderByProduct(searchValue, page, rows);
         return orders;
@@ -167,11 +250,9 @@ public class PlanController {
     }
 
     @ResponseBody
-    @RequestMapping("product/get")
-    public List<Product> getProductInfoById() {
-        List<Product> productList = planService.showProductList();
-
-        return productList;
+    @RequestMapping("product/get/{productId}")
+    public Product selectProductByProductId(@PathVariable("productId") String productId) {
+        return planService.selectProductByProductId(productId);
     }
 
 
@@ -182,6 +263,118 @@ public class PlanController {
 
     /*------------------------------------------------------- custom -------------------------------------------*/
 
+
+    @RequestMapping("custom/list")
+    @ResponseBody
+    public PageWraper<Custom> findCustomByPage(@RequestParam("page") int page,
+                                               @RequestParam("rows") int rows) {
+        PageWraper<Custom> pageWraper = new PageWraper<>();
+        List<Custom> customList = planService.showAllCustomsByIndexs(page, rows);
+        int customAmount = planService.countAllCustoms();
+        pageWraper.setRows(customList);
+        pageWraper.setTotal(customAmount);
+        return pageWraper;
+
+    }
+
+    @RequestMapping("custom/search_custom_by_customName")
+    @ResponseBody
+    public PageWraper<Custom> searchCustomByCustomName(Custom custom,
+                                                   @RequestParam("page") int page,
+                                                    @RequestParam("rows") int rows) {
+        PageWraper<Custom> pageWraper = new PageWraper<>();
+        List<Custom> customList = planService.selectCustomOnCondition(custom, page, rows);
+        int customAmount = planService.countAllCustoms();
+        pageWraper.setRows(customList);
+        pageWraper.setTotal(customAmount);
+        return pageWraper;
+
+    }
+
+    @RequestMapping("custom/search_custom_by_customId")
+    @ResponseBody
+    public PageWraper<Custom> searchCustomByCustomId(Custom custom,
+                                                 @RequestParam("page") int page,
+                                                @RequestParam("rows") int rows) {
+        PageWraper<Custom> pageWraper = new PageWraper<>();
+        List<Custom> customList = planService.selectCustomOnCondition(custom, page, rows);
+        int customAmount = planService.countAllCustoms();
+        pageWraper.setRows(customList);
+        pageWraper.setTotal(customAmount);
+        return pageWraper;
+
+    }
+
+
+    @RequestMapping("custom/insert")
+    @ResponseBody
+    public UserMessage addCustom(Custom custom) {
+        boolean addCustom = planService.addCustom(custom);
+        UserMessage userMessage = new UserMessage();
+        if (addCustom){
+            userMessage.setStatus(200);
+            userMessage.setMsg("OK");
+        }else {
+            userMessage.setStatus(500);
+            userMessage.setMsg("FALSE");
+        }
+        return userMessage;
+    }
+
+
+    @RequestMapping(value = "custom/delete_batch",
+            method=RequestMethod.POST,
+            consumes="application/x-www-form-urlencoded")
+    @ResponseBody
+    public UserMessage deleteBatchCustom(String[] ids) {
+        boolean addCustom = planService.deleteBatchCustoms(ids);
+        UserMessage userMessage = new UserMessage();
+        if (addCustom){
+            userMessage.setStatus(200);
+            userMessage.setMsg("OK");
+        }else {
+            userMessage.setStatus(500);
+            userMessage.setMsg("FALSE");
+        }
+        return userMessage;
+    }
+
+
+    @RequestMapping("custom/edit")
+    @ResponseBody
+    public Custom editCustom(String customId){
+        return planService.selectCustomByCustomId(customId);
+    }
+
+
+
+    @RequestMapping("custom/update_all")
+    @ResponseBody
+    public UserMessage updateCustom(Custom custom) {
+
+
+        boolean addCustom = planService.editCustom(custom);
+        UserMessage userMessage = new UserMessage();
+        if (addCustom){
+            userMessage.setStatus(200);
+            userMessage.setMsg("OK");
+        }else {
+            userMessage.setStatus(500);
+            userMessage.setMsg("FALSE");
+        }
+        return userMessage;
+
+    }
+
+
+    @RequestMapping("custom/get/{customId}")
+    @ResponseBody
+    public Custom getCustomByCustomId(@PathVariable("customId") String customId){
+        return planService.selectCustomByCustomId(customId);
+    }
+
+
+
     @ResponseBody
     @RequestMapping("custom/get_data")
     public List<Custom> getCustomData() {
@@ -190,23 +383,16 @@ public class PlanController {
     }
 
 
-    @RequestMapping("custom/list")
-    @ResponseBody
-    public List<Custom> showCustomList() {
-        ArrayList<Custom> list = new ArrayList<>();
 
 
-        return list;
-    }
-
-    @RequestMapping("product/list")
-    @ResponseBody
-    public List<Product> showProductList() {
-        ArrayList<Product> list = new ArrayList<>();
 
 
-        return list;
-    }
+
+
+
+
+
+
 
     @RequestMapping("work/list")
     @ResponseBody

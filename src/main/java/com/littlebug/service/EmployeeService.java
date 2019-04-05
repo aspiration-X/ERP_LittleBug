@@ -13,4 +13,12 @@ public interface EmployeeService {
     List<Employee> findAllEmployee();
 
     List<Employee> findEmployeeList();
+
+    int insertEmployee(Employee employee, String departmentId);
+
+    int updateByPrimaryKey(Employee employee);
+
+    int deleteEmployee(String[] ids);
+
+    List<Employee>  queryByEmployeeId(String empId);
 }

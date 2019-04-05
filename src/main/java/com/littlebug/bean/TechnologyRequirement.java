@@ -13,6 +13,8 @@ public class TechnologyRequirement {
 
     private Date reviseTime;
 
+    private String technologyName;
+
     public String getTechnologyRequirementId() {
         return technologyRequirementId;
     }
@@ -51,5 +53,13 @@ public class TechnologyRequirement {
 
     public void setReviseTime(Date reviseTime) {
         this.reviseTime = reviseTime;
+    }
+
+    public String getTechnologyName() {
+        return technologyName;
+    }
+
+    public void setTechnologyName(String technologyName) {
+        this.technologyName = technologyName;
     }
 }
