@@ -25,4 +25,6 @@ public interface COrderMapper {
     List<COrder> selectOrderByProduct(String productName, int offset, int limit);
 
     List<COrder> selectOrderByCustom(String customName, int offset, int limit);
+
+    List<COrder> showAllOrders();
 }

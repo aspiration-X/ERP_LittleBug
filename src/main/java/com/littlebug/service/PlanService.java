@@ -30,7 +30,7 @@ public interface PlanService {
 
     List<COrder> showAllOrdersByIndexs(int start, int end);
 
-
+    List<COrder> showALLOrders();
 
 
     /*--------------------------------------------------- custom ------------------------------------------------------*/
@@ -83,7 +83,49 @@ public interface PlanService {
 
 
 
+
     /*--------------------------------------------------- work ------------------------------------------------------*/
+
+
+    boolean addWork(Work work);
+
+    boolean deleteBatchWorks(String[] ids);
+
+    boolean updateWork(Work work);
+
+    int countAllWorks();
+
+    List<Work> showAllWorksByIndexs(int page, int rows);
+
+    List<Work> selectWorksOnCondition(Work work, int page, int rows);
+
+    int countAllWorksOnCondition(Work work);
+
+//    List<Work> showWorkList();
+
+    Work selectWorkByWorkId(String workId);
+
+
+
+
+
+
+
+    /*--------------------------------------------------- work ------------------------------------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

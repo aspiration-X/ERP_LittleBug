@@ -64,6 +64,15 @@ public class DarlingTest {
         System.out.println(orders);
     }
 
+
+    @Test
+    public void showAllOrders(){
+
+        List<COrder> orders = planService.showALLOrders();
+        System.out.println("-------------------------------------------"+orders.size());
+
+    }
+
     @Test
     public void customTest(){
         int offset = 0;
