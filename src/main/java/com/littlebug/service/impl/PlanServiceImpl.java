@@ -77,20 +77,8 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public boolean addOrder(COrder order) {
-        return false;
-    }
-
-    @Override
-    public boolean deleteJudge(String[] ids) {
-        boolean isExits = true;
-        for (String id:ids) {
-            COrder cOrder = orderMapper.selectByPrimaryKey(id);
-            if (cOrder == null){
-                isExits = false;
-                break;
-            }
-        }
-        return isExits;
+        int insert = orderMapper.insert(order);
+        return insert == 1;
     }
 
 
@@ -101,10 +89,68 @@ public class PlanServiceImpl implements PlanService {
 
     /*--------------------------------------------------- product ------------------------------------------------------*/
 
+
+    @Override
+    public boolean addProduct(Product product) {
+        return productMapper.insert(product) == 1;
+    }
+
+    @Override
+    public boolean deleteBatchProducts(String[] ids) {
+        for (String id:ids) {
+            int delete = productMapper.deleteByPrimaryKey(id);
+            if (delete != 1){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean updateProduct(Product product) {
+        return productMapper.updateByPrimaryKey(product) == 1;
+    }
+
+    @Override
+    public int countAllProductsOnCondition(Product product) {
+        return productMapper.countProductOnCondition(product);
+    }
+
     @Override
     public List<Product> showProductList() {
-       List<Product> productsList = productMapper.selectAllProducts();
-        return productsList;
+        return productMapper.selectAllProducts();
+    }
+
+    @Override
+    public Product selectProductByProductId(String productId) {
+        return productMapper.selectByPrimaryKey(productId);
+    }
+
+    @Override
+    public List<Product> selectProductsOnCondition(Product product, int page, int rows) {
+        int offset = 0, limit = 0;
+
+        if (page >= 1){
+            offset = (page -1) * rows;
+        }
+        if (rows >= 1){
+            limit = offset + rows;
+        }
+
+        return productMapper.selectProductOnCondition(product, offset, limit);
+    }
+
+    @Override
+    public List<Product> showAllProductsByIndexs(int page, int rows) {
+        int offset = 0, limit = 0;
+
+        if (page >= 1){
+            offset = (page -1) * rows;
+        }
+        if (rows >= 1){
+            limit = offset + rows;
+        }
+        return productMapper.selectProductsByIndexs(offset, limit);
     }
 
     @Override
@@ -125,9 +171,19 @@ public class PlanServiceImpl implements PlanService {
     }
 
 
+    @Override
+    public int countAllProducts() {
+        return productMapper.countAllProducts();
+    }
+
 
 
     /*--------------------------------------------------- custom ------------------------------------------------------*/
+
+    @Override
+    public int countAllCustoms() {
+        return customMapper.countAllCustoms();
+    }
 
     @Override
     public List<Custom> showCustomList() {
@@ -137,7 +193,72 @@ public class PlanServiceImpl implements PlanService {
         return customsList;
     }
 
+    @Override
+    public int countCustomOnCondition(Custom custom, int page, int rows){
+        int offset = 0, limit = 0;
 
+        if (page >= 1){
+            offset = (page -1) * rows;
+        }
+        if (rows >= 1){
+            limit = offset + rows;
+        }
+
+
+        return customMapper.countCustomOnCondition(custom, offset, limit);
+    }
+
+    @Override
+    public Custom selectCustomByCustomId(String customId) {
+        return customMapper.selectByPrimaryKey(customId);
+    }
+
+    @Override
+    public List<Custom> showAllCustomsByIndexs(int page, int rows) {
+        int offset = 0, limit = 0;
+
+        if (page >= 1){
+            offset = (page -1) * rows;
+        }
+        if (rows >= 1){
+            limit = offset + rows;
+        }
+
+        List<Custom> customList = customMapper.showAllCustomsByIndexs(offset, limit);
+        return customList;
+    }
+
+    @Override
+    public List<Custom> selectCustomOnCondition(Custom custom, int offset, int rows) {
+        return customMapper.selectCustomOnCondition(custom, offset, rows);
+    }
+
+    @Override
+    public boolean addCustom(Custom custom) {
+        int insert = customMapper.insert(custom);
+        return insert == 1;
+    }
+
+    @Override
+    public boolean deleteBatchCustoms(String[] customIds) {
+        for (String id:customIds) {
+            int delete = customMapper.deleteByPrimaryKey(id);
+            if (delete != 1){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean editCustom(Custom custom) {
+        return customMapper.updateByPrimaryKey(custom) == 1;
+    }
+
+    @Override
+    public boolean updateCustom(Custom custom) {
+        return customMapper.updateByPrimaryKey(custom) == 1;
+    }
 
     @Override
     public List<COrder> selectOrderByCustom(String customName, int page, int rows) {
@@ -162,40 +283,4 @@ public class PlanServiceImpl implements PlanService {
 
 
 
-
-
-
-
-
-//
-//    @Override
-//    public List<Custom> showCustomList(int page, int rows) {
-//        return null;
-//    }
-//
-//    @Override
-//    public List<Product> showProductList(int page, int rows) {
-//        return null;
-//    }
-//
-//    @Override
-//    public List<Work> showWorkList(int page, int rows) {
-//        return null;
-//    }
-//
-//    @Override
-//    public List<Task> showTaskList(int page, int rows) {
-//        return null;
-//    }
-//
-//    @Override
-//    public List<Manufacture> showManufactureList(int page, int rows) {
-//        return null;
-//    }
-//
-//    @Override
-//    public PageModel findByPage(@Param("page") int page, @Param("rows") int rows) {
-//        PageModel pageModel = new PageModel();
-//        return null;
-//    }
 }

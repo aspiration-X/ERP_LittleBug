@@ -36,26 +36,6 @@ public class TechnologyRequirementServiceImpl implements TechnologyRequirementSe
         return technologyRequirements;
     }
 
-    /**
-     * 工艺要求里通过工艺ID获取单个工艺信息
-     * @param technologyId
-     * @return
-     */
-    @Override
-    public Technology technologyRequirementGetTechnology(String technologyId) {
-        Technology technology = technologyMapper.selectByPrimaryKey(technologyId);
-        return technology;
-    }
-
-    /**
-     * 新增一个工艺要求需要查询所有工艺
-     * @return
-     */
-    @Override
-    public List<Technology> get_data() {
-        List<Technology> technologyList = technologyMapper.findAllTechnologies();
-        return technologyList;
-    }
 
     /**
      * 新增一个工艺要求
@@ -90,5 +70,33 @@ public class TechnologyRequirementServiceImpl implements TechnologyRequirementSe
     public boolean delete_batch(String[] split) {
         int i = technologyRequirementMapper.delete_batch(split);
         return i != 0;
+    }
+
+    /**
+     * 通过工艺要求编号模糊查询符合要求的所有工艺要求
+     * @param searchValue
+     * @return
+     */
+    @Override
+    public List<TechnologyRequirement> search_technologyRequirement_by_technologyRequirementId(String searchValue) {
+        if(null != searchValue) {
+            searchValue = "%" + searchValue + "%";
+        }
+        List<TechnologyRequirement> technologyRequirements = technologyRequirementMapper.search_technologyRequirement_by_technologyRequirementId(searchValue);
+        return technologyRequirements;
+    }
+
+    /**
+     * 通过工艺名称模糊查询符合要求的所有工艺要求
+     * @param searchValue
+     * @return
+     */
+    @Override
+    public List<TechnologyRequirement> search_technologyRequirement_by_technologyName(String searchValue) {
+        if(null != searchValue) {
+            searchValue = "%" + searchValue + "%";
+        }
+        List<TechnologyRequirement> technologyRequirements = technologyRequirementMapper.search_technologyRequirement_by_technologyName(searchValue);
+        return technologyRequirements;
     }
 }

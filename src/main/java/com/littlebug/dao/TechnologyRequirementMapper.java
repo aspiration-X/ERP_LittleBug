@@ -31,4 +31,18 @@ public interface TechnologyRequirementMapper {
      * @return
      */
     int delete_batch(String[] split);
+
+    /**
+     * 通过工艺要求编号模糊查询符合要求的所有工艺要求
+     * @param searchValue
+     * @return
+     */
+    List<TechnologyRequirement> search_technologyRequirement_by_technologyRequirementId(@Param("searchValue") String searchValue);
+
+    /**
+     * 通过工艺名称模糊查询符合要求的所有工艺要求
+     * @param searchValue
+     * @return
+     */
+    List<TechnologyRequirement> search_technologyRequirement_by_technologyName(@Param("searchValue") String searchValue);
 }

@@ -27,6 +27,8 @@ public interface EmployeeMapper {
 
 
 
+    List<Employee> selectEmployeeList();
+
     int deleteByPrimaryKey(String empId);
 
     int insert(Employee record);

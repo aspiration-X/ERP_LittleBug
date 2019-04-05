@@ -146,7 +146,7 @@
     from technology
   </select>
 
-  <update id="delete_batch" >
+  <update id="delete_batchTechnology" >
     delete from technology
     where technology_id in (
     <foreach collection="array" item="ids" separator=",">

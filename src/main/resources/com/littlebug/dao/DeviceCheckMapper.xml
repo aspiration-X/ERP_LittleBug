@@ -4,11 +4,28 @@
   <resultMap id="BaseResultMap" type="com.littlebug.bean.DeviceCheck">
     <id column="device_check_id" jdbcType="VARCHAR" property="deviceCheckId" />
     <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+    <result column="device_name" jdbcType="VARCHAR" property="deviceName" />
     <result column="device_check_emp_id" jdbcType="VARCHAR" property="deviceCheckEmpId" />
+    <result column="emp_name" jdbcType="VARCHAR" property="deviceCheckEmp" />
     <result column="device_check_date" jdbcType="TIMESTAMP" property="deviceCheckDate" />
     <result column="device_check_result" jdbcType="VARCHAR" property="deviceCheckResult" />
     <result column="device_check_fault_id" jdbcType="VARCHAR" property="deviceCheckFaultId" />
   </resultMap>
+  <select id="selectDeviceCheckList" resultMap="BaseResultMap">
+    select device_check_id, d.device_id, d.device_name, dk.device_check_emp_id, e.emp_name, device_check_date, device_check_result,
+    device_check_fault_id from device_check dk left join device d on dk.device_id = d.device_id
+    left join employee e on e.emp_id = dk.device_check_emp_id
+  </select>
+ <select id="selectDeviceCheckListById" resultMap="BaseResultMap">
+    select device_check_id, d.device_id, d.device_name, dk.device_check_emp_id, e.emp_name, device_check_date, device_check_result,
+    device_check_fault_id from device_check dk left join device d on dk.device_id = d.device_id
+    left join employee e on e.emp_id = dk.device_check_emp_id where dk.device_check_id = #{id}
+  </select>
+ <select id="selectDeviceCheckListByDeviceName" resultMap="BaseResultMap">
+    select device_check_id, d.device_id, d.device_name, dk.device_check_emp_id, e.emp_name, device_check_date, device_check_result,
+    device_check_fault_id from device_check dk left join device d on dk.device_id = d.device_id
+    left join employee e on e.emp_id = dk.device_check_emp_id where d.device_name = #{deviceName}
+  </select>
   <sql id="Base_Column_List">
     device_check_id, device_id, device_check_emp_id, device_check_date, device_check_result, 
     device_check_fault_id
@@ -104,4 +121,10 @@
       device_check_fault_id = #{deviceCheckFaultId,jdbcType=VARCHAR}
     where device_check_id = #{deviceCheckId,jdbcType=VARCHAR}
   </update>
+  <delete id="deleteDeviceCheckList">
+    delete from device_check where device_check_id in (
+    <foreach collection="ids" item="id" separator=",">
+      #{id}
+    </foreach>)
+  </delete>
 </mapper>
