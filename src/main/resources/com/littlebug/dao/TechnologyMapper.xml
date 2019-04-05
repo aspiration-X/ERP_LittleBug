@@ -173,4 +173,8 @@
     </if>
   </select>
 
+  <select id="selectTechnologyNameByPrimaryKey" resultType="String">
+    select technology_name from technology where technology_id = #{technologyId}
+  </select>
+
 </mapper>

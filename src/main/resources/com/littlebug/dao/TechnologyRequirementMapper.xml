@@ -7,6 +7,7 @@
     <result column="requirement" jdbcType="VARCHAR" property="requirement" />
     <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
     <result column="revise_time" jdbcType="TIMESTAMP" property="reviseTime" />
+    <association column="technology_id" property="technologyName" select="com.littlebug.dao.TechnologyMapper.selectTechnologyNameByPrimaryKey"/>
   </resultMap>
   <sql id="Base_Column_List">
     technology_requirement_id, technology_id, requirement, add_time, revise_time
@@ -92,4 +93,10 @@
       revise_time = #{reviseTime,jdbcType=TIMESTAMP}
     where technology_requirement_id = #{technologyRequirementId,jdbcType=VARCHAR}
   </update>
+
+  <select id="findAllTechnologyRequirements" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List"/>
+      from technology_requirement limit #{rows} offset #{page}
+  </select>
 </mapper>
