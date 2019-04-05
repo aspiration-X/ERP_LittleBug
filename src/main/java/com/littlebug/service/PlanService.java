@@ -32,13 +32,6 @@ public interface PlanService {
 
 
 
-    /*--------------------------------------------------- product ------------------------------------------------------*/
-
-
-    List<Product> showProductList();
-
-    Product selectProductByProductId(String productId);
-
 
     /*--------------------------------------------------- custom ------------------------------------------------------*/
 
@@ -63,11 +56,41 @@ public interface PlanService {
     boolean updateCustom(Custom custom);
 
 
-//
-//    List<Work> showWorkList(@Param("page") int page, @Param("rows") int rows);
-//    List<Task> showTaskList(@Param("page") int page, @Param("rows") int rows);
-//    List<Manufacture> showManufactureList(@Param("page") int page, @Param("rows") int rows);
-//
-//    PageModel findByPage(@Param("page") int page, @Param("rows") int rows);
+
+    /*--------------------------------------------------- product ------------------------------------------------------*/
+
+    int countAllProducts();
+
+    List<Product> showAllProductsByIndexs(int page, int rows);
+
+    List<Product> showProductList();
+
+    Product selectProductByProductId(String productId);
+
+    List<Product> selectProductsOnCondition(Product product, int page, int rows);
+
+    int countAllProductsOnCondition(Product product);
+
+    boolean addProduct(Product product);
+
+    boolean deleteBatchProducts(String[] productIds);
+
+    boolean updateProduct(Product product);
+
+
+
+
+
+
+
+    /*--------------------------------------------------- work ------------------------------------------------------*/
+
+
+
+
+
+
+
+
 
 }

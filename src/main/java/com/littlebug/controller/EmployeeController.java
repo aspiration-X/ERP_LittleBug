@@ -51,6 +51,13 @@ public class EmployeeController {
         return employees;
     }
 
+    @RequestMapping("get_data2")
+    @ResponseBody
+    public List<Employee> deviceType3() {
+        List<Employee> employeeList = employeeService.findEmployeeList();
+        return employeeList;
+    }
+
     //增加
     //抓包看到响应报文为空的json
     @RequestMapping("/add_judge")
@@ -138,7 +145,4 @@ public class EmployeeController {
         List<Employee> employees = employeeService.queryByEmployeeId(searchValue);
         return employees;
     }
-
-
-
 }

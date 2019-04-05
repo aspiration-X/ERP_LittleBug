@@ -162,16 +162,16 @@ public class QualifyController {
         return qualifyService.searchUnqualifyByProductName(searchValue,page,rows);
     }
 
-    /**
-     * 点击产品名称可以查询该产品详情信息
-     * @param productId 产品Id
-     * @return 该产品详情
-     */
-    @RequestMapping("product/get/{productId}")
-    @ResponseBody
-     public Product getProductByProductId(@PathVariable("productId") String productId){
-        return qualifyService.getProductByProductId(productId);
-     }
+//    /**
+//     * 点击产品名称可以查询该产品详情信息
+//     * @param productId 产品Id
+//     * @return 该产品详情
+//     */
+//    @RequestMapping("product/get/{productId}")
+//    @ResponseBody
+//     public Product getProductByProductId(@PathVariable("productId") String productId){
+//        return qualifyService.getProductByProductId(productId);
+//     }
 
     /**
      * 点击申请人可以查询该申请人的详细信息

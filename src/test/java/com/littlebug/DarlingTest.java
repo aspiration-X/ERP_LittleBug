@@ -5,8 +5,10 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.littlebug.bean.COrder;
 import com.littlebug.bean.Custom;
+import com.littlebug.bean.Product;
 import com.littlebug.service.PlanService;
 import com.littlebug.util.PageWraper;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -149,6 +151,90 @@ public class DarlingTest {
         custom.setNote("kjl;ddddddddddddddddddddd'");
         List<Custom> customs = planService.selectCustomOnCondition(custom, 0, 3);
         System.out.println(custom+"-----------------------------------------------------------------------------");
+    }
+
+
+
+
+
+    @Test
+    public void addProductTest(){
+        Product product = new Product();
+        product.setProductId("22222");
+        product.setProductName("product_name");
+        product.setImage("inf/ddd.jpg");
+        boolean addProduct = planService.addProduct(product);
+        Assert.assertTrue(addProduct);
+
+    }
+
+    @Test
+    public void deleteProduct(){
+
+        String[] ids = {"11111","22222"};
+        boolean deleteBatchProducts = planService.deleteBatchProducts(ids);
+        Assert.assertTrue(deleteBatchProducts);
+    }
+
+    @Test
+    public void updateProduct(){
+
+        Product product = new Product();
+        product.setProductId("22222");
+        product.setProductName("ppppname");
+        product.setImage("images/ddd.jpg");
+        boolean updateProduct = planService.updateProduct(product);
+        Assert.assertTrue(updateProduct);
+
+    }
+
+    @Test
+    public void selectAllProductsByIndexTest(){
+
+        int offset = 1;
+        int limit = 3;
+        List<Product> products = planService.showAllProductsByIndexs(offset, limit);
+        int countAllCustoms = planService.countAllCustoms();
+        System.out.println(products);
+        System.out.println("---------------------------------------------------------");
+        System.out.println(countAllCustoms);
+    }
+
+
+    @Test
+    public void selectAllProductsOnNameLike(){
+        int offset = 1;
+        int limit = 3;
+        Product product = new Product();
+        product.setProductName("哈尔冰");
+//        List<Product> products = planService.selectProductsOnCondition(product, offset, limit);
+        int account = planService.countAllProductsOnCondition(product);
+
+        System.out.println(account + "----------------------------------------------------");
+//        System.out.println("-----------------------------------------------------------" + products.size());
+//        System.out.println(products);
+        System.out.println(account);
+
+    }
+
+    @Test
+    public void selectAllProductsOnIdLike(){
+        int offset = 1;
+        int limit = 3;
+        Product product = new Product();
+        product.setProductName("哈尔滨");
+        List<Product> products = planService.selectProductsOnCondition(product, offset, limit);
+        System.out.println(products);
+
+
+    }
+
+    @Test
+    public void showAllProducts(){
+
+
+        List<Product> products = planService.showAllProductsByIndexs(1, 3);
+        System.out.println(products);
     }
 
 

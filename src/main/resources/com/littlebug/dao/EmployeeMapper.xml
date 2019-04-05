@@ -42,6 +42,10 @@
     where emp_id = #{empId}
   </select>
 
+  <select id="selectEmployeeList" resultMap="BaseResultMap">
+    select * from employee
+  </select>
+
   <insert id="insertEmployee" >
     insert into employee (emp_id, emp_name, sex,
       id_code, birthday, join_date,

@@ -5,17 +5,27 @@ import com.littlebug.bean.Product;
 import java.util.List;
 
 public interface ProductMapper {
-    int deleteByPrimaryKey(String productId);
-
     int insert(Product record);
+
+    int deleteByPrimaryKey(String productId);
 
     int insertSelective(Product record);
 
-    Product selectByPrimaryKey(String productId);
+    int updateByPrimaryKey(Product record);
 
     int updateByPrimaryKeySelective(Product record);
 
-    int updateByPrimaryKey(Product record);
+    Product selectByPrimaryKey(String productId);
 
     List<Product> selectAllProducts();
+
+
+    List<Product> selectProductOnCondition(Product product, int offset, int limit);
+
+    List<Product> selectProductsByIndexs(int offset, int limit);
+
+    int countProductOnCondition(Product product);
+
+    int countAllProducts();
+
 }

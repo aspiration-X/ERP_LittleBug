@@ -91,15 +91,66 @@ public class PlanServiceImpl implements PlanService {
 
 
     @Override
-    public Product selectProductByProductId(String productId) {
-        return productMapper.selectByPrimaryKey(productId);
+    public boolean addProduct(Product product) {
+        return productMapper.insert(product) == 1;
     }
 
+    @Override
+    public boolean deleteBatchProducts(String[] ids) {
+        for (String id:ids) {
+            int delete = productMapper.deleteByPrimaryKey(id);
+            if (delete != 1){
+                return false;
+            }
+        }
+        return true;
+    }
 
+    @Override
+    public boolean updateProduct(Product product) {
+        return productMapper.updateByPrimaryKey(product) == 1;
+    }
+
+    @Override
+    public int countAllProductsOnCondition(Product product) {
+        return productMapper.countProductOnCondition(product);
+    }
 
     @Override
     public List<Product> showProductList() {
         return productMapper.selectAllProducts();
+    }
+
+    @Override
+    public Product selectProductByProductId(String productId) {
+        return productMapper.selectByPrimaryKey(productId);
+    }
+
+    @Override
+    public List<Product> selectProductsOnCondition(Product product, int page, int rows) {
+        int offset = 0, limit = 0;
+
+        if (page >= 1){
+            offset = (page -1) * rows;
+        }
+        if (rows >= 1){
+            limit = offset + rows;
+        }
+
+        return productMapper.selectProductOnCondition(product, offset, limit);
+    }
+
+    @Override
+    public List<Product> showAllProductsByIndexs(int page, int rows) {
+        int offset = 0, limit = 0;
+
+        if (page >= 1){
+            offset = (page -1) * rows;
+        }
+        if (rows >= 1){
+            limit = offset + rows;
+        }
+        return productMapper.selectProductsByIndexs(offset, limit);
     }
 
     @Override
@@ -120,6 +171,11 @@ public class PlanServiceImpl implements PlanService {
     }
 
 
+    @Override
+    public int countAllProducts() {
+        return productMapper.countAllProducts();
+    }
+
 
 
     /*--------------------------------------------------- custom ------------------------------------------------------*/
@@ -128,7 +184,6 @@ public class PlanServiceImpl implements PlanService {
     public int countAllCustoms() {
         return customMapper.countAllCustoms();
     }
-
 
     @Override
     public List<Custom> showCustomList() {
@@ -205,7 +260,6 @@ public class PlanServiceImpl implements PlanService {
         return customMapper.updateByPrimaryKey(custom) == 1;
     }
 
-
     @Override
     public List<COrder> selectOrderByCustom(String customName, int page, int rows) {
         int offset = 0, limit = 0;
@@ -229,40 +283,4 @@ public class PlanServiceImpl implements PlanService {
 
 
 
-
-
-
-
-
-//
-//    @Override
-//    public List<Custom> showCustomList(int page, int rows) {
-//        return null;
-//    }
-//
-//    @Override
-//    public List<Product> showProductList(int page, int rows) {
-//        return null;
-//    }
-//
-//    @Override
-//    public List<Work> showWorkList(int page, int rows) {
-//        return null;
-//    }
-//
-//    @Override
-//    public List<Task> showTaskList(int page, int rows) {
-//        return null;
-//    }
-//
-//    @Override
-//    public List<Manufacture> showManufactureList(int page, int rows) {
-//        return null;
-//    }
-//
-//    @Override
-//    public PageModel findByPage(@Param("page") int page, @Param("rows") int rows) {
-//        PageModel pageModel = new PageModel();
-//        return null;
-//    }
 }

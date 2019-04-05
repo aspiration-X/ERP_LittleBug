@@ -22,6 +22,28 @@
     note from device d left join device_type dt on d.device_type_id = dt.device_type_id
     left join employee e on d.device_keeper_id = e.emp_id;
   </select>
+  <select id="selectDeviceListByDeviceId" resultMap="BaseResultMap">
+    select device_id, device_name, dt.device_type_id, dt.device_type_name, device_status_id, device_status, device_purchase_date,
+    device_purchase_price, device_manufacture_date, device_service_life, d.device_keeper_id, emp_name,
+    note from device d left join device_type dt on d.device_type_id = dt.device_type_id
+    left join employee e on d.device_keeper_id = e.emp_id where d.device_id = #{deviceId};
+  </select>
+  <select id="selectDeviceListByDeviceName" resultMap="BaseResultMap">
+    select device_id, device_name, dt.device_type_id, dt.device_type_name, device_status_id, device_status, device_purchase_date,
+    device_purchase_price, device_manufacture_date, device_service_life, d.device_keeper_id, emp_name,
+    note from device d left join device_type dt on d.device_type_id = dt.device_type_id
+    left join employee e on d.device_keeper_id = e.emp_id where d.device_name = #{deviceName};
+  </select>
+  <select id="selectDeviceListByDeviceTypeName" resultMap="BaseResultMap">
+    select device_id, device_name, dt.device_type_id, dt.device_type_name, device_status_id, device_status, device_purchase_date,
+    device_purchase_price, device_manufacture_date, device_service_life, d.device_keeper_id, emp_name,
+    note from device d left join device_type dt on d.device_type_id = dt.device_type_id
+    left join employee e on d.device_keeper_id = e.emp_id where dt.device_type_name = #{deviceTypeName};
+  </select>
+  <update id="updateNoteByDeviceId">
+    update device set note = #{note} where device_id = #{deviceId}
+  </update>
+
   <sql id="Base_Column_List">
     device_id, device_name, device_type_id, device_status_id, device_status, device_purchase_date, 
     device_purchase_price, device_manufacture_date, device_service_life, device_keeper_id, 
@@ -172,4 +194,10 @@
       note = #{note,jdbcType=VARCHAR}
     where device_id = #{deviceId,jdbcType=VARCHAR}
   </update>
+  <delete id="deleteDeviceByIds">
+    delete from device where device_id in (
+    <foreach collection="ids" item="id" separator=",">
+      #{id}
+    </foreach>)
+  </delete>
 </mapper>
