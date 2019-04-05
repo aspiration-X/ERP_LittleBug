@@ -105,6 +105,11 @@ public interface PlanService {
 
     Work selectWorkByWorkId(String workId);
 
+    List<Work> showWorkList();
+
+    COrder selectOrderByOrderId(String orderId);
+
+
 
 
 

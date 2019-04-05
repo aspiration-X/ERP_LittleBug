@@ -6,6 +6,7 @@ import com.littlebug.service.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.Process;
 import java.util.List;
 
 /**
@@ -33,8 +34,10 @@ public class PlanServiceImpl implements PlanService {
     TaskMapper taskMapper;
 
     @Autowired
-    ManufactureMapper manufactureMapper;
+    ProcessMapper processMapper;
 
+    @Autowired
+    DeviceMapper deviceMapper;
 
 /*----------------------------------------------------- Order处理方法 ----------------------------------------------------------*/
     @Override
@@ -324,7 +327,13 @@ public class PlanServiceImpl implements PlanService {
             limit = offset + rows;
         }
 
-        return workMapper.showAllWorksByIndexs(offset, limit);
+        List<Work> workList = workMapper.showAllWorksByIndexs(offset, limit);
+        for (Work w:workList) {
+            w.setProduct(productMapper.selectByPrimaryKey(w.getProductId()));
+            w.setDevice(deviceMapper.selectByPrimaryKey(w.getDeviceId()));
+            w.setProcess(processMapper.selectByPrimaryKey(w.getProcessId()));
+        }
+        return workList;
     }
 
     @Override
@@ -346,19 +355,26 @@ public class PlanServiceImpl implements PlanService {
         return workMapper.countAllWorksOnCondition(work);
     }
 
-//    @Override
-//    public List<Work> showWorkList() {
-//        return workMapper.showWorkList();
-//    }
-
     @Override
     public Work selectWorkByWorkId(String workId) {
         return workMapper.selectByPrimaryKey(workId);
     }
 
+    public List<Work> showWorkList(){
+        List<Work> workList = workMapper.showAllWorks();
+        for (Work w:workList
+             ) {
+            w.setProduct(productMapper.selectByPrimaryKey(w.getProductId()));
+            w.setProcess(processMapper.selectByPrimaryKey(w.getProcessId()));
+            w.setDevice(deviceMapper.selectByPrimaryKey(w.getDeviceId()));
+        }
+        return workList;
+    }
 
-
-
+    @Override
+    public COrder selectOrderByOrderId(String orderId) {
+        return orderMapper.selectByPrimaryKey(orderId);
+    }
 
 
 }

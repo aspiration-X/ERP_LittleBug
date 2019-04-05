@@ -13,6 +13,12 @@ public class Work {
 
     private Integer rating;
 
+    private Product product;
+
+    private Process process;
+
+    private Device device;
+
     public String getWorkId() {
         return workId;
     }
@@ -59,5 +65,44 @@ public class Work {
 
     public void setRating(Integer rating) {
         this.rating = rating;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Process getProcess() {
+        return process;
+    }
+
+    public void setProcess(Process process) {
+        this.process = process;
+    }
+
+    public Device getDevice() {
+        return device;
+    }
+
+    @Override
+    public String toString() {
+        return "Work{" +
+                "workId='" + workId + '\'' +
+                ", processNumber='" + processNumber + '\'' +
+                ", productId='" + productId + '\'' +
+                ", processId='" + processId + '\'' +
+                ", deviceId='" + deviceId + '\'' +
+                ", rating=" + rating +
+                ", product=" + product +
+                ", process=" + process +
+                ", device=" + device +
+                '}';
+    }
+
+    public void setDevice(Device device) {
+        this.device = device;
     }
 }

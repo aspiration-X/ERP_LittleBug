@@ -191,6 +191,14 @@ public class PlanController {
         return orderList;
     }
 
+    @ResponseBody
+    @RequestMapping("work/get/{orderId}")
+    public COrder selectOrderByOrderId(@PathVariable("orderId") String orderId) {
+        return planService.selectOrderByOrderId(orderId);
+    }
+
+
+
     @RequestMapping("order/edit")
     public String goEditOrderPage() {
         return "order_edit";
@@ -537,6 +545,7 @@ public class PlanController {
         PageWraper<Work> pageWraper = new PageWraper<>();
         List<Work> workList = planService.showAllWorksByIndexs(page, rows);
         int workAmount = planService.countAllWorks();
+
         pageWraper.setRows(workList);
         pageWraper.setTotal(workAmount);
         return pageWraper;
@@ -659,20 +668,19 @@ public class PlanController {
     }
 
 
-//    @ResponseBody
-//    @RequestMapping("work/get_data")
-//    public List<Work> getWorkData() {
-//        List<Work> workList = planService.showWorkList();
-//
-//        return workList;
-//    }
+    @ResponseBody
+    @RequestMapping("work/get_data")
+    public List<Work> getWorkData() {
+        List<Work> workList = planService.showWorkList();
+
+        return workList;
+    }
 
     @ResponseBody
     @RequestMapping("work/get/{workId}")
     public Work selectWorkByWorkId(@PathVariable("workId") String workId) {
         return planService.selectWorkByWorkId(workId);
     }
-
 
 
 

@@ -1,6 +1,7 @@
 package com.littlebug.dao;
 
 import com.littlebug.bean.Work;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -21,9 +22,14 @@ public interface WorkMapper {
 
     int countAllWorks();
 
-    List<Work> showAllWorksByIndexs(int offset, int limit);
+    List<Work> showAllWorksByIndexs(@Param("offset") int offset,
+                                    @Param("limit") int limit);
 
-    List<Work> selectWorksOnCondition(Work work, int offset, int limit);
+    List<Work> selectWorksOnCondition(@Param("work") Work work,
+                                      @Param("offset") int offset,
+                                      @Param("limit") int limit);
 
-    int countAllWorksOnCondition(Work work);
+    int countAllWorksOnCondition(@Param("work") Work work);
+
+    List<Work> showAllWorks();
 }
