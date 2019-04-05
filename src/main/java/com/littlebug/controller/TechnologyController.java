@@ -7,12 +7,8 @@ import com.littlebug.util.TransferString;
 import com.littlebug.util.UserMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -50,11 +46,6 @@ public class TechnologyController {
     * 跳转到新增工艺页面,新增工艺
     * @return
     */
-   @RequestMapping("add_judge")
-   @ResponseBody
-   public String add_judge(){
-      return "{}";
-   }
    @RequestMapping("add")
    public String add(){
       return "technology_add";
@@ -78,11 +69,6 @@ public class TechnologyController {
     * 修改工艺
     * @return
     */
-   @RequestMapping("edit_judge")
-   @ResponseBody
-   public String edit_judge(){
-      return "{}";
-   }
    @RequestMapping("edit")
    public String edit(){
       return "technology_edit";
@@ -106,11 +92,6 @@ public class TechnologyController {
     * 删除一项或几项工艺
     * @return
     */
-   @RequestMapping("delete_judge")
-   @ResponseBody
-   public String delete_judge(){
-      return "{}";
-   }
    @RequestMapping("delete_batch")
    @ResponseBody
    public UserMessage delete_batch(String ids) {
@@ -125,6 +106,30 @@ public class TechnologyController {
          userMessage.setMsg("删除失败");
       }
       return userMessage;
+   }
+
+   /**
+    * 通过工艺id模糊查询符合要求的所有工艺
+    * @param searchValue
+    * @return
+    */
+   @RequestMapping("search_technology_by_technologyId")
+   @ResponseBody
+   public List<Technology> search_technology_by_technologyId(String searchValue) {
+      List<Technology> technologyList = technologyService.search_technology_by_technologyId(searchValue);
+      return technologyList;
+   }
+
+   /**
+    * 通过工艺名称模糊查询符合要求的所有工艺
+    * @param searchValue
+    * @return
+    */
+   @RequestMapping("search_technology_by_technologyName")
+   @ResponseBody
+   public List<Technology> search_technology_by_technologyName(String searchValue) {
+      List<Technology> technologyList = technologyService.search_technology_by_technologyName(searchValue);
+      return technologyList;
    }
 
 }

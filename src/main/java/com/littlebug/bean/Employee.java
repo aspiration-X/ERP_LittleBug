@@ -29,6 +29,8 @@ public class Employee {
 
     private String departmentId;
 
+    private Department department;
+
     public String getEmpId() {
         return empId;
     }
@@ -131,5 +133,25 @@ public class Employee {
 
     public void setDepartmentId(String departmentId) {
         this.departmentId = departmentId == null ? null : departmentId.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "empId='" + empId + '\'' +
+                ", empName='" + empName + '\'' +
+                ", sex='" + sex + '\'' +
+                ", idCode='" + idCode + '\'' +
+                ", birthday=" + birthday +
+                ", joinDate=" + joinDate +
+                ", status='" + status + '\'' +
+                ", education='" + education + '\'' +
+                ", degree='" + degree + '\'' +
+                ", major='" + major + '\'' +
+                ", graduateSchool='" + graduateSchool + '\'' +
+                ", educationForm='" + educationForm + '\'' +
+                ", departmentId='" + departmentId + '\'' +
+                ", department=" + department +
+                '}';
     }
 }

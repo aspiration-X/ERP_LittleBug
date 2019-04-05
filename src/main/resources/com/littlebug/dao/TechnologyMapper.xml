@@ -155,4 +155,22 @@
     )
   </update>
 
+  <select id="search_technology_by_technologyId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from technology
+    <if test=" technologyId != null">
+      where technology_id like #{technologyId}
+    </if>
+  </select>
+
+  <select id="search_technology_by_technologyName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from technology
+    <if test=" technologyName != null">
+      where technology_name like #{technologyName}
+    </if>
+  </select>
+
 </mapper>
