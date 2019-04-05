@@ -25,4 +25,10 @@ public interface TechnologyRequirementMapper {
     List<TechnologyRequirement> findAllTechnologyRequirements(@Param("page") int page, @Param("rows") int rows);
 
 
+    /**
+     * 删除一个或多个工艺要求
+     * @param split
+     * @return
+     */
+    int delete_batch(String[] split);
 }

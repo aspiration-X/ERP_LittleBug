@@ -74,4 +74,31 @@ public class TechnologyRequirementController {
          return DuplicatedCodeUtil.consequenceMessageReturn(flag);
      }
 
+    /**
+     * 编辑修改一个工艺要求
+     * @return
+     */
+    @RequestMapping("edit")
+    public String edit(){
+        return "technologyRequirement_edit";
+    }
+    @RequestMapping("update_all")
+    @ResponseBody
+    public UserMessage update_all(TechnologyRequirement technologyRequirement){
+        boolean flag = technologyRequirementService.update_all(technologyRequirement);
+        return DuplicatedCodeUtil.consequenceMessageReturn(flag);
+    }
+
+    /**
+     * 删除一个或多个工艺要求
+     * @param ids
+     * @return
+     */
+    @RequestMapping("delete_batch")
+    @ResponseBody
+    public UserMessage delete_batch( String ids){
+        String[] split = ids.split(",");
+        boolean flag = technologyRequirementService.delete_batch(split);
+        return DuplicatedCodeUtil.consequenceMessageReturn(flag);
+    }
 }

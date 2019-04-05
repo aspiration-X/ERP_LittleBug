@@ -99,4 +99,13 @@
       <include refid="Base_Column_List"/>
       from technology_requirement limit #{rows} offset #{page}
   </select>
+
+  <update id="delete_batch" >
+    delete from technology_requirement
+    where technology_requirement_id in (
+    <foreach collection="array" item="ids" separator=",">
+      #{ids}
+    </foreach>
+    )
+  </update>
 </mapper>

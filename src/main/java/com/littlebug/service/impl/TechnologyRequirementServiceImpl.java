@@ -64,7 +64,31 @@ public class TechnologyRequirementServiceImpl implements TechnologyRequirementSe
      */
     @Override
     public boolean insertTechnologyRequirement(TechnologyRequirement technologyRequirement) {
+        if(technologyRequirementMapper.selectByPrimaryKey(technologyRequirement.getTechnologyRequirementId())!= null){
+            return false;
+        }
         int i = technologyRequirementMapper.insert(technologyRequirement);
         return i == 1;
+    }
+
+    /**
+     * 编辑修改一个工艺要求
+     * @return
+     */
+    @Override
+    public boolean update_all(TechnologyRequirement technologyRequirement) {
+        int i = technologyRequirementMapper.updateByPrimaryKeySelective(technologyRequirement);
+        return i == 1;
+    }
+
+    /**
+     * 删除一个或多个工艺要求
+     * @param split
+     * @return
+     */
+    @Override
+    public boolean delete_batch(String[] split) {
+        int i = technologyRequirementMapper.delete_batch(split);
+        return i != 0;
     }
 }

@@ -20,8 +20,7 @@ public class DuplicatedCodeUtil {
             userMessage.setStatus(200);
             userMessage.setMsg("OK");
         }else {
-            userMessage.setStatus(500);
-            userMessage.setMsg("failure");
+            userMessage.setMsg("由于未知的原因,操作失败,请重试 ^_^");
         }
         return userMessage;
     }

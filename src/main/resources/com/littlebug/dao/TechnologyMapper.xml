@@ -149,7 +149,7 @@
   <update id="delete_batch" >
     delete from technology
     where technology_id in (
-    <foreach collection="list" item="ids" separator=",">
+    <foreach collection="array" item="ids" separator=",">
       #{ids}
     </foreach>
     )

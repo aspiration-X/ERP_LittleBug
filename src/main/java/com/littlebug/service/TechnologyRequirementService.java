@@ -35,4 +35,17 @@ public interface TechnologyRequirementService {
      * @return
      */
     boolean insertTechnologyRequirement(TechnologyRequirement technologyRequirement);
+
+    /**
+     * 编辑修改一个工艺要求
+     * @return
+     */
+    boolean update_all(TechnologyRequirement technologyRequirement);
+
+    /**
+     * 删除一个或多个工艺要求
+     * @param split
+     * @return
+     */
+    boolean delete_batch(String[] split);
 }
