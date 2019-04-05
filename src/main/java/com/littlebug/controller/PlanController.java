@@ -69,11 +69,7 @@ public class PlanController {
 //        return "{}";
 //    }
 
-    @RequestMapping("**/*_judge")
-    @ResponseBody
-    public String judge() {
-        return "{}";
-    }
+
 
 //    @RequestMapping("order/add_judge")
 //    @ResponseBody

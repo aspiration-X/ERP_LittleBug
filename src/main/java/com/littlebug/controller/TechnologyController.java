@@ -46,11 +46,6 @@ public class TechnologyController {
     * 跳转到新增工艺页面,新增工艺
     * @return
     */
-   @RequestMapping("add_judge")
-   @ResponseBody
-   public String add_judge(){
-      return "{}";
-   }
    @RequestMapping("add")
    public String add(){
       return "technology_add";
@@ -74,11 +69,6 @@ public class TechnologyController {
     * 修改工艺
     * @return
     */
-   @RequestMapping("edit_judge")
-   @ResponseBody
-   public String edit_judge(){
-      return "{}";
-   }
    @RequestMapping("edit")
    public String edit(){
       return "technology_edit";
@@ -102,11 +92,6 @@ public class TechnologyController {
     * 删除一项或几项工艺
     * @return
     */
-   @RequestMapping("delete_judge")
-   @ResponseBody
-   public String delete_judge(){
-      return "{}";
-   }
    @RequestMapping("delete_batch")
    @ResponseBody
    public UserMessage delete_batch(String ids) {
