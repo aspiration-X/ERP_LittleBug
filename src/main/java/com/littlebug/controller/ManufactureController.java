@@ -9,6 +9,7 @@ import com.littlebug.service.TechnologyService;
 import com.littlebug.util.PageWraper;
 import com.littlebug.util.UserMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.List;
  * @Date Created in 2019/4/6 2:32
  * @Modified By
  */
+@Controller
 public class ManufactureController {
 
     @Autowired

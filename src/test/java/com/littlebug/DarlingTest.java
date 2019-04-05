@@ -6,7 +6,9 @@ import com.github.pagehelper.PageInfo;
 import com.littlebug.bean.*;
 import com.littlebug.service.ManufactureService;
 import com.littlebug.service.PlanService;
+import com.littlebug.service.TaskService;
 import com.littlebug.util.PageWraper;
+import org.apache.ibatis.annotations.Param;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,6 +29,9 @@ public class DarlingTest {
 
     @Autowired
     ManufactureService manufactureService;
+
+    @Autowired
+    TaskService taskService;
 
     @Test
     public void test1() {
@@ -300,7 +305,75 @@ public class DarlingTest {
         System.out.println(manufacture);
 
 
+
     }
+
+
+
+
+    @Test
+    public void addTask(){
+        int offset = 1;
+        int limit = 3;
+
+        Task task = new Task();
+        task.setTaskId("001");
+        boolean b = taskService.addTask(task);
+        Assert.assertTrue(b);
+    }
+
+
+    @Test
+    public void selectTaskOnCondition(){
+        int offset = 1;
+        int limit = 3;
+
+        Task task = new Task();
+        task.setManufactureSn("0007");
+        List<Task> taskList = taskService.selectTasksOnCondition(task, offset, limit);
+        System.out.println("----------------------------------"+taskList.size());
+    }
+
+
+    @Test
+    public void selectAllTasks(){
+
+
+        Task task = new Task();
+        task.setTaskId("001");
+        List<Task> taskList = taskService.showTaskList();
+        System.out.println("-------------------------" + taskList.size());
+
+    }
+
+
+    @Test
+    public void updateTask(){
+
+
+        Task task = new Task();
+        task.setTaskId("001");
+        task.setTaskQuantity(111);
+        boolean b = taskService.updateTask(task);
+        Assert.assertTrue(b);
+
+    }
+
+    @Test
+    public void deleteTask(){
+
+
+        Task task = new Task();
+        task.setTaskId("001");
+        task.setTaskQuantity(111);
+        String[] ids = {"001"};
+        boolean b = taskService.deleteBatchTasks(ids);
+        Assert.assertTrue(b);
+
+    }
+
+
+
 
 
 

@@ -90,4 +90,80 @@
       working_hours = #{workingHours,jdbcType=DECIMAL}
     where task_id = #{taskId,jdbcType=VARCHAR}
   </update>
+
+
+
+
+
+
+
+
+
+
+
+
+    <sql id="selectOnConditionSql">
+        1 = 1
+        <if test="task.taskId != null">
+            and task_id LIKE CONCAT('%',#{task.taskId,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="task.manufactureSn != null">
+            and manufacture_sn like CONCAT('%',#{task.manufactureSn,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="task.workId != null">
+            and work_id like CONCAT('%',#{task.workId,jdbcType=VARCHAR},'%')
+        </if>
+    </sql>
+
+
+    <sql id="countOnConditionSql">
+        1 = 1
+        <if test="task.taskId != null">
+            and task_id LIKE CONCAT('%',#{task.taskId,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="task.manufactureSn != null">
+            and manufacture_sn like CONCAT('%',#{task.manufactureSn,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="task.workId != null">
+            and work_id like CONCAT('%',#{task.workId,jdbcType=VARCHAR},'%')
+        </if>
+    </sql>
+
+
+    <select id="countAllTasksOnCondition" resultType="integer">
+        select count(task_id) from `task`
+        where
+        <include refid="countOnConditionSql"/>
+    </select>
+
+
+    <select id="selectTasksOnCondition" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from `task`
+        where
+        <include refid="selectOnConditionSql"/>
+        limit #{offset},#{limit}
+    </select>
+
+
+    <select id="countAllTasks" resultType="integer">
+        select count(task_id) from `task`
+    </select>
+
+
+    <select id="showAllTasksByIndexs" resultMap="BaseResultMap">
+        select * from `task`
+        limit #{offset}, #{limit}
+    </select>
+
+
+    <select id="showAllTaskList" resultMap="BaseResultMap">
+        select * from `task`
+    </select>
+
+
+
+
+
 </mapper>
