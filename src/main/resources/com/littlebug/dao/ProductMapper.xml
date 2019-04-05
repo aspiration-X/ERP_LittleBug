@@ -108,4 +108,62 @@
     </select>
 
 
+
+
+
+    <sql id="selectOnConditionSql">
+        1 = 1
+        <if test="param1.productId != null">
+            and product_id LIKE CONCAT('%',#{param1.productId,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="param1.productName != null">
+            and product_name like CONCAT('%',#{param1.productName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="param1.productType != null">
+            and product_type like CONCAT('%',#{param1.productType,jdbcType=VARCHAR},'%')
+        </if>
+    </sql>
+
+
+    <sql id="countOnConditionSql">
+        1 = 1
+        <if test="param1.productId != null">
+            and product_id LIKE CONCAT('%',#{product.productId,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="param1.productName != null">
+            and product_name like CONCAT('%',#{product.productName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="param1.productType != null">
+            and product_type like CONCAT('%',#{product.productType,jdbcType=VARCHAR},'%')
+        </if>
+    </sql>
+
+
+    <select id="countProductOnCondition" resultType="integer">
+        select count(product_id) from `product`
+        where
+        <include refid="countOnConditionSql"/>
+    </select>
+
+    <select id="selectProductOnCondition" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from `product`
+        where
+        <include refid="selectOnConditionSql"/>
+        limit #{param2},#{param3}
+    </select>
+
+    <select id="countAllProducts" resultType="integer">
+        select count(product_id) from `product`
+    </select>
+
+    <select id="selectProductsByIndexs" resultMap="BaseResultMap">
+        select * from product
+        limit #{param1}, #{param2}
+    </select>
+
+
+
+
 </mapper>
