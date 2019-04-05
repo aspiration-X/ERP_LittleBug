@@ -11,4 +11,10 @@ import java.util.List;
 public interface EmployeeService {
 
     List<Employee> findAllEmployee();
+
+    int insertEmployee(Employee employee, String departmentId);
+
+    int updateByPrimaryKey(Employee employee);
+
+
 }

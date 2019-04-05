@@ -135,6 +135,14 @@ public class Employee {
         this.departmentId = departmentId == null ? null : departmentId.trim();
     }
 
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +

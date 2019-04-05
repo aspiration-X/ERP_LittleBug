@@ -23,4 +23,16 @@ public class EmployeeServiceImpl implements EmployeeService {
         List<Employee> employees = employeeMapper.findAllEmployee();
         return employees;
     }
+
+    @Override
+    public int insertEmployee(Employee employee, String departmentId) {
+        return employeeMapper.insertEmployee(employee, departmentId);
+    }
+
+    @Override
+    public int updateByPrimaryKey(Employee employee) {
+        return employeeMapper.updateByPrimaryKey(employee);
+    }
+
+
 }

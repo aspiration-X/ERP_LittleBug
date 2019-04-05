@@ -1,5 +1,6 @@
 package com.littlebug.controller;
 
+import com.littlebug.bean.Department;
 import com.littlebug.bean.Employee;
 import com.littlebug.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by little Stone
@@ -47,5 +50,66 @@ public class EmployeeController {
         List<Employee> employees = employeeService.findAllEmployee();
         return employees;
     }
+
+    //增加
+    //抓包看到响应报文为空的json
+    @RequestMapping("/add_judge")
+    @ResponseBody
+    public void addJudge(){
+        return ;
+    }
+
+    //显示department_add.jsp
+    @RequestMapping("/add")
+    public String add(){
+        return "employee_add";
+    }
+
+    @RequestMapping("/insert")
+    @ResponseBody
+    public Map<String, String> insertEmployee(Employee employee, String departmentId){
+        int b = employeeService.insertEmployee(employee, departmentId);
+        Map<String, String> map = new HashMap<>();
+        map.put("status", "200");
+        if (b != 1){
+            map.put("msg", "添加异常");
+        }
+        return map;
+    }
+
+    //抓包看到响应报文为空的json
+    @RequestMapping("/edit_judge")
+    @ResponseBody
+    public void editJudge(){
+        return;
+    }
+
+    //显示department_edit.jsp
+    @RequestMapping("/edit")
+    public String edit(){
+        return "employee_edit";
+    }
+
+    @RequestMapping("/update_all")
+    @ResponseBody
+    public Map<String, String> updateAll(Employee employee){
+        int update = employeeService.updateByPrimaryKey(employee);
+        Map<String, String> map = new HashMap<>();
+        map.put("status", "200");
+        if (update != 1){
+            map.put("msg", "编辑异常");
+        }
+        return map;
+    }
+
+
+    @RequestMapping("/get_data")
+    @ResponseBody
+    public List<Employee> getEmployeetData() {
+        List<Employee> employees = employeeService.findAllEmployee();
+        return employees;
+    }
+
+
 
 }
