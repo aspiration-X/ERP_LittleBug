@@ -1,6 +1,7 @@
 package com.littlebug.dao;
 
 import com.littlebug.bean.ProcessCountCheck;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,4 +20,6 @@ public interface ProcessCountCheckMapper {
 
 
     List<ProcessCountCheck> selectPagination(int limit, int offset);
+
+    List<ProcessCountCheck> pCountcheckList(@Param("limit") int limit,@Param("offset") int offset);
 }

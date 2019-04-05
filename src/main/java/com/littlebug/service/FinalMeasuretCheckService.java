@@ -1,5 +1,6 @@
 package com.littlebug.service;
 
+import com.littlebug.bean.FinalCountCheck;
 import com.littlebug.bean.FinalMeasuretCheck;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface FinalMeasuretCheckService {
      List<FinalMeasuretCheck> searchMeasureByFMeasureCheckId(String searchValue, int page, int rows);
 
      List<FinalMeasuretCheck> searchFMeasureCheckByOrderId(String searchValue, int page, int rows);
+
+
 }

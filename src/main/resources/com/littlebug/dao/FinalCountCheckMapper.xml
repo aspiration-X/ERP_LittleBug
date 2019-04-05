@@ -14,10 +14,21 @@
     <result column="emp_id" jdbcType="VARCHAR" property="empId" />
     <result column="result" jdbcType="VARCHAR" property="result" />
     <result column="note" jdbcType="VARCHAR" property="note" />
+    <association property="empName" jdbcType="VARCHAR" resultMap="EmployeeNameResultMap"/>
+  </resultMap>
+  <resultMap id="EmployeeNameResultMap" type="string">
+    <result column="emp_name" jdbcType="VARCHAR" property="empName"/>
   </resultMap>
   <sql id="Base_Column_List">
     f_count_check_id, order_id, check_item, sample, check_number, unqualify, qualify, 
     cdate, measure_data, emp_id, result, note
+  </sql>
+  <sql id="Specify_fc_Colum_List">
+    fc.f_count_check_id, fc.order_id, fc.check_item, fc.sample, fc.check_number, fc.unqualify, fc.qualify,
+    fc.cdate, fc.measure_data, fc.emp_id, fc.result, fc.note
+  </sql>
+  <sql id="LikeSearchValue">
+    like #{searchValue}
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -174,4 +185,50 @@
       note = #{note,jdbcType=VARCHAR}
     where f_count_check_id = #{fCountCheckId,jdbcType=VARCHAR}
   </update>
+
+
+
+
+  
+  
+  
+  
+  
+  <select id="selectPagination" resultMap="BaseResultMap">
+    select
+    <include refid="Specify_fc_Colum_List"/>,
+    e.emp_name
+    from final_count_check fc
+    left outer join employee e
+    on fc.emp_id = e.emp_id
+    limit #{limit} offset #{offset}
+  </select>
+
+  <!--成品计数质检编号查询-->
+  <select id="searchFCountCheckByFCountCheckId" resultMap="BaseResultMap">
+    select
+    <include refid="Specify_fc_Colum_List"/>,
+    e.emp_name
+    from final_count_check fc
+    left outer join employee e
+    on fc.emp_id = e.emp_id
+    <where>
+      f_count_check_id <include refid="LikeSearchValue" />
+    </where>
+    limit #{limit} offset #{offset}
+  </select>
+
+  <!--订单编号片段查询-->
+  <select id="searchFCountCheckByOrderId" resultMap="BaseResultMap">
+    select
+    <include refid="Specify_fc_Colum_List"/>,
+    e.emp_name
+    from final_count_check fc
+    left outer join employee e
+    on fc.emp_id = e.emp_id
+    <where>
+      order_id <include refid="LikeSearchValue" />
+    </where>
+    limit #{limit} offset #{offset}
+  </select>
 </mapper>

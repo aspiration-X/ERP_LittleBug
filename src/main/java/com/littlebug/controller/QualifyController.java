@@ -1,15 +1,13 @@
 package com.littlebug.controller;
 
 import com.littlebug.bean.*;
-import com.littlebug.service.FinalMeasuretCheckService;
-import com.littlebug.service.QualifyService;
+import com.littlebug.bean.Process;
+import com.littlebug.dao.ProcessMeasureCheckMapper;
+import com.littlebug.service.*;
 import com.littlebug.util.UserMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,6 +26,17 @@ public class QualifyController {
     @Autowired
     private FinalMeasuretCheckService finalMeasuretCheckService;
 
+    @Autowired
+    private FinalCountCheckService finalCountCheckService;
+
+    @Autowired
+    private ProcessMeasureCheckService processMeasureCheckService;
+
+    @Autowired
+    private ProcessService processService;
+
+    @Autowired
+    private ProcessCountCheckService processCountCheckService;
     /**
      * 发送成功的信息
      * @return
@@ -298,13 +307,183 @@ public class QualifyController {
         return finalMeasuretCheckService.searchFMeasureCheckByOrderId(searchValue, page,rows);
     }
 
+/*-------------------------------------成品技术质检-------------------------------------------------------------*/
+
+    @RequestMapping("f_count_check/find")
+    public  String fCountCheckFind(){
+        return "f_count_check_list";
+    }
+
+    @RequestMapping("process/get/{processId}")
+    @ResponseBody
+    public Process getProcessByProcessId(@PathVariable String processId){
+        return processService.getProcessByProcessId(processId);
+    }
+
+    @RequestMapping("f_count_check/list")
+    @ResponseBody
+    public List<FinalCountCheck> fCountCheckList(int page, int rows){
+       return finalCountCheckService.fCountCheckList(page,rows);
+    }
+
+    @RequestMapping("f_count_check/add")
+    public String fCountCheckAdd(){
+        return "f_count_check_add";
+    }
+
+    @RequestMapping("f_count_check/insert")
+    @ResponseBody
+    public UserMessage fCountCheckInsert(FinalCountCheck finalCountCheck){
+        boolean b = finalCountCheckService.fCountCheckInsert(finalCountCheck);
+        if (b){
+            return sendSuccessUserMessage();
+        }
+        return null;
+    }
+
+    @RequestMapping("f_count_check/edit")
+    public String  fCountCheckEdit123123(){
+        return "f_count_check_edit";
+    }
+
+    @RequestMapping("f_count_check/update_all")
+    @ResponseBody
+    public UserMessage fCountCheckUpdateAll(FinalCountCheck finalCountCheck){
+        boolean b = finalCountCheckService.fCountCheckEdit(finalCountCheck);
+        if (b){
+            return sendSuccessUserMessage();
+        }
+        return null;
+    }
+
+    @RequestMapping("f_count_check/delete_batch")
+    @ResponseBody
+    public UserMessage fCountCheckDeleteBatch(String ids){
+        boolean b = finalCountCheckService.fCountCheckDeleteBatch(ids);
+        if (b){
+            return sendSuccessUserMessage();
+        }
+        return null;
+    }
+
+    @RequestMapping("f_count_check/search_fCountCheck_by_fCountCheckId")
+    @ResponseBody
+    public List<FinalCountCheck> searchFCountCheckByFCountCheckId(String searchValue ,int page, int rows){
+        return finalCountCheckService.searchFCountCheckByFCountCheckId(searchValue,page,rows);
+    }
+
+    @RequestMapping("f_count_check/search_fCountCheck_by_orderId")
+    @ResponseBody
+    public List<FinalCountCheck> searchFCountCheckByOrderId(String searchValue ,int page, int rows){
+        return finalCountCheckService.searchFCountCheckByOrderId(searchValue,page,rows);
+    }
+
+/*-------------------------------------------工序计量质检--------------------------------------------------------------*/
+
+    /**
+     * 工序编号
+     * @return
+     */
+    @RequestMapping("process/get_data")
+    @ResponseBody
+    public List<Process> processGetData(){
+        return processService.processGetData();
+    }
+
+    @RequestMapping("p_measure_check/find")
+    public String pMeasure_checkFind(){
+        return "p_measure_check_list";
+    }
 
 
+    @RequestMapping("p_measure_check/list")
+    @ResponseBody
+    public List<ProcessMeasureCheck> pMeasureCheckList(int page, int rows){
+        List<ProcessMeasureCheck> processMeasureCheckMappers = processMeasureCheckService.selectPagination(page, rows);
+        return processMeasureCheckMappers;
+    }
 
 
+    @RequestMapping("p_measure_check/add")
+        public String pMeasureCheckAdd(){
+            return "p_measure_check_add";
+    }
+
+    @RequestMapping("p_measure_check/insert")
+    @ResponseBody
+    public UserMessage pMeasurecheckinsert(ProcessMeasureCheck processMeasureCheck){
+        boolean b =processMeasureCheckService.pMeasurecheckinsert(processMeasureCheck);
+        if (b){
+            return sendSuccessUserMessage();
+        }
+        return null;
+    }
+
+    @RequestMapping("p_measure_check/edit")
+    public String pMeasureCheckEdit(){
+        return "p_measure_check_edit";
+    }
+
+    @RequestMapping("p_measure_check/update_all")
+    @ResponseBody
+    public UserMessage pMeasureCheckUpdateAll(ProcessMeasureCheck processMeasureCheck){
+        boolean b = processMeasureCheckService.pMeasureCheckUpdateAll(processMeasureCheck);
+        if (b){
+            return sendSuccessUserMessage();
+        }
+        return null;
+    }
+
+    @RequestMapping("p_measure_check/delete_batch")
+    @ResponseBody
+    public UserMessage pmeasureCheckDeleteBatch(String ids){
+        boolean b = processMeasureCheckService. pmeasureCheckDeleteBatch(ids);
+        if (b){
+            return sendSuccessUserMessage();
+        }
+        return null;
+    }
+
+    @RequestMapping("p_measure_check/search_pMeasureCheck_by_pMeasureCheckId")
+    @ResponseBody
+    public List<ProcessMeasureCheck> searchpMeasureCheckByPMeasureCheckId(String searchValue ,int page, int rows){
+         return processMeasureCheckService.searchpMeasureCheckByPMeasureCheckId(searchValue,page,rows);
+    }
 
 
+    /*-----------------------------------------------工序计数质检-----------------------------------------------------------------*/
 
+
+    @RequestMapping("p_count_check/find")
+    public String pCountcheckFind(){
+        return "p_count_check_list";
+    }
+
+    @RequestMapping("p_count_check/list")
+    @ResponseBody
+    public List<ProcessCountCheck> pCountcheckList(int page, int rows){
+        return processCountCheckService.pCountcheckList(page,rows);
+    }
+
+    @RequestMapping("p_count_check/add")
+    public String pCountCheckAdd(){
+        return "p_count_check_add";
+    }
+
+/*    @RequestMapping(value = "p_count_check/inser" ,method = RequestMethod.POST)
+    @ResponseBody
+    public UserMessage pCountCheckInser(ProcessCountCheck processCountCheck){
+        boolean b = processCountCheckService.pCountCheckInser(processCountCheck);
+        if (b){
+            return sendSuccessUserMessage();
+        }
+        return null;
+    }*/
+
+    @RequestMapping("p_count_check/edit")
+    public String pCountCheckEdit(){
+        return "p_count_check_edit";
+    }
 
 
 

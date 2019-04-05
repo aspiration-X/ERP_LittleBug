@@ -42,29 +42,24 @@
 
 <div  id="toolbar_pMeasureCheck" style=" height: 22px; padding: 3px 11px; background: #fafafa;">  
 	
-	<c:forEach items="${sessionScope.sysPermissionList}" var="per" >
-		<c:if test="${per=='pMeasureCheck:add' }" >
+
 		    <div style="float: left;">  
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="pMeasureCheck_add()">
 					新增
 				</a>
 		    </div>  
-		</c:if>
-		<c:if test="${per=='pMeasureCheck:edit' }" >
+
 		    <div style="float: left;">  
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="pMeasureCheck_edit()">
 					编辑
 				</a>
 		    </div>  
-		</c:if>
-		<c:if test="${per=='pMeasureCheck:delete' }" >
+
 		    <div style="float: left;">  
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="pMeasureCheck_delete()">
 					删除
 				</a>
-		    </div>  
-		</c:if>
-	</c:forEach>
+		    </div>
 	
 	<div class="datagrid-btn-separator"></div>  
 	

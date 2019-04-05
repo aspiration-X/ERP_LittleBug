@@ -14,10 +14,18 @@
     <result column="emp_id" jdbcType="VARCHAR" property="empId" />
     <result column="result" jdbcType="VARCHAR" property="result" />
     <result column="note" jdbcType="VARCHAR" property="note" />
+    <association property="empName" jdbcType="VARCHAR" resultMap="EmployeeNameResultMap"/>
+  </resultMap>
+  <resultMap id="EmployeeNameResultMap" type="string">
+    <result column="emp_name" jdbcType="VARCHAR" property="empName"/>
   </resultMap>
   <sql id="Base_Column_List">
     p_count_check_id, process_id, check_item, sample, check_number, unqualify, qualify, 
     cdate, measure_data, emp_id, result, note
+  </sql>
+  <sql id="Specify_pc_Colum_List">
+    pc.p_count_check_id, pc.process_id, pc.check_item, pc.sample, pc.check_number, pc.unqualify, pc.qualify,
+    pc.cdate, pc.measure_data, pc.emp_id, pc.result, pc.note
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -174,6 +182,30 @@
       note = #{note,jdbcType=VARCHAR}
     where p_count_check_id = #{pCountCheckId,jdbcType=VARCHAR}
   </update>
+
+
+
+
+
+
+
+
+
+
+
+  <select id="pCountcheckList" resultMap="BaseResultMap">
+    select
+    <include refid="Specify_pc_Colum_List"/>,
+    e.emp_name
+    from process_count_check pc
+    left outer join employee e
+    on pc.emp_id = e.emp_id
+    limit #{limit} offset #{offset}
+  </select>
+
+
+
+
 
 
 </mapper>
