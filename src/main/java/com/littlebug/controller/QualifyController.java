@@ -1,8 +1,7 @@
 package com.littlebug.controller;
 
-import com.littlebug.bean.Employee;
-import com.littlebug.bean.Product;
-import com.littlebug.bean.UnqualifyApply;
+import com.littlebug.bean.*;
+import com.littlebug.service.FinalMeasuretCheckService;
 import com.littlebug.service.QualifyService;
 import com.littlebug.util.UserMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.List;
 
 /**
@@ -27,6 +25,9 @@ public class QualifyController {
     @Autowired
     private QualifyService qualifyService;
 
+    @Autowired
+    private FinalMeasuretCheckService finalMeasuretCheckService;
+
     /**
      * 发送成功的信息
      * @return
@@ -40,7 +41,7 @@ public class QualifyController {
 
 /*------------------------------------------不合格品管理------------------------------------------------------*/
     /**
-     * 不合格品管理
+     * 不合格品管理按钮
      * @return 对应的jsp页面
      */
     @RequestMapping("unqualify/find")
@@ -49,7 +50,7 @@ public class QualifyController {
     }
 
     /**
-     *处理分页查询
+     *不合格品管理处理分页查询
      * @param
      * @return
      */
@@ -186,6 +187,44 @@ public class QualifyController {
 
 /*----------------------------------------------成品计量质检-------------------------------------------------*/
 
+    /**
+     * 成品计量质检
+     * @return
+     */
+    @RequestMapping("measure/find")
+    public String measurementFind(){
+        return "measurement_list";
+    }
+
+    /**
+     *成品计量质检处理分页查询
+     * @param
+     * @return
+     */
+    @RequestMapping("measure/list")
+    @ResponseBody
+    public List<FinalMeasuretCheck> measureList(int page, int rows ){
+        return finalMeasuretCheckService.queryProcessCountCheckList(page,rows);
+
+    }
+
+
+
+    /**
+     * 成品计量质检—》添加-》
+     * @return 跳转至unqualify_add.jsp页面
+     */
+    @RequestMapping("measure/add")
+    public String measureAdd(){
+        return"measurement_add";
+    }
+
+    @RequestMapping("measure/insert")
+    public UserMessage measureInsert(){
+
+
+        return null;
+    }
 
 
 

@@ -71,4 +71,6 @@ public interface QualifyService {
      * @return 该申请人对象
      */
     Employee getEmployeeByempId(String empId);
+
+
 }

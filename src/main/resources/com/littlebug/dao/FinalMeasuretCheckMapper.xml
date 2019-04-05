@@ -10,9 +10,16 @@
     <result column="emp_id" jdbcType="VARCHAR" property="empId" />
     <result column="result" jdbcType="VARCHAR" property="result" />
     <result column="note" jdbcType="VARCHAR" property="note" />
+    <association property="empName" jdbcType="VARCHAR" resultMap="EmployeeNameResultMap"/>
+  </resultMap>
+  <resultMap id="EmployeeNameResultMap" type="string">
+    <result column="emp_name" jdbcType="VARCHAR" property="empName"/>
   </resultMap>
   <sql id="Base_Column_List">
     f_measure_check_id, order_id, check_item, cdate, measure_data, emp_id, result, note
+  </sql>
+  <sql id="Specify_f_Colum_List">
+    f.f_measure_check_id, f.order_id, f.check_item, f.cdate, f.measure_data, f.emp_id, result, f.note
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -125,4 +132,24 @@
       note = #{note,jdbcType=VARCHAR}
     where f_measure_check_id = #{fMeasureCheckId,jdbcType=VARCHAR}
   </update>
+
+
+
+
+
+
+
+
+
+
+
+  <select id="selectPagination" resultMap="BaseResultMap">
+    select
+    <include refid="Specify_f_Colum_List"/>,
+    e.emp_name
+    from final_measuret_check f
+    left outer join employee e
+    on f.emp_id = e.emp_id
+    limit #{limit} offset #{offset}
+  </select>
 </mapper>
