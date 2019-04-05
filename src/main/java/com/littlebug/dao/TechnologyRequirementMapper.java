@@ -1,6 +1,7 @@
 package com.littlebug.dao;
 
 import com.littlebug.bean.TechnologyRequirement;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -21,5 +22,7 @@ public interface TechnologyRequirementMapper {
      * 获取所有工艺要求
      * @return
      */
-    List<TechnologyRequirement> findAllTechnologyRequirements();
+    List<TechnologyRequirement> findAllTechnologyRequirements(@Param("page") int page, @Param("rows") int rows);
+
+
 }

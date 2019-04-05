@@ -59,7 +59,7 @@ public class TechnologyServiceImpl implements TechnologyService {
      * @return
      */
     @Override
-    public boolean delete_batch(List<String> ids) {
+    public boolean delete_batch(String[] ids) {
         int i = technologyMapper.delete_batch(ids);
         return i != 0;
     }
