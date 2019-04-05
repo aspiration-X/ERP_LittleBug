@@ -36,26 +36,6 @@ public class TechnologyRequirementServiceImpl implements TechnologyRequirementSe
         return technologyRequirements;
     }
 
-    /**
-     * 工艺要求里通过工艺ID获取单个工艺信息
-     * @param technologyId
-     * @return
-     */
-    @Override
-    public Technology technologyRequirementGetTechnology(String technologyId) {
-        Technology technology = technologyMapper.selectByPrimaryKey(technologyId);
-        return technology;
-    }
-
-    /**
-     * 新增一个工艺要求需要查询所有工艺
-     * @return
-     */
-    @Override
-    public List<Technology> get_data() {
-        List<Technology> technologyList = technologyMapper.findAllTechnologies();
-        return technologyList;
-    }
 
     /**
      * 新增一个工艺要求

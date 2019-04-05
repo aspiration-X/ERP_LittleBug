@@ -42,30 +42,14 @@ public class TechnologyRequirementController {
         List<TechnologyRequirement> technologyList = technologyRequirementService.findAllTechnologyRequirements(page,rows);
         return technologyList;
     }
-    /**
-     * 工艺要求获取工艺详情
-     * @return
-     */
-    @RequestMapping("get/{technologyId}")
-    @ResponseBody
-    public Technology technologyRequirementGetTechnology(@PathVariable("technologyId")String technologyId){
-        Technology technology = technologyRequirementService.technologyRequirementGetTechnology(technologyId);
-        return technology;
-    }
 
     /**
-     * 新增插入一个工艺要求
-     * @return
-     */
-     @RequestMapping("add")
-     public String add(){
-        return "technologyRequirement_add";
-     }
-    @RequestMapping("get_data")
-    @ResponseBody
-    public List<Technology> get_data(){
-        List<Technology> technologies = technologyRequirementService.get_data();
-        return technologies;
+    * 新增插入一个工艺要求
+    * @return
+    */
+    @RequestMapping("add")
+    public String add(){
+       return "technologyRequirement_add";
     }
     @RequestMapping("insert")
     @ResponseBody
@@ -103,7 +87,7 @@ public class TechnologyRequirementController {
     }
 
     /**
-     * 通过工艺要求编号模糊查询符合要求的所有工艺
+     * 通过工艺要求编号模糊查询符合要求的所有工艺要求
      * @param searchValue
      * @return
      */
@@ -115,7 +99,7 @@ public class TechnologyRequirementController {
     }
 
     /**
-     * 通过工艺名称模糊查询符合要求的所有工艺
+     * 通过工艺名称模糊查询符合要求的所有工艺要求
      * @param searchValue
      * @return
      */
