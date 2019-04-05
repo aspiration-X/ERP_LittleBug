@@ -5,6 +5,7 @@
     <id column="device_id" jdbcType="VARCHAR" property="deviceId" />
     <result column="device_name" jdbcType="VARCHAR" property="deviceName" />
     <result column="device_type_id" jdbcType="VARCHAR" property="deviceTypeId" />
+    <result column="device_type_name" jdbcType="VARCHAR" property="deviceTypeName" />
     <result column="device_status_id" jdbcType="VARCHAR" property="deviceStatusId" />
     <result column="device_status" jdbcType="VARCHAR" property="deviceStatus" />
     <result column="device_purchase_date" jdbcType="TIMESTAMP" property="devicePurchaseDate" />
@@ -12,10 +13,14 @@
     <result column="device_manufacture_date" jdbcType="TIMESTAMP" property="deviceManufactureDate" />
     <result column="device_service_life" jdbcType="TIMESTAMP" property="deviceServiceLife" />
     <result column="device_keeper_id" jdbcType="VARCHAR" property="deviceKeeperId" />
+    <result column="emp_name" jdbcType="VARCHAR" property="deviceKeeper"/>
     <result column="note" jdbcType="VARCHAR" property="note" />
   </resultMap>
   <select id="selectAllDevices" resultMap="BaseResultMap">
-    select * from device;
+    select device_id, device_name, dt.device_type_id, dt.device_type_name, device_status_id, device_status, device_purchase_date,
+    device_purchase_price, device_manufacture_date, device_service_life, d.device_keeper_id, emp_name,
+    note from device d left join device_type dt on d.device_type_id = dt.device_type_id
+    left join employee e on d.device_keeper_id = e.emp_id;
   </select>
   <sql id="Base_Column_List">
     device_id, device_name, device_type_id, device_status_id, device_status, device_purchase_date, 

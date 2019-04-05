@@ -170,6 +170,12 @@ public class PlanController {
     }
 
 
+    @RequestMapping("order/edit")
+    public String goEditOrderPage() {
+        return "order_edit";
+    }
+
+
     @RequestMapping("order/add")
     public String goAddOrderPage() {
         return "order_add";

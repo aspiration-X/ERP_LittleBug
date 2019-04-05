@@ -6,7 +6,6 @@ import com.littlebug.service.DeviceService;
 import com.littlebug.util.UserMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
@@ -92,6 +91,13 @@ public class DeviceController {
         return deviceType;
     }
 
+    @RequestMapping("deviceType/get")
+    @ResponseBody
+    public List<DeviceType> getDeviceTypeListById(String deviceTypeId) {
+        List<DeviceType> deviceType = deviceService.findDeviceTypeById(deviceTypeId);
+        return deviceType;
+    }
+
     @RequestMapping("deviceType/search_deviceType_by_deviceTypeName")
     @ResponseBody
     public List<DeviceType> searchDeviceTypeListByName(String searchValue) {
@@ -106,8 +112,10 @@ public class DeviceController {
 
     @RequestMapping("/deviceList/list")
     @ResponseBody
-    public List<Device> deviceList2(Model model) {
+    public List<Device> deviceList2() {
         List<Device> deviceList = deviceService.findAllDevices();
         return deviceList;
     }
+
+
 }

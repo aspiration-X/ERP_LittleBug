@@ -30,26 +30,22 @@
 
 <div  id="toolbar_technologyRequirement" style=" height: 22px; padding: 3px 11px; background: #fafafa;">  
 	
-	<c:forEach items="${sessionScope.sysPermissionList}" var="per" >
-		<c:if test="${per=='technologyRequirement:add' }" >
+
 		    <div style="float: left;">  
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add"
 				   onclick="technologyRequirement_add()">新增</a>
 		    </div>  
-		</c:if>
-		<c:if test="${per=='technologyRequirement:edit' }" >
+
 		    <div style="float: left;">  
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit"
 				   onclick="technologyRequirement_edit()">编辑</a>
 		    </div>  
-		</c:if>
-		<c:if test="${per=='technologyRequirement:delete' }" >
+
 		    <div style="float: left;">  
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel"
 				   onclick="technologyRequirement_delete()">删除</a>
 		    </div>  
-		</c:if>
-	</c:forEach>
+
 	
 	<div class="datagrid-btn-separator"></div>  
 	
@@ -237,7 +233,7 @@ function doSearch_technologyRequirement(value,name){ //用户输入用户名,点
 		var row = onTechnologyRequirementClickRow(index);
 		$("#technologyInfo_technologyRequirement").dialog({
     		onOpen :function(){
-    			$.get("technology/get/"+row.technologyId,'',function(data){
+    			$.get("technologyRequirement/get/"+row.technologyId,'',function(data){
 		    		//回显数据
 		    		$("#technologyEditForm_technologyRequirement").form("load", data);
     	    	});

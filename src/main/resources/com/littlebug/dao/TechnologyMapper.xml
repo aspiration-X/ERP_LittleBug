@@ -149,7 +149,7 @@
   <update id="delete_batch" >
     delete from technology
     where technology_id in (
-    <foreach collection="list" item="ids" separator=",">
+    <foreach collection="array" item="ids" separator=",">
       #{ids}
     </foreach>
     )
@@ -171,6 +171,10 @@
     <if test=" technologyName != null">
       where technology_name like #{technologyName}
     </if>
+  </select>
+
+  <select id="selectTechnologyNameByPrimaryKey" resultType="String">
+    select technology_name from technology where technology_id = #{technologyId}
   </select>
 
 </mapper>

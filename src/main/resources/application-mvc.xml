@@ -18,6 +18,7 @@
     <!--mvc的配置-->
     <mvc:annotation-driven conversion-service="conversionService"/>
 
+
     <!--springmvc的视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/"/>

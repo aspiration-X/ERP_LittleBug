@@ -39,6 +39,9 @@ public class TechnologyServiceImpl implements TechnologyService {
      */
     @Override
     public boolean insertTechnology(Technology technology) {
+        if(technologyMapper.selectByPrimaryKey(technology.getTechnologyId())!= null){
+            return false ;
+        }
         int insert = technologyMapper.insert(technology);
         return insert == 1;
     }
@@ -59,7 +62,7 @@ public class TechnologyServiceImpl implements TechnologyService {
      * @return
      */
     @Override
-    public boolean delete_batch(List<String> ids) {
+    public boolean delete_batch(String[] ids) {
         int i = technologyMapper.delete_batch(ids);
         return i != 0;
     }
@@ -91,4 +94,5 @@ public class TechnologyServiceImpl implements TechnologyService {
         List<Technology> technologies = technologyMapper.search_technology_by_technologyName( searchValue);
         return technologies;
     }
+
 }

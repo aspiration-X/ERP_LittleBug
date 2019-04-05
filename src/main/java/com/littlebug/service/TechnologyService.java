@@ -33,7 +33,7 @@ public interface TechnologyService {
      * @param ids
      * @return
      */
-    boolean delete_batch(List<String> ids);
+    boolean delete_batch(String[] ids);
 
     /**
      * 通过工艺id模糊查询符合要求的所有工艺
