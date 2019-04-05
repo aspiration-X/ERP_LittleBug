@@ -110,6 +110,35 @@ public class EmployeeController {
         return employees;
     }
 
+    //删除
+    @RequestMapping("/delete_judge")
+    @ResponseBody
+    public void deleteJudge(){
+        return;
+    }
+
+    @RequestMapping("/delete_batch")
+    @ResponseBody
+    public Map<String, String> deleteBatch(String[] ids){
+        Map<String, String> map = new HashMap<>();
+        map.put("status", "200");
+        int i = employeeService.deleteEmployee(ids);
+
+        if (i != ids.length){
+            map.put("msg", "删除异常");
+        }
+        return map;
+    }
+
+
+    //根据部门编号查询
+    @RequestMapping("/search_employee_by_employeeId")
+    public @ResponseBody
+    List<Employee> queryByEmployeeId(String searchValue) {
+        List<Employee> employees = employeeService.queryByEmployeeId(searchValue);
+        return employees;
+    }
+
 
 
 }
