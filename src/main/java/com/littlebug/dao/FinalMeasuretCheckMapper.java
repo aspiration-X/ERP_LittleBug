@@ -29,4 +29,8 @@ public interface FinalMeasuretCheckMapper {
      * @return
      */
     List<FinalMeasuretCheck> selectPagination(@Param("limit") int limit, @Param("offset") int offset);
+
+    List<FinalMeasuretCheck> searchMeasureByFMeasureCheckId(@Param("searchValue") String searchValue, @Param("limit") int limit, @Param("offset") int offset);
+
+    List<FinalMeasuretCheck> searchFMeasureCheckByOrderId(@Param("searchValue") String searchValue, @Param("limit") int limit, @Param("offset") int offset);
 }

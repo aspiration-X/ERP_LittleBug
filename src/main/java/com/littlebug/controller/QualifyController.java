@@ -205,8 +205,8 @@ public class QualifyController {
     @ResponseBody
     public List<FinalMeasuretCheck> measureList(int page, int rows ){
         return finalMeasuretCheckService.queryProcessCountCheckList(page,rows);
-
     }
+
 
 
 
@@ -219,12 +219,86 @@ public class QualifyController {
         return"measurement_add";
     }
 
+    /**
+     * 成品计量质检-》添加-》提交
+     * @return
+     */
     @RequestMapping("measure/insert")
-    public UserMessage measureInsert(){
-
-
+    @ResponseBody
+    public UserMessage measureInsert(FinalMeasuretCheck finalMeasuretCheck){
+        boolean b = finalMeasuretCheckService.insertMeasureCheck(finalMeasuretCheck);
+        if (b){
+            return sendSuccessUserMessage();
+        }
         return null;
     }
+
+    /**
+     * 成品计量质检-》编辑
+     * @return
+     */
+    @RequestMapping("measure/edit")
+    public String measureEdit(){
+        return "measurement_edit";
+    }
+
+    /**
+     * 成品计量质检-》编辑-》提交
+     * @param finalMeasuretCheck
+     * @return
+     */
+    @RequestMapping("measure/update_all")
+    @ResponseBody
+    public UserMessage measureUpdate_all(FinalMeasuretCheck finalMeasuretCheck){
+        boolean b = finalMeasuretCheckService.updateOne(finalMeasuretCheck);
+        if (b){
+            return sendSuccessUserMessage();
+        }
+        return null;
+    }
+
+    /**
+     * 品计量质检-》删除
+     * @param ids
+     * @return
+     */
+    @RequestMapping("measure/delete_batch")
+    @ResponseBody
+    public UserMessage measureDeleteBatch(String ids){
+        boolean b = finalMeasuretCheckService.deleteMeasure(ids);
+        if (b){
+            return sendSuccessUserMessage();
+        }
+        return null;
+    }
+
+    /**
+     * 成品计量质检编号查询
+     * @param searchValue
+     * @param page
+     * @param rows
+     * @return
+     */
+    @RequestMapping("measure/search_fMeasureCheck_by_fMeasureCheckId")
+    @ResponseBody
+    public List<FinalMeasuretCheck> searchMeasureByFMeasureCheckId(String searchValue ,int page, int rows){
+        return finalMeasuretCheckService.searchMeasureByFMeasureCheckId(searchValue, page,rows);
+    }
+
+    /**
+     * 订单编号查询
+     * @param searchValue
+     * @param page
+     * @param rows
+     * @return
+     */
+    @RequestMapping("measure/search_fMeasureCheck_by_orderId")
+    @ResponseBody
+    public List<FinalMeasuretCheck>searchFMeasureCheckByOrderId(String searchValue ,int page, int rows){
+        return finalMeasuretCheckService.searchFMeasureCheckByOrderId(searchValue, page,rows);
+    }
+
+
 
 
 

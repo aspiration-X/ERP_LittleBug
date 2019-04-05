@@ -4,6 +4,7 @@ import com.littlebug.bean.FinalMeasuretCheck;
 import com.littlebug.bean.UnqualifyApply;
 import com.littlebug.dao.FinalMeasuretCheckMapper;
 import com.littlebug.dao.UnqualifyApplyMapper;
+import com.littlebug.service.FinalMeasuretCheckService;
 import com.littlebug.service.QualifyService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +30,8 @@ public class WangTest {
     QualifyService qualifyService;
     @Autowired
     FinalMeasuretCheckMapper finalMeasuretCheckMapper;
+    @Autowired
+    FinalMeasuretCheckService finalMeasuretCheckService;
 
     @Test
     public void testSelectPagination(){
@@ -52,7 +55,11 @@ public class WangTest {
     @Test
     public void selectPaginationMeasure(){
         List<FinalMeasuretCheck> finalMeasuretCheckList = finalMeasuretCheckMapper.selectPagination(10, 0);
+    }
 
+    @Test
+    public void searchMeasureByFMeasureCheckId(){
+        finalMeasuretCheckService.searchMeasureByFMeasureCheckId("19", 1, 10);
     }
 
 

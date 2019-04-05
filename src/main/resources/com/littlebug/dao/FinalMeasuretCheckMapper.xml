@@ -21,6 +21,10 @@
   <sql id="Specify_f_Colum_List">
     f.f_measure_check_id, f.order_id, f.check_item, f.cdate, f.measure_data, f.emp_id, result, f.note
   </sql>
+
+  <sql id="LikeSearchValue">
+    like #{searchValue}
+  </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -150,6 +154,35 @@
     from final_measuret_check f
     left outer join employee e
     on f.emp_id = e.emp_id
+    limit #{limit} offset #{offset}
+  </select>
+
+
+  <!--通过成品计量质检编号片段模糊查找-->
+  <select id="searchMeasureByFMeasureCheckId" resultMap="BaseResultMap">
+    select
+    <include refid="Specify_f_Colum_List"/>,
+    e.emp_name
+    from final_measuret_check f
+    left outer join employee e
+    on f.emp_id = e.emp_id
+    <where>
+      f.f_measure_check_id <include refid="LikeSearchValue" />
+    </where>
+    limit #{limit} offset #{offset}
+  </select>
+
+  <!--tongg订单编号片段模糊查找-->
+  <select id="searchFMeasureCheckByOrderId" resultMap="BaseResultMap">
+    select
+    <include refid="Specify_f_Colum_List"/>,
+    e.emp_name
+    from final_measuret_check f
+    left outer join employee e
+    on f.emp_id = e.emp_id
+    <where>
+      order_id <include refid="LikeSearchValue" />
+    </where>
     limit #{limit} offset #{offset}
   </select>
 </mapper>

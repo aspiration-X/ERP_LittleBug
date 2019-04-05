@@ -1,7 +1,6 @@
 package com.littlebug.service;
 
 import com.littlebug.bean.FinalMeasuretCheck;
-import com.littlebug.bean.ProcessCountCheck;
 
 import java.util.List;
 
@@ -13,4 +12,13 @@ public interface FinalMeasuretCheckService {
 
      List<FinalMeasuretCheck> queryProcessCountCheckList(int page, int rows) ;
 
+     boolean updateOne(FinalMeasuretCheck finalMeasuretCheck);
+
+     boolean insertMeasureCheck(FinalMeasuretCheck finalMeasuretCheck);
+
+     boolean deleteMeasure(String ids);
+
+     List<FinalMeasuretCheck> searchMeasureByFMeasureCheckId(String searchValue, int page, int rows);
+
+     List<FinalMeasuretCheck> searchFMeasureCheckByOrderId(String searchValue, int page, int rows);
 }
