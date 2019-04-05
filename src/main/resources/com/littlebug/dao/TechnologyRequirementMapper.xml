@@ -103,8 +103,8 @@
   <update id="delete_batch" >
     delete from technology_requirement
     where technology_requirement_id in (
-    <foreach collection="array" item="ids" separator=",">
-      #{ids}
+    <foreach collection="array" item="split" separator=",">
+      #{split}
     </foreach>
     )
   </update>
