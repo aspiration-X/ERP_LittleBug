@@ -30,4 +30,13 @@ public class Department {
     public void setNote(String note) {
         this.note = note == null ? null : note.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Department{" +
+                "departmentId='" + departmentId + '\'' +
+                ", departmentName='" + departmentName + '\'' +
+                ", note='" + note + '\'' +
+                '}';
+    }
 }
