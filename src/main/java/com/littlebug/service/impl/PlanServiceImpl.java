@@ -43,6 +43,11 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
+    public List<COrder> showALLOrders() {
+        return orderMapper.showAllOrders();
+    }
+
+    @Override
     public boolean deleteBatchOrders(String[] ids) {
 
         for (String id:ids) {
@@ -110,6 +115,7 @@ public class PlanServiceImpl implements PlanService {
     public boolean updateProduct(Product product) {
         return productMapper.updateByPrimaryKey(product) == 1;
     }
+
 
     @Override
     public int countAllProductsOnCondition(Product product) {
@@ -274,9 +280,81 @@ public class PlanServiceImpl implements PlanService {
         return orders;
     }
 
+    /*--------------------------------------------------- work ------------------------------------------------------*/
 
 
 
+    @Override
+    public boolean addWork(Work work) {
+        int insert = workMapper.insert(work);
+        return insert == 1;
+    }
+
+    @Override
+    public boolean deleteBatchWorks(String[] ids) {
+        for (String id : ids
+                ) {
+            int delete = workMapper.deleteByPrimaryKey(id);
+            if (delete != 1){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean updateWork(Work work) {
+        return workMapper.updateByPrimaryKey(work) == 1;
+    }
+
+    @Override
+    public int countAllWorks() {
+        return workMapper.countAllWorks();
+    }
+
+    @Override
+    public List<Work> showAllWorksByIndexs(int page, int rows) {
+
+        int offset = 0, limit = 0;
+
+        if (page >= 1){
+            offset = (page -1) * rows;
+        }
+        if (rows >= 1){
+            limit = offset + rows;
+        }
+
+        return workMapper.showAllWorksByIndexs(offset, limit);
+    }
+
+    @Override
+    public List<Work> selectWorksOnCondition(Work work, int page, int rows) {
+        int offset = 0, limit = 0;
+
+        if (page >= 1){
+            offset = (page -1) * rows;
+        }
+        if (rows >= 1){
+            limit = offset + rows;
+        }
+
+        return workMapper.selectWorksOnCondition(work, offset, limit);
+    }
+
+    @Override
+    public int countAllWorksOnCondition(Work work) {
+        return workMapper.countAllWorksOnCondition(work);
+    }
+
+//    @Override
+//    public List<Work> showWorkList() {
+//        return workMapper.showWorkList();
+//    }
+
+    @Override
+    public Work selectWorkByWorkId(String workId) {
+        return workMapper.selectByPrimaryKey(workId);
+    }
 
 
 

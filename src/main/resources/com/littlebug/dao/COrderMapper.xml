@@ -273,7 +273,9 @@
         <!--select -->
     <!--</select>-->
 
-    
+    <select id="showAllOrders" resultMap="BaseResultMap">
+        select * from c_order
+    </select>
 
 
 
