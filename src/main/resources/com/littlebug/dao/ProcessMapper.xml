@@ -86,7 +86,7 @@
     from process
   </select>
 
-  <update id="delete_batchTechnology" >
+  <update id="delete_batchProcess" >
     delete from process
     where process_id in (
     <foreach collection="array" item="processIds" separator=",">

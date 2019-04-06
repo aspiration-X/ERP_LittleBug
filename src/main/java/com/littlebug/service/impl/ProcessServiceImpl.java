@@ -52,9 +52,6 @@ public class ProcessServiceImpl implements ProcessService {
      */
     @Override
     public boolean update_allProcess(Process process) {
-        if(processMapper.selectByPrimaryKey(process.getProcessId()) != null){
-            return false;
-        }
         int i = processMapper.updateByPrimaryKeySelective(process);
         return i == 1;
     }
