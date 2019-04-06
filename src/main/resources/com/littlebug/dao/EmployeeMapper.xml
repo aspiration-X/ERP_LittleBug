@@ -32,7 +32,7 @@
 
   <select id="queryByDepartmentName" resultMap="BaseResultMap">
     select *
-    from employee, (select * from department where department_name = like "%"#{departmentName}"%") as department1
+    from employee, (select * from department where department_name = #{departmentName}) as department1
     where employee.department_id = department1.department_id
   </select>
 
