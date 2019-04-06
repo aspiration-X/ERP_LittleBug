@@ -19,6 +19,8 @@ public class TechnologyPlan {
 
     private Date technologyPlanEnd;
 
+    private String technologyName;
+
     public String getTechnologyPlanId() {
         return technologyPlanId;
     }
@@ -81,5 +83,13 @@ public class TechnologyPlan {
 
     public void setTechnologyPlanEnd(Date technologyPlanEnd) {
         this.technologyPlanEnd = technologyPlanEnd;
+    }
+
+    public String getTechnologyName() {
+        return technologyName;
+    }
+
+    public void setTechnologyName(String technologyName) {
+        this.technologyName = technologyName;
     }
 }

@@ -10,10 +10,21 @@
     <result column="emp_id" jdbcType="VARCHAR" property="empId" />
     <result column="result" jdbcType="VARCHAR" property="result" />
     <result column="note" jdbcType="VARCHAR" property="note" />
+    <association property="empName" jdbcType="VARCHAR" resultMap="EmployeeNameResultMap"/>
+  </resultMap>
+  <resultMap id="EmployeeNameResultMap" type="string">
+    <result column="emp_name" jdbcType="VARCHAR" property="empName"/>
   </resultMap>
   <sql id="Base_Column_List">
     p_measure_check_id, process_id, check_item, cdate, measure_data, emp_id, result, 
     note
+  </sql>
+  <sql id="Specify_p_Colum_List">
+    p.p_measure_check_id, p.process_id, p.check_item, p.cdate, p.measure_data, p.emp_id, p.result,
+    p.note
+  </sql>
+  <sql id="LikeSearchValue">
+    like #{searchValue}
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -126,4 +137,29 @@
       note = #{note,jdbcType=VARCHAR}
     where p_measure_check_id = #{pMeasureCheckId,jdbcType=VARCHAR}
   </update>
+
+
+
+  <select id="selectPagination" resultMap="BaseResultMap">
+  select
+  <include refid="Specify_p_Colum_List"/>,
+  e.emp_name
+  from process_measure_check p
+  left outer join employee e
+  on p.emp_id = e.emp_id
+  limit #{limit} offset #{offset}
+</select>
+
+<select id="searchpMeasureCheckByPMeasureCheckId" resultMap="BaseResultMap">
+  select
+  <include refid="Specify_p_Colum_List"/>,
+  e.emp_name
+  from process_measure_check p
+  left outer join employee e
+  on p.emp_id = e.emp_id
+  <where>
+    p.p_measure_check_id <include refid="LikeSearchValue" />
+  </where>
+  limit #{limit} offset #{offset}
+</select>
 </mapper>

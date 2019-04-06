@@ -16,18 +16,6 @@ public interface TechnologyRequirementService {
      */
     List<TechnologyRequirement> findAllTechnologyRequirements(int page,int rows);
 
-    /**
-     * 工艺要求里通过工艺ID获取单个工艺信息
-     * @param technologyId
-     * @return
-     */
-    Technology technologyRequirementGetTechnology(String technologyId);
-
-    /**
-     * 新增一个工艺要求需要查询所有工艺
-     * @return
-     */
-    List<Technology> get_data();
 
     /**
      * 新增一个工艺要求
@@ -35,4 +23,31 @@ public interface TechnologyRequirementService {
      * @return
      */
     boolean insertTechnologyRequirement(TechnologyRequirement technologyRequirement);
+
+    /**
+     * 编辑修改一个工艺要求
+     * @return
+     */
+    boolean update_all(TechnologyRequirement technologyRequirement);
+
+    /**
+     * 删除一个或多个工艺要求
+     * @param split
+     * @return
+     */
+    boolean delete_batch(String[] split);
+
+    /**
+     * 通过工艺要求编号模糊查询符合要求的所有工艺要求
+     * @param searchValue
+     * @return
+     */
+    List<TechnologyRequirement> search_technologyRequirement_by_technologyRequirementId(String searchValue);
+
+    /**
+     * 通过工艺名称模糊查询符合要求的所有工艺要求
+     * @param searchValue
+     * @return
+     */
+    List<TechnologyRequirement> search_technologyRequirement_by_technologyName(String searchValue);
 }

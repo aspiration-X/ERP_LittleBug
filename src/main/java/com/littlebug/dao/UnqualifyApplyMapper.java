@@ -1,5 +1,6 @@
 package com.littlebug.dao;
 
+import com.littlebug.bean.ProcessCountCheck;
 import com.littlebug.bean.UnqualifyApply;
 import org.apache.ibatis.annotations.Param;
 
@@ -26,4 +27,11 @@ public interface UnqualifyApplyMapper {
      * @return
      */
     List<UnqualifyApply> selectPagination(@Param("limit") int limit, @Param("offset") int offset);
+
+    List<UnqualifyApply> searchUnqualifyByUnqualifyId(@Param("searchValue") String searchValue, @Param("limit") int limit,@Param("offset") int offset);
+
+    List<UnqualifyApply> searchUnqualifyByProductName(@Param("searchValue") String searchValue, @Param("limit") int limit,@Param("offset") int offset);
+
+
+
 }

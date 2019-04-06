@@ -1,11 +1,11 @@
 package com.littlebug.controller;
 
-import com.littlebug.bean.Device;
-import com.littlebug.bean.DeviceType;
+import com.littlebug.bean.*;
 import com.littlebug.service.DeviceService;
 import com.littlebug.util.UserMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
@@ -30,6 +30,14 @@ public class DeviceController {
         List<DeviceType> deviceType = deviceService.findAllDeviceTypes();
         return deviceType;
     }
+
+    @RequestMapping("deviceType/get_data")
+    @ResponseBody
+    public List<DeviceType> deviceType3() {
+        List<DeviceType> deviceType = deviceService.findAllDeviceTypes();
+        return deviceType;
+    }
+
 
     @RequestMapping("*/*_judge")
     @ResponseBody
@@ -71,6 +79,18 @@ public class DeviceController {
         return userMessage;
     }
 
+    @RequestMapping("deviceType/update_all")
+    @ResponseBody
+    public UserMessage deviceTypeEdit3(DeviceType deviceType, String deviceTypeId) {
+        boolean b = deviceService.editDeviceType(deviceType, deviceTypeId);
+        UserMessage userMessage = new UserMessage();
+        if (b) {
+            userMessage.setMsg("ok");
+            userMessage.setStatus(200);
+        }
+        return userMessage;
+    }
+
     @RequestMapping("deviceType/delete_batch")
     @ResponseBody
     public UserMessage deviceTypeDelete(String ids) {
@@ -91,11 +111,11 @@ public class DeviceController {
         return deviceType;
     }
 
-    @RequestMapping("deviceType/get")
+    @RequestMapping("deviceType/get/{deviceTypeId}")
     @ResponseBody
-    public List<DeviceType> getDeviceTypeListById(String deviceTypeId) {
+    public DeviceType getDeviceTypeListById(@PathVariable("deviceTypeId") String deviceTypeId) {
         List<DeviceType> deviceType = deviceService.findDeviceTypeById(deviceTypeId);
-        return deviceType;
+        return deviceType.get(0);
     }
 
     @RequestMapping("deviceType/search_deviceType_by_deviceTypeName")
@@ -115,6 +135,386 @@ public class DeviceController {
     public List<Device> deviceList2() {
         List<Device> deviceList = deviceService.findAllDevices();
         return deviceList;
+    }
+
+    @RequestMapping("deviceList/add")
+    public String addDevice1() {
+        return "deviceList_add";
+    }
+
+    @RequestMapping("deviceList/insert")
+    @ResponseBody
+    public UserMessage addDevice2(Device device) {
+        boolean b = deviceService.addDevice(device);
+        UserMessage userMessage = new UserMessage();
+        if (b) {
+            userMessage.setMsg("ok");
+            userMessage.setStatus(200);
+        }
+        return userMessage;
+    }
+
+    @RequestMapping("deviceList/edit")
+    public String editDevice1() {
+        return "deviceList_edit";
+    }
+
+    @RequestMapping("deviceList/update")
+    @ResponseBody
+    public UserMessage editDevice2(Device device) {
+        boolean b = deviceService.editDeviceById(device);
+        UserMessage userMessage = new UserMessage();
+        if (b) {
+            userMessage.setMsg("ok");
+            userMessage.setStatus(200);
+        }
+        return userMessage;
+    }
+
+    @RequestMapping("deviceList/delete_batch")
+    @ResponseBody
+    public UserMessage deleteDeviceByIds(String ids) {
+        String[] strings = ids.split(",");
+        boolean b = deviceService.deleteDeviceByIds(strings);
+        UserMessage userMessage = new UserMessage();
+        if (b) {
+            userMessage.setMsg("ok");
+            userMessage.setStatus(200);
+        }
+        return userMessage;
+    }
+
+    @RequestMapping("deviceList/search_device_by_deviceId")
+    @ResponseBody
+    public List<Device> selectDeviceListByDeviceId(String searchValue) {
+        List<Device> deviceList = deviceService.selectDeviceListByDeviceId(searchValue);
+        return deviceList;
+    }
+
+    @RequestMapping("deviceList/search_device_by_deviceName")
+    @ResponseBody
+    public List<Device> selectDeviceListByDeviceName(String searchValue) {
+        List<Device> deviceList = deviceService.selectDeviceListByDeviceName(searchValue);
+        return deviceList;
+    }
+
+    @RequestMapping("deviceList/search_device_by_deviceTypeName")
+    @ResponseBody
+    public List<Device> selectDeviceListByDeviceTypeName(String searchValue) {
+        List<Device> deviceList = deviceService.selectDeviceListByDeviceTypeName(searchValue);
+        return deviceList;
+    }
+
+    @RequestMapping("deviceList/update_note")
+    @ResponseBody
+    public UserMessage updateDeviceNote(String deviceId, String note) {
+        boolean b = deviceService.updateNoteByDeviceId(deviceId, note);
+        UserMessage userMessage = new UserMessage();
+        if (b) {
+            userMessage.setMsg("ok");
+            userMessage.setStatus(200);
+        }
+        return userMessage;
+    }
+
+    @RequestMapping("device/deviceFault")
+    public String searchDeviceFaultList1() {
+        return "deviceFault";
+    }
+
+    @RequestMapping("deviceFault/list")
+    @ResponseBody
+    public List<DeviceFault> searchDeviceFaultList2() {
+        List<DeviceFault> deviceFaultList = deviceService.searchDeviceFaultList();
+        return deviceFaultList;
+    }
+
+    @RequestMapping("deviceList/get/{deviceId}")
+    @ResponseBody
+    public Device searchDeviceById(@PathVariable("deviceId") String deviceId) {
+        List<Device> deviceList = deviceService.selectDeviceListByDeviceId(deviceId);
+        return deviceList.get(0);
+    }
+
+    @RequestMapping("deviceFault/update_note")
+    @ResponseBody
+    public UserMessage updateDeviceFaultNote(String deviceFaultId, String deviceFaultDetail) {
+        boolean b = deviceService.updateDeviceFaultNote(deviceFaultId, deviceFaultDetail);
+        UserMessage userMessage = new UserMessage();
+        if (b) {
+            userMessage.setMsg("ok");
+            userMessage.setStatus(200);
+        }
+        return userMessage;
+    }
+
+    @RequestMapping("deviceList/update_all")
+    @ResponseBody
+    public UserMessage updateDeviceByDeviceId(Device device) {
+        boolean b = deviceService.editDeviceById(device);
+        UserMessage userMessage = new UserMessage();
+        if (b) {
+            userMessage.setMsg("ok");
+            userMessage.setStatus(200);
+        }
+        return userMessage;
+    }
+
+    @RequestMapping("deviceFault/add")
+    public String addDeviceFault1() {
+        return "deviceFault_add";
+    }
+
+    @RequestMapping("deviceList/get_data")
+    @ResponseBody
+    public List<Device> getDeviceList() {
+        List<Device> deviceList = deviceService.findAllDevices();
+        return deviceList;
+    }
+
+    @RequestMapping("deviceFault/insert")
+    @ResponseBody
+    public UserMessage addDeviceFault2(DeviceFault deviceFault) {
+        boolean b = deviceService.addDeviceFault(deviceFault);
+        UserMessage userMessage = new UserMessage();
+        if (b) {
+            userMessage.setMsg("ok");
+            userMessage.setStatus(200);
+        }
+        return userMessage;
+    }
+
+    @RequestMapping("deviceFault/edit")
+    public String editDeviceFault1() {
+        return "deviceFault_edit";
+    }
+
+    @RequestMapping("deviceFault/update")
+    @ResponseBody
+    public UserMessage editDeviceFault2(DeviceFault deviceFault) {
+        boolean b = deviceService.editDeviceFault(deviceFault);
+        UserMessage userMessage = new UserMessage();
+        if (b) {
+            userMessage.setMsg("ok");
+            userMessage.setStatus(200);
+        }
+        return userMessage;
+    }
+
+    @RequestMapping("deviceFault/delete_batch")
+    @ResponseBody
+    public UserMessage deleteDeviceFaultList(String ids) {
+        String[] strings = ids.split(",");
+        boolean b = deviceService.deleteDeviceFaultList(strings);
+        UserMessage userMessage = new UserMessage();
+        if (b) {
+            userMessage.setMsg("ok");
+            userMessage.setStatus(200);
+        }
+        return userMessage;
+    }
+
+    @RequestMapping("deviceFault/search_deviceFault_by_deviceFaultId")
+    @ResponseBody
+    public List<DeviceFault> searchDeviceFaultById(String searchValue) {
+        List<DeviceFault> deviceFaultList = deviceService.selectDeviceFaultListById(searchValue);
+        return deviceFaultList;
+    }
+
+    @RequestMapping("deviceFault/search_deviceFault_by_deviceName")
+    @ResponseBody
+    public List<DeviceFault> searchDeviceFaultByDeviceName(String searchValue) {
+        List<DeviceFault> deviceFaultList = deviceService.selectDeviceFaultListByDeviceName(searchValue);
+        return deviceFaultList;
+    }
+
+    @RequestMapping("device/deviceCheck")
+    public String deviceCheck() {
+        return "deviceCheck";
+    }
+
+    @RequestMapping("deviceCheck/list")
+    @ResponseBody
+    public List<DeviceCheck> findDeviceCheckList() {
+        List<DeviceCheck> deviceCheckList = deviceService.selectDeviceCheckList();
+        return deviceCheckList;
+    }
+
+    @RequestMapping("deviceCheck/add")
+    public String addDeviceCheck1() {
+        return "deviceCheck_add";
+    }
+
+    @RequestMapping("deviceCheck/insert")
+    @ResponseBody
+    public UserMessage addDeviceCheck2(DeviceCheck deviceCheck) {
+        boolean b = deviceService.addDeviceCheck(deviceCheck);
+        UserMessage userMessage = new UserMessage();
+        if (b) {
+            userMessage.setMsg("ok");
+            userMessage.setStatus(200);
+        }
+        return userMessage;
+    }
+
+    @RequestMapping("deviceCheck/edit")
+    public String editDeviceCheck1() {
+        return "deviceCheck_edit";
+    }
+
+    @RequestMapping("deviceCheck/update")
+    @ResponseBody
+    public UserMessage editDeviceCheck2(DeviceCheck deviceCheck) {
+        boolean b = deviceService.editDeviceCheckById(deviceCheck);
+        UserMessage userMessage = new UserMessage();
+        if (b) {
+            userMessage.setMsg("ok");
+            userMessage.setStatus(200);
+        }
+        return userMessage;
+    }
+
+    @RequestMapping("deviceCheck/delete_batch")
+    @ResponseBody
+    public UserMessage deleteDeviceCheckList(String ids) {
+        String[] strings = ids.split(",");
+        boolean b = deviceService.deleteDeviceCheckList(strings);
+        UserMessage userMessage = new UserMessage();
+        if (b) {
+            userMessage.setMsg("ok");
+            userMessage.setStatus(200);
+        }
+        return userMessage;
+    }
+
+    @RequestMapping("deviceCheck/search_deviceCheck_by_deviceCheckId")
+    @ResponseBody
+    public List<DeviceCheck> searchDeviceCheckById(String searchValue) {
+        List<DeviceCheck> deviceCheckList = deviceService.selectDeviceCheckListById(searchValue);
+        return deviceCheckList;
+    }
+
+    @RequestMapping("deviceCheck/search_deviceCheck_by_deviceName")
+    @ResponseBody
+    public List<DeviceCheck> searchDeviceCheckByDeviceName(String searchValue) {
+        List<DeviceCheck> deviceCheckList = deviceService.selectDeviceCheckListByDeviceName(searchValue);
+        return deviceCheckList;
+    }
+
+    @RequestMapping("deviceCheck/update_note")
+    @ResponseBody
+    public UserMessage updateDeviceCheck(DeviceCheck deviceCheck) {
+        boolean b = deviceService.editDeviceCheckById(deviceCheck);
+        UserMessage userMessage = new UserMessage();
+        if (b) {
+            userMessage.setMsg("ok");
+            userMessage.setStatus(200);
+        }
+        return userMessage;
+    }
+
+    @RequestMapping("device/deviceMaintain")
+    public String deviceMaintain() {
+        return "deviceMaintain";
+    }
+
+    @RequestMapping("deviceMaintain/list")
+    @ResponseBody
+    public List<DeviceMaintain> searchDeviceMaintainList() {
+        List<DeviceMaintain> deviceMaintainList = deviceService.selectDeviceMaintainList();
+        return deviceMaintainList;
+    }
+
+    @RequestMapping("deviceMaintain/add")
+    public String addDeviceMaintain1() {
+        return "deviceMaintain_add";
+    }
+
+    @RequestMapping("deviceMaintain/insert")
+    @ResponseBody
+    public UserMessage addDeviceMaintain2(DeviceMaintain deviceMaintain) {
+        boolean b = deviceService.addDeviceMaintain(deviceMaintain);
+        UserMessage userMessage = new UserMessage();
+        if (b) {
+            userMessage.setMsg("ok");
+            userMessage.setStatus(200);
+        }
+        return userMessage;
+    }
+
+    @RequestMapping("deviceMaintain/edit")
+    public String editDeviceMaintain() {
+        return "deviceMaintain_edit";
+    }
+
+    @RequestMapping("deviceMaintain/update")
+    @ResponseBody
+    public UserMessage editDeviceMaintain(DeviceMaintain deviceMaintain) {
+        boolean b = deviceService.editDeviceMaintain(deviceMaintain);
+        UserMessage userMessage = new UserMessage();
+        if (b) {
+            userMessage.setMsg("ok");
+            userMessage.setStatus(200);
+        }
+        return userMessage;
+    }
+
+    @RequestMapping("deviceMaintain/delete_batch")
+    @ResponseBody
+    public UserMessage deletetDeviceMaintainByIds(String ids) {
+        String[] strings = ids.split(",");
+        boolean b = deviceService.deleteDeviceMaintainByIds(strings);
+        UserMessage userMessage = new UserMessage();
+        if (b) {
+            userMessage.setMsg("ok");
+            userMessage.setStatus(200);
+        }
+        return userMessage;
+    }
+
+    @RequestMapping("deviceFault/update_all")
+    @ResponseBody
+    public UserMessage updateDeviceFault(DeviceFault deviceFault) {
+        boolean b = deviceService.updateDeviceFault(deviceFault);
+        UserMessage userMessage = new UserMessage();
+        if (b) {
+            userMessage.setMsg("ok");
+            userMessage.setStatus(200);
+        }
+        return userMessage;
+    }
+
+    @RequestMapping("deviceMaintain/search_deviceMaintain_by_deviceMaintainId")
+    @ResponseBody
+    public List<DeviceMaintain> searchDeviceMaintainById(String searchValue) {
+        List<DeviceMaintain> deviceMaintainList = deviceService.selectDeviceMaintainListById(searchValue);
+        return deviceMaintainList;
+    }
+
+    @RequestMapping("deviceCheck/deviceMaintain/search_deviceMaintain_by_deviceFaultId")
+    @ResponseBody
+    public List<DeviceMaintain> searchDeviceMaintainByDeviceFaultId(String searchValue) {
+        List<DeviceMaintain> deviceMaintainList = deviceService.selectDeviceMaintainListByDeviceFaultId(searchValue);
+        return deviceMaintainList;
+    }
+
+    @RequestMapping("deviceMaintain/update_note")
+    @ResponseBody
+    public UserMessage updateDeviceMaintain(DeviceMaintain deviceMaintain) {
+        boolean b = deviceService.updateDeviceMaintain(deviceMaintain);
+        UserMessage userMessage = new UserMessage();
+        if (b) {
+            userMessage.setMsg("ok");
+            userMessage.setStatus(200);
+        }
+        return userMessage;
+    }
+
+    @RequestMapping("deviceFault/get/{deviceFaultId}")
+    @ResponseBody
+    public DeviceFault getDeviceFault(@PathVariable("deviceFaultId") String deviceFaultId) {
+        List<DeviceFault> deviceFaultList = deviceService.selectDeviceFaultListById(deviceFaultId);
+        return deviceFaultList.get(0);
     }
 
 

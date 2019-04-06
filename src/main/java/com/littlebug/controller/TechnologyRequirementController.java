@@ -42,30 +42,14 @@ public class TechnologyRequirementController {
         List<TechnologyRequirement> technologyList = technologyRequirementService.findAllTechnologyRequirements(page,rows);
         return technologyList;
     }
-    /**
-     * 工艺要求获取工艺详情
-     * @return
-     */
-    @RequestMapping("get/{technologyId}")
-    @ResponseBody
-    public Technology technologyRequirementGetTechnology(@PathVariable("technologyId")String technologyId){
-        Technology technology = technologyRequirementService.technologyRequirementGetTechnology(technologyId);
-        return technology;
-    }
 
     /**
-     * 新增插入一个工艺要求
-     * @return
-     */
-     @RequestMapping("add")
-     public String add(){
-        return "technologyRequirement_add";
-     }
-    @RequestMapping("get_data")
-    @ResponseBody
-    public List<Technology> get_data(){
-        List<Technology> technologies = technologyRequirementService.get_data();
-        return technologies;
+    * 新增插入一个工艺要求
+    * @return
+    */
+    @RequestMapping("add")
+    public String add(){
+       return "technologyRequirement_add";
     }
     @RequestMapping("insert")
     @ResponseBody
@@ -74,4 +58,55 @@ public class TechnologyRequirementController {
          return DuplicatedCodeUtil.consequenceMessageReturn(flag);
      }
 
+    /**
+     * 编辑修改一个工艺要求
+     * @return
+     */
+    @RequestMapping("edit")
+    public String edit(){
+        return "technologyRequirement_edit";
+    }
+    @RequestMapping("update_all")
+    @ResponseBody
+    public UserMessage update_all(TechnologyRequirement technologyRequirement){
+        boolean flag = technologyRequirementService.update_all(technologyRequirement);
+        return DuplicatedCodeUtil.consequenceMessageReturn(flag);
+    }
+
+    /**
+     * 删除一个或多个工艺要求
+     * @param ids
+     * @return
+     */
+    @RequestMapping("delete_batch")
+    @ResponseBody
+    public UserMessage delete_batch( String ids){
+        String[] split = ids.split(",");
+        boolean flag = technologyRequirementService.delete_batch(split);
+        return DuplicatedCodeUtil.consequenceMessageReturn(flag);
+    }
+
+    /**
+     * 通过工艺要求编号模糊查询符合要求的所有工艺要求
+     * @param searchValue
+     * @return
+     */
+    @RequestMapping("search_technologyRequirement_by_technologyRequirementId")
+    @ResponseBody
+    public List<TechnologyRequirement> search_technologyRequirement_by_technologyRequirementId(String searchValue){
+        List<TechnologyRequirement> technologyRequirements = technologyRequirementService.search_technologyRequirement_by_technologyRequirementId(searchValue);
+        return technologyRequirements;
+    }
+
+    /**
+     * 通过工艺名称模糊查询符合要求的所有工艺要求
+     * @param searchValue
+     * @return
+     */
+    @RequestMapping("search_technologyRequirement_by_technologyName")
+    @ResponseBody
+    public List<TechnologyRequirement> search_technologyRequirement_by_technologyName(String searchValue){
+        List<TechnologyRequirement> technologyRequirements = technologyRequirementService.search_technologyRequirement_by_technologyName(searchValue);
+        return technologyRequirements;
+    }
 }

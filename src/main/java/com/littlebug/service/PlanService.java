@@ -12,9 +12,11 @@ import java.util.List;
  */
 public interface PlanService {
 
-    boolean addOrder(COrder order);
 
-    boolean deleteJudge(String[] ids);
+    /*-------------------------------------------------- order ----------------------------------------------------------*/
+
+
+    boolean addOrder(COrder order);
 
     boolean deleteBatchOrders(String[] ids);
 
@@ -28,17 +30,93 @@ public interface PlanService {
 
     List<COrder> showAllOrdersByIndexs(int start, int end);
 
-
-
-    /*--------------------------------------------------- product ------------------------------------------------------*/
-    List<Product> showProductList();
-
+    List<COrder> showALLOrders();
 
 
     /*--------------------------------------------------- custom ------------------------------------------------------*/
 
+    int countAllCustoms();
+
+    int countCustomOnCondition(Custom custom,int page,int rows);
+
     List<Custom> showCustomList();
 
+    Custom selectCustomByCustomId(String customId);
+
+    List<Custom> showAllCustomsByIndexs(int offset, int limit);
+
+    List<Custom> selectCustomOnCondition(Custom custom, int offset, int rows);
+
+    boolean addCustom(Custom custom);
+
+    boolean deleteBatchCustoms(String[] customIds);
+
+    boolean editCustom(Custom custom);
+
+    boolean updateCustom(Custom custom);
+
+
+
+    /*--------------------------------------------------- product ------------------------------------------------------*/
+
+    int countAllProducts();
+
+    List<Product> showAllProductsByIndexs(int page, int rows);
+
+    List<Product> showProductList();
+
+    Product selectProductByProductId(String productId);
+
+    List<Product> selectProductsOnCondition(Product product, int page, int rows);
+
+    int countAllProductsOnCondition(Product product);
+
+    boolean addProduct(Product product);
+
+    boolean deleteBatchProducts(String[] productIds);
+
+    boolean updateProduct(Product product);
+
+
+
+
+
+
+
+
+    /*--------------------------------------------------- work ------------------------------------------------------*/
+
+
+    boolean addWork(Work work);
+
+    boolean deleteBatchWorks(String[] ids);
+
+    boolean updateWork(Work work);
+
+    int countAllWorks();
+
+    List<Work> showAllWorksByIndexs(int page, int rows);
+
+    List<Work> selectWorksOnCondition(Work work, int page, int rows);
+
+    int countAllWorksOnCondition(Work work);
+
+//    List<Work> showWorkList();
+
+    Work selectWorkByWorkId(String workId);
+
+    List<Work> showWorkList();
+
+    COrder selectOrderByOrderId(String orderId);
+
+
+
+
+
+
+
+
+    /*--------------------------------------------------- work ------------------------------------------------------*/
 
 
 
@@ -52,11 +130,14 @@ public interface PlanService {
 
 
 
-//
-//    List<Work> showWorkList(@Param("page") int page, @Param("rows") int rows);
-//    List<Task> showTaskList(@Param("page") int page, @Param("rows") int rows);
-//    List<Manufacture> showManufactureList(@Param("page") int page, @Param("rows") int rows);
-//
-//    PageModel findByPage(@Param("page") int page, @Param("rows") int rows);
+
+
+
+
+
+
+
+
+
 
 }

@@ -99,4 +99,42 @@
       <include refid="Base_Column_List"/>
       from technology_requirement limit #{rows} offset #{page}
   </select>
+
+  <update id="delete_batch" >
+    delete from technology_requirement
+    where technology_requirement_id in (
+    <foreach collection="array" item="split" separator=",">
+      #{split}
+    </foreach>
+    )
+  </update>
+
+
+  <select id="search_technologyRequirement_by_technologyRequirementId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from technology_requirement
+    <if test=" searchValue != null">
+      where technology_requirement_id like #{searchValue}
+    </if>
+  </select>
+
+  <select id="search_technologyRequirement_by_technologyName" resultType="technologyRequirement">
+    select
+    tr.technology_requirement_id as technologyRequirementId,
+    tr.technology_id as technologyId,
+    tr.requirement as requirement,
+    tr.add_time as addTime,
+    tr.revise_time as reviseTime,
+    t.technology_name as technologyName
+    from technology_requirement tr
+    inner join technology t
+    on tr.technology_id = t.technology_id
+    <if test=" searchValue != null">
+      where t.technology_name like #{searchValue}
+    </if>
+  </select>
+
+
+
 </mapper>

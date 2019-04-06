@@ -233,7 +233,7 @@ function doSearch_technologyRequirement(value,name){ //用户输入用户名,点
 		var row = onTechnologyRequirementClickRow(index);
 		$("#technologyInfo_technologyRequirement").dialog({
     		onOpen :function(){
-    			$.get("technologyRequirement/get/"+row.technologyId,'',function(data){
+    			$.get("technology/get/"+row.technologyId,'',function(data){
 		    		//回显数据
 		    		$("#technologyEditForm_technologyRequirement").form("load", data);
     	    	});

@@ -4,11 +4,28 @@
   <resultMap id="BaseResultMap" type="com.littlebug.bean.DeviceFault">
     <id column="device_fault_id" jdbcType="VARCHAR" property="deviceFaultId" />
     <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+    <result column="device_name" jdbcType="VARCHAR" property="deviceName" />
     <result column="device_fault_cause" jdbcType="VARCHAR" property="deviceFaultCause" />
     <result column="device_fault_detail" jdbcType="VARCHAR" property="deviceFaultDetail" />
     <result column="device_fault_date" jdbcType="TIMESTAMP" property="deviceFaultDate" />
     <result column="device_fault_maintenance" jdbcType="VARCHAR" property="deviceFaultMaintenance" />
   </resultMap>
+  <select id="selectDeviceFaultListById" resultMap="BaseResultMap">
+    select device_fault_id, d.device_id, d.device_name, device_fault_cause, device_fault_detail, device_fault_date,
+    device_fault_maintenance from device_fault df left join device d on df.device_id = d.device_id where df.device_fault_id = #{id}
+  </select>
+  <select id="selectDeviceFaultListByDeviceName" resultMap="BaseResultMap">
+    select device_fault_id, d.device_id, d.device_name, device_fault_cause, device_fault_detail, device_fault_date,
+    device_fault_maintenance from device_fault df left join device d on df.device_id = d.device_id where d.device_name = #{deviceName}
+  </select>
+  <select id="selectDeviceFaultList" resultMap="BaseResultMap">
+    select device_fault_id, d.device_id, d.device_name, device_fault_cause, device_fault_detail, device_fault_date,
+    device_fault_maintenance from device_fault df left join device d on df.device_id = d.device_id
+  </select>
+  <update id="updateDeviceFaultNote">
+    update device_fault set device_fault_detail = #{deviceFaultDetail} where device_fault_id = #{deviceFaultId}
+  </update>
+
   <sql id="Base_Column_List">
     device_fault_id, device_id, device_fault_cause, device_fault_detail, device_fault_date, 
     device_fault_maintenance
@@ -104,4 +121,10 @@
       device_fault_maintenance = #{deviceFaultMaintenance,jdbcType=VARCHAR}
     where device_fault_id = #{deviceFaultId,jdbcType=VARCHAR}
   </update>
+  <delete id="deleteBatchByPrimaryKey">
+    delete from device_fault where device_fault_id in (
+    <foreach collection="ids" separator="," item="id">
+      #{id}
+    </foreach>)
+  </delete>
 </mapper>

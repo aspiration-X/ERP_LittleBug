@@ -47,7 +47,9 @@
     from employee
     where emp_id = #{empId}
   </select>
-
+  <select id="selectEmployeeList" resultMap="BaseResultMap">
+    select * from employee
+  </select>
   <insert id="insertEmployee" >
     insert into employee (emp_id, emp_name, sex,
       id_code, birthday, join_date,
@@ -60,9 +62,6 @@
       #{employee.major,jdbcType=VARCHAR}, #{employee.graduateSchool,jdbcType=VARCHAR}, #{employee.educationForm,jdbcType=VARCHAR},
       #{departmentId,jdbcType=VARCHAR})
   </insert>
-
-
-
   <sql id="Base_Column_List">
     emp_id, emp_name, sex, id_code, birthday, join_date, status, education, degree, major, 
     graduate_school, education_form, department_id

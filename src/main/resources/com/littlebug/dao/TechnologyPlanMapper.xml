@@ -10,6 +10,7 @@
     <result column="commit_plan" jdbcType="TIMESTAMP" property="commitPlan" />
     <result column="technology_plan_start" jdbcType="TIMESTAMP" property="technologyPlanStart" />
     <result column="technology_plan_end" jdbcType="TIMESTAMP" property="technologyPlanEnd" />
+    <association column="technology_id" property="technologyName" select="com.littlebug.dao.TechnologyMapper.selectTechnologyNameByPrimaryKey"/>
   </resultMap>
   <sql id="Base_Column_List">
     technology_plan_id, technology_id, batch_amount, start_plan, end_plan, commit_plan, 
@@ -128,4 +129,51 @@
       technology_plan_end = #{technologyPlanEnd,jdbcType=TIMESTAMP}
     where technology_plan_id = #{technologyPlanId,jdbcType=VARCHAR}
   </update>
+
+  <select id="findAllTechnologyPlans" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from technology_plan
+  </select>
+
+  <update id="delete_batchTechnologyPlan" >
+    delete from technology_plan
+    where technology_plan_id in (
+    <foreach collection="array" item="technologyPlanIds" separator=",">
+      #{technologyPlanIds}
+    </foreach>
+    )
+  </update>
+
+  <select id="search_technologyPlan_by_technologyPlanId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from technology_plan
+    <if test=" searchValue != null">
+      where technology_plan_id like #{searchValue}
+    </if>
+  </select>
+
+  <select id="search_technologyPlan_by_technologyName" resultType="technologyPlan">
+    select
+    tp.technology_Plan_id as technologyPlanId,
+    tp.technology_id as technologyId,
+    tp.batch_amount as batchAmount,
+    tp.start_plan as startPlan,
+    tp.end_plan as endPlan,
+    tp.technology_plan_start as technologyPlanStart,
+    tp.technology_plan_end as technologyPlanEnd,
+    t.technology_name as technologyName
+    from technology_plan tp
+    inner join technology t
+    on tp.technology_id = t.technology_id
+    <if test=" searchValue != null">
+      where t.technology_name like #{searchValue}
+    </if>
+
+
+
+  </select>
+
+
 </mapper>

@@ -7,13 +7,33 @@ public class DeviceCheck {
 
     private String deviceId;
 
+    private String deviceName;
+
     private String deviceCheckEmpId;
+
+    private String deviceCheckEmp;
 
     private Date deviceCheckDate;
 
     private String deviceCheckResult;
 
     private String deviceCheckFaultId;
+
+    public String getDeviceName() {
+        return deviceName;
+    }
+
+    public void setDeviceName(String deviceName) {
+        this.deviceName = deviceName;
+    }
+
+    public String getDeviceCheckEmp() {
+        return deviceCheckEmp;
+    }
+
+    public void setDeviceCheckEmp(String deviceCheckEmp) {
+        this.deviceCheckEmp = deviceCheckEmp;
+    }
 
     public String getDeviceCheckId() {
         return deviceCheckId;

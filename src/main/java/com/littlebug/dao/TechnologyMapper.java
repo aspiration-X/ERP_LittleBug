@@ -30,7 +30,7 @@ public interface TechnologyMapper {
      * @param ids
      * @return
      */
-    int delete_batch(String[] ids);
+    int delete_batchTechnology(String[] ids);
 
     /**
      * 通过工艺id模糊查询符合要求的所有工艺

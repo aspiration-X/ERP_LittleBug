@@ -79,4 +79,58 @@
       quota = #{quota,jdbcType=INTEGER}
     where process_id = #{processId,jdbcType=VARCHAR}
   </update>
+
+
+  <select id="findAllProcesses" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from process
+  </select>
+
+  <update id="delete_batchProcess" >
+    delete from process
+    where process_id in (
+    <foreach collection="array" item="processIds" separator=",">
+      #{processIds}
+    </foreach>
+    )
+  </update>
+
+  <select id="search_process_by_processId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from process
+    <if test=" searchValue != null">
+      where process_id like #{searchValue}
+    </if>
+  </select>
+
+  <select id="search_process_by_technologyPlanId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from process
+    <if test=" searchValue != null">
+      where technology_plan_id like #{searchValue}
+    </if>
+  </select>
+
+
+
+
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from process;
+  </select>
+
+  <select id="getProcessByProcessId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from process
+    <where>
+      process_id = #{processId}
+    </where>
+  </select>
+
 </mapper>
