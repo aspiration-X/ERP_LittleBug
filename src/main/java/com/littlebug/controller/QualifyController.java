@@ -493,6 +493,12 @@ public class QualifyController {
         return null;
     }
 
+    @RequestMapping("p_count_check/search_pCountCheck_by_pCountCheckId")
+    @ResponseBody
+    public List<ProcessCountCheck> searchPCountCheckByPCountCheckId(String searchValue ,int page, int rows){
+        return processCountCheckService.searchPCountCheckByPCountCheckId(searchValue,page,rows);
+    }
+
 
 
 

@@ -16,4 +16,7 @@ public interface ProcessCountCheckService {
     boolean pCountCheckUpdateAll(ProcessCountCheck processCountCheck);
 
     boolean pCountCheckDeleteBatch(String ids);
+
+    List<ProcessCountCheck> searchPCountCheckByPCountCheckId(String searchValue, int page, int rows);
+
 }
