@@ -27,6 +27,9 @@
     pc.p_count_check_id, pc.process_id, pc.check_item, pc.sample, pc.check_number, pc.unqualify, pc.qualify,
     pc.cdate, pc.measure_data, pc.emp_id, pc.result, pc.note
   </sql>
+  <sql id="LikeSearchValue">
+    like #{searchValue}
+  </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -205,7 +208,18 @@
 
 
 
-
+  <select id="searchPCountCheckByPCountCheckId" resultMap="BaseResultMap">
+    select
+    <include refid="Specify_pc_Colum_List"/>,
+    e.emp_name
+    from process_count_check pc
+    left outer join employee e
+    on pc.emp_id = e.emp_id
+    <where>
+      pc.p_count_check_id <include refid="LikeSearchValue" />
+    </where>
+    limit #{limit} offset #{offset}
+  </select>
 
 
 </mapper>

@@ -165,7 +165,7 @@ public class TaskController {
 
     @ResponseBody
     @RequestMapping("task/get/{taskId}")
-    public Task selectTaskByTaskId(@PathVariable("TaskId") String taskId) {
+    public Task selectTaskByTaskId(@PathVariable("taskId") String taskId) {
         return taskService.selectTaskByTaskId(taskId);
     }
 

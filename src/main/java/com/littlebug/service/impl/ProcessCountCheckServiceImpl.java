@@ -31,4 +31,24 @@ public class ProcessCountCheckServiceImpl implements ProcessCountCheckService {
 
         return 1 == processCountCheckMapper.insert(processCountCheck);
     }
+
+    @Override
+    public boolean pCountCheckUpdateAll(ProcessCountCheck processCountCheck) {
+        return 1 == processCountCheckMapper.updateByPrimaryKey(processCountCheck);
+    }
+
+    @Override
+    public boolean pCountCheckDeleteBatch(String ids) {
+        return 1 == processCountCheckMapper.deleteByPrimaryKey(ids);
+    }
+
+    @Override
+    public List<ProcessCountCheck> searchPCountCheckByPCountCheckId(String searchValue, int page, int rows) {
+        int limit = rows;
+        int offset = (page - 1) * rows ;
+        searchValue = "%" + searchValue + "%";
+        return processCountCheckMapper.searchPCountCheckByPCountCheckId(searchValue,limit,offset);
+    }
+
+
 }

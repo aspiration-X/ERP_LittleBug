@@ -458,7 +458,7 @@ public class QualifyController {
         return "p_count_check_add";
     }
 
-/*    @RequestMapping(value = "p_count_check/inser" ,method = RequestMethod.POST)
+    @RequestMapping(value = "p_count_check/insert" ,method = RequestMethod.POST)
     @ResponseBody
     public UserMessage pCountCheckInser(ProcessCountCheck processCountCheck){
         boolean b = processCountCheckService.pCountCheckInser(processCountCheck);
@@ -466,14 +466,38 @@ public class QualifyController {
             return sendSuccessUserMessage();
         }
         return null;
-    }*/
+    }
 
     @RequestMapping("p_count_check/edit")
     public String pCountCheckEdit(){
         return "p_count_check_edit";
     }
 
+    @RequestMapping("p_count_check/update_all")
+    @ResponseBody
+    public UserMessage pCountCheckUpdateAll(ProcessCountCheck processCountCheck){
+        boolean b = processCountCheckService.pCountCheckUpdateAll(processCountCheck);
+        if (b){
+            return sendSuccessUserMessage();
+        }
+        return null;
+    }
 
+    @RequestMapping("p_count_check/delete_batch")
+    @ResponseBody
+    public UserMessage pCountCheckDeleteBatch(String ids){
+        boolean b = processCountCheckService.pCountCheckDeleteBatch(ids);
+        if (b){
+            return sendSuccessUserMessage();
+        }
+        return null;
+    }
+
+    @RequestMapping("p_count_check/search_pCountCheck_by_pCountCheckId")
+    @ResponseBody
+    public List<ProcessCountCheck> searchPCountCheckByPCountCheckId(String searchValue ,int page, int rows){
+        return processCountCheckService.searchPCountCheckByPCountCheckId(searchValue,page,rows);
+    }
 
 
 

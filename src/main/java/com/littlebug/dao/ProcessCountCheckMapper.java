@@ -22,4 +22,6 @@ public interface ProcessCountCheckMapper {
     List<ProcessCountCheck> selectPagination(int limit, int offset);
 
     List<ProcessCountCheck> pCountcheckList(@Param("limit") int limit,@Param("offset") int offset);
+
+    List<ProcessCountCheck> searchPCountCheckByPCountCheckId(@Param("searchValue") String searchValue, @Param("limit") int limit,@Param("offset") int offset);
 }
