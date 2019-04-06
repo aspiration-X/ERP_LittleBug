@@ -127,6 +127,17 @@ public class TechnologyServiceImpl implements TechnologyService {
     }
 
     /**
+     * 过工艺计划ID获取工艺计划详情
+     * @param technologyPlanId
+     * @return
+     */
+    @Override
+    public TechnologyPlan GetTechnologyPlanByTechnologyPlanId(String technologyPlanId) {
+        TechnologyPlan technologyPlan = technologyPlanMapper.selectByPrimaryKey(technologyPlanId);
+        return technologyPlan;
+    }
+
+    /**
      * 新增工艺计划
      * @return
      */

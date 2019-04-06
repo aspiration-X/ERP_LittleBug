@@ -72,6 +72,13 @@ public interface TechnologyService {
     List<TechnologyPlan> findAllTechnologyPlans();
 
     /**
+     * 过工艺计划ID获取工艺计划详情
+     * @param technologyPlanId
+     * @return
+     */
+    TechnologyPlan GetTechnologyPlanByTechnologyPlanId(String technologyPlanId);
+
+    /**
      * 新增工艺计划
      * @return
      */
@@ -104,4 +111,6 @@ public interface TechnologyService {
      * @return
      */
     List<TechnologyPlan> search_technologyPlan_by_technologyName(String searchValue);
+
+
 }

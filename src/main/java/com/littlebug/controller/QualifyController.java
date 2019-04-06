@@ -314,11 +314,7 @@ public class QualifyController {
         return "f_count_check_list";
     }
 
-    @RequestMapping("process/get/{processId}")
-    @ResponseBody
-    public Process getProcessByProcessId(@PathVariable String processId){
-        return processService.getProcessByProcessId(processId);
-    }
+
 
     @RequestMapping("f_count_check/list")
     @ResponseBody
@@ -380,15 +376,7 @@ public class QualifyController {
 
 /*-------------------------------------------工序计量质检--------------------------------------------------------------*/
 
-    /**
-     * 工序编号
-     * @return
-     */
-    @RequestMapping("process/get_data")
-    @ResponseBody
-    public List<Process> processGetData(){
-        return processService.processGetData();
-    }
+
 
     @RequestMapping("p_measure_check/find")
     public String pMeasure_checkFind(){

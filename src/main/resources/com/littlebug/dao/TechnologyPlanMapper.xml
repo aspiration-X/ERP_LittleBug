@@ -139,8 +139,8 @@
   <update id="delete_batchTechnologyPlan" >
     delete from technology_plan
     where technology_plan_id in (
-    <foreach collection="array" item="ids" separator=",">
-      #{ids}
+    <foreach collection="array" item="technologyPlanIds" separator=",">
+      #{technologyPlanIds}
     </foreach>
     )
   </update>

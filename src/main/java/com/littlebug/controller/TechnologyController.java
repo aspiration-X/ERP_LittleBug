@@ -22,6 +22,8 @@ public class TechnologyController {
    @Autowired
    TechnologyService technologyService;
 
+   //-----------------------------------下面是Technology工艺的内容-------------------------------------------//
+
    /**
     * 跳转到工艺分页显示页面
     * @return
@@ -132,7 +134,7 @@ public class TechnologyController {
 
 
 
-//-----------------------------------下面是TechnologyPlan的内容-------------------------------------------//
+//-----------------------------------下面是TechnologyPlan工艺计划的内容-------------------------------------------//
 
 
 
@@ -153,6 +155,28 @@ public class TechnologyController {
    @ResponseBody
    @RequestMapping("technologyPlan/list")
    public List<TechnologyPlan> findAllTechnologyPlans(){
+      List<TechnologyPlan> technologyPlanList = technologyService.findAllTechnologyPlans();
+      return technologyPlanList;
+   }
+
+   /**
+    * 通过工艺计划ID获取工艺计划详情
+    * @return
+    */
+   @RequestMapping("technologyPlan/get/{technologyPlanId}")
+   @ResponseBody
+   public TechnologyPlan GetTechnologyPlanByTechnologyPlanId(@PathVariable("technologyPlanId")String technologyPlanId){
+      TechnologyPlan technologyPlan = technologyService.GetTechnologyPlanByTechnologyPlanId(technologyPlanId);
+      return technologyPlan;
+   }
+
+   /**
+    * 新增工序时下拉框需要的工艺计划信息集合
+    * @return
+    */
+   @RequestMapping("technologyPlan/get_data")
+   @ResponseBody
+   public List<TechnologyPlan> get_dataTechnologyPlan(){
       List<TechnologyPlan> technologyPlanList = technologyService.findAllTechnologyPlans();
       return technologyPlanList;
    }
