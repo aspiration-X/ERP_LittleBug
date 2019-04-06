@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+
 public interface ProcessMapper {
     int deleteByPrimaryKey(String processId);
 
@@ -17,6 +18,7 @@ public interface ProcessMapper {
     int updateByPrimaryKeySelective(Process record);
 
     int updateByPrimaryKey(Process record);
+
 
     /**
      * 获取所有工序
@@ -44,4 +46,9 @@ public interface ProcessMapper {
      * @return
      */
     List<Process> search_process_by_technologyPlanId(@Param("searchValue")String searchValue);
+
+    List<Process> selectAll();
+
+    Process getProcessByProcessId(String processId);
+
 }

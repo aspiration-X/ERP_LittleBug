@@ -1,5 +1,6 @@
 package com.littlebug.service;
 
+
 import java.util.List;
 import com.littlebug.bean.Process;
 
@@ -48,4 +49,10 @@ public interface ProcessService {
      * @return
      */
     List<Process> search_process_by_technologyPlanId(String searchValue);
+
+
+    List<Process> processGetData();
+
+    Process getProcessByProcessId(String processId);
+
 }

@@ -6,6 +6,7 @@ import com.littlebug.util.DuplicatedCodeUtil;
 import com.littlebug.util.UserMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -38,6 +39,27 @@ public class ProcessController {
     public List<Process> findAllProcesses(){
         List<Process> processList = processService.findAllProcesses();
         return processList;
+    }
+
+    /**
+     * 通过processId页面回显工序process内容
+     * @param processId
+     * @return
+     */
+    @RequestMapping("process/get/{processId}")
+    @ResponseBody
+    public Process getProcessByProcessId(@PathVariable String processId){
+        return processService.getProcessByProcessId(processId);
+    }
+
+    /**
+     * 工序编号
+     * @return
+     */
+    @RequestMapping("process/get_data")
+    @ResponseBody
+    public List<Process> processGetData(){
+        return processService.processGetData();
     }
 
 
@@ -100,7 +122,7 @@ public class ProcessController {
      * @param searchValue
      * @return
      */
-    @RequestMapping("process/search_process_by_technologyName")
+    @RequestMapping("process/search_process_by_technologyPlanId")
     @ResponseBody
     public List<Process> search_process_by_technologyPlanId(String searchValue) {
         List<Process> processList = processService.search_process_by_technologyPlanId(searchValue);

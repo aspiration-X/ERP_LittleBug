@@ -1,6 +1,7 @@
 package com.littlebug.dao;
 
 import com.littlebug.bean.Product;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -20,11 +21,14 @@ public interface ProductMapper {
     List<Product> selectAllProducts();
 
 
-    List<Product> selectProductOnCondition(Product product, int offset, int limit);
+    List<Product> selectProductOnCondition(@Param("product") Product product,
+                                           @Param("offset") int offset,
+                                           @Param("limit") int limit);
 
-    List<Product> selectProductsByIndexs(int offset, int limit);
+    List<Product> selectProductsByIndexs(@Param("offset") int offset,
+                                         @Param("limit") int limit);
 
-    int countProductOnCondition(Product product);
+    int countProductOnCondition(@Param("product") Product product);
 
     int countAllProducts();
 

@@ -103,4 +103,70 @@
       end_date = #{endDate,jdbcType=TIMESTAMP}
     where manufacture_sn = #{manufactureSn,jdbcType=VARCHAR}
   </update>
+
+
+
+
+
+
+    <sql id="selectOnConditionSql">
+        1 = 1
+        <if test="manufacture.manufactureSn != null">
+            and manufacture_sn LIKE CONCAT('%',#{manufacture.manufactureSn,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="manufacture.orderId != null">
+            and order_id like CONCAT('%',#{manufacture.orderId,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="manufacture.technologyId != null">
+            and technology_id like CONCAT('%',#{manufacture.technologyId,jdbcType=VARCHAR},'%')
+        </if>
+    </sql>
+
+
+    <sql id="countOnConditionSql">
+        1 = 1
+        <if test="manufacture.manufactureSn != null">
+            and manufacture_sn LIKE CONCAT('%',#{manufacture.manufactureSn,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="manufacture.orderId != null">
+            and order_id like CONCAT('%',#{manufacture.orderId,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="manufacture.technologyId != null">
+            and technology_id like CONCAT('%',#{manufacture.technologyId,jdbcType=VARCHAR},'%')
+        </if>
+    </sql>
+
+
+    <select id="countAllManufacturesOnCondition" resultType="integer">
+        select count(manufacture_sn) from `manufacture`
+        where
+        <include refid="countOnConditionSql"/>
+    </select>
+
+    <select id="selectManufacturesOnCondition" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from `manufacture`
+        where
+        <include refid="selectOnConditionSql"/>
+        limit #{param2},#{param3}
+    </select>
+
+    <select id="countAllManufactures" resultType="integer">
+        select count(manufacture_sn) from `manufacture`
+    </select>
+
+    <select id="showAllManufacturesByIndexs" resultMap="BaseResultMap">
+        select * from `manufacture`
+        limit #{offset}, #{limit}
+    </select>
+
+    <select id="showAllManufatures" resultMap="BaseResultMap">
+        select * from `manufacture`
+    </select>
+
+
+
+
+
 </mapper>

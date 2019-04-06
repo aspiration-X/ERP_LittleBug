@@ -32,29 +32,25 @@
 
 <div  id="toolbar_pCountCheck" style=" height: 22px; padding: 3px 11px; background: #fafafa;">  
 	
-	<c:forEach items="${sessionScope.sysPermissionList}" var="per" >
-		<c:if test="${per=='pCountCheck:add' }" >
+
 		    <div style="float: left;">  
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="pCountCheck_add()">
 					新增
 				</a>
 		    </div>  
-		</c:if>
-		<c:if test="${per=='pCountCheck:edit' }" >
+
 		    <div style="float: left;">  
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="pCountCheck_edit()">
 					编辑
 				</a>
 		    </div>  
-		</c:if>
-		<c:if test="${per=='pCountCheck:delete' }" >
+
 		    <div style="float: left;">  
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="pCountCheck_delete()">
 					删除
 				</a>
 		    </div>  
-		</c:if>
-	</c:forEach>
+
 	
 	<div class="datagrid-btn-separator"></div>  
 	

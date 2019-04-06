@@ -3,11 +3,12 @@ package com.littlebug;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.littlebug.bean.COrder;
-import com.littlebug.bean.Custom;
-import com.littlebug.bean.Product;
+import com.littlebug.bean.*;
+import com.littlebug.service.ManufactureService;
 import com.littlebug.service.PlanService;
+import com.littlebug.service.TaskService;
 import com.littlebug.util.PageWraper;
+import org.apache.ibatis.annotations.Param;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,6 +26,12 @@ public class DarlingTest {
 
     @Autowired
     PlanService planService;
+
+    @Autowired
+    ManufactureService manufactureService;
+
+    @Autowired
+    TaskService taskService;
 
     @Test
     public void test1() {
@@ -62,6 +69,15 @@ public class DarlingTest {
         List<COrder> orders = planService.selectOrderById(orderName, offset, limit);
         System.out.println(orders.size()+"========================================");
         System.out.println(orders);
+    }
+
+
+    @Test
+    public void showAllOrders(){
+
+        List<COrder> orders = planService.showALLOrders();
+        System.out.println("-------------------------------------------"+orders.size());
+
     }
 
     @Test
@@ -236,6 +252,127 @@ public class DarlingTest {
         List<Product> products = planService.showAllProductsByIndexs(1, 3);
         System.out.println(products);
     }
+
+
+    @Test
+    public void selectAllWorksByIndexs(){
+        int offset = 1;
+        int limit = 3;
+        List<Work> workList = planService.showAllWorksByIndexs(offset, limit);
+        System.out.println(workList);
+        System.out.println("--------------------------------------------------"+workList.size());
+    }
+
+
+    @Test
+    public void selectAllWorksOnCondition(){
+        int offset = 1;
+        int limit = 3;
+        Work work = new Work();
+//        work.setWorkId("004");
+//        List<Work> workList = planService.selectWorksOnCondition(work, offset, limit);
+//        work.setDeviceId("003");
+//        List<Work> workList = planService.selectWorksOnCondition(work, offset, limit);
+//        work.setProcessId("03");
+//        List<Work> workList = planService.selectWorksOnCondition(work, offset, limit);
+        work.setProductId("00004");
+        List<Work> workList = planService.selectWorksOnCondition(work, offset, limit);
+        System.out.println(workList);
+
+
+
+    }
+
+    @Test
+    public void countWorksOnCondition(){
+        int offset = 1;
+        int limit = 3;
+        Work work = new Work();
+        int works = planService.countAllWorksOnCondition(work);
+        System.out.println("-------------------------------------------------" + works);
+
+    }
+
+    @Test
+    public void selectManufacturesOnConditionTest(){
+
+        int offset = 1;
+        int limit = 3;
+        Manufacture manufacture = new Manufacture();
+//        manufacture.setManufactureSn("0002");
+        manufacture.setOrderId("000003");
+        List<Manufacture> manufactures = manufactureService.selectManufacturesOnCondition(manufacture, offset, limit);
+        System.out.println(manufacture);
+
+
+
+    }
+
+
+
+
+    @Test
+    public void addTask(){
+        int offset = 1;
+        int limit = 3;
+
+        Task task = new Task();
+        task.setTaskId("001");
+        boolean b = taskService.addTask(task);
+        Assert.assertTrue(b);
+    }
+
+
+    @Test
+    public void selectTaskOnCondition(){
+        int offset = 1;
+        int limit = 3;
+
+        Task task = new Task();
+        task.setManufactureSn("0007");
+        List<Task> taskList = taskService.selectTasksOnCondition(task, offset, limit);
+        System.out.println("----------------------------------"+taskList.size());
+    }
+
+
+    @Test
+    public void selectAllTasks(){
+
+
+        Task task = new Task();
+        task.setTaskId("001");
+        List<Task> taskList = taskService.showTaskList();
+        System.out.println("-------------------------" + taskList.size());
+
+    }
+
+
+    @Test
+    public void updateTask(){
+
+
+        Task task = new Task();
+        task.setTaskId("001");
+        task.setTaskQuantity(111);
+        boolean b = taskService.updateTask(task);
+        Assert.assertTrue(b);
+
+    }
+
+    @Test
+    public void deleteTask(){
+
+
+        Task task = new Task();
+        task.setTaskId("001");
+        task.setTaskQuantity(111);
+        String[] ids = {"001"};
+        boolean b = taskService.deleteBatchTasks(ids);
+        Assert.assertTrue(b);
+
+    }
+
+
 
 
 

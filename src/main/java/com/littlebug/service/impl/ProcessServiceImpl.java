@@ -1,5 +1,6 @@
 package com.littlebug.service.impl;
 
+
 import com.littlebug.dao.ProcessMapper;
 import com.littlebug.bean.Process;
 import com.littlebug.service.ProcessService;
@@ -11,10 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * created by ZMX
- * Date 2019/4/5 Time 22:50
- */
+
 @Transactional(propagation= Propagation.REQUIRED,isolation= Isolation.DEFAULT)
 @Service("processService")
 public class ProcessServiceImpl implements ProcessService {
@@ -88,10 +86,21 @@ public class ProcessServiceImpl implements ProcessService {
      */
     @Override
     public List<Process> search_process_by_technologyPlanId(String searchValue) {
-        if(null != searchValue) {
+        if (null != searchValue) {
             searchValue = "%" + searchValue + "%";
         }
         List<Process> processes = processMapper.search_process_by_technologyPlanId(searchValue);
         return processes;
+    }
+
+    @Override
+    public List<Process> processGetData() {
+        return processMapper.selectAll();
+    }
+
+    @Override
+    public Process getProcessByProcessId(String processId) {
+        return processMapper.getProcessByProcessId(processId);
+
     }
 }
