@@ -8,9 +8,13 @@ import com.littlebug.util.PageWraper;
 import com.littlebug.util.UserMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -56,7 +60,14 @@ public class DeviceController {
 
     @RequestMapping("/deviceType/insert")
     @ResponseBody
-    public UserMessage addDeviceType3(DeviceType deviceType) {
+    public UserMessage addDeviceType3(@Valid DeviceType deviceType, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            FieldError fieldError = bindingResult.getFieldError();
+            String defaultMessage = fieldError.getDefaultMessage();
+            UserMessage userMessage = new UserMessage();
+            userMessage.setMsg(defaultMessage);
+            return userMessage;
+        }
         boolean b = deviceService.addDeviceType(deviceType);
         return DuplicatedCodeUtil.consequenceMessageReturn(b);
     }
