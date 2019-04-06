@@ -12,4 +12,8 @@ public interface ProcessCountCheckService {
     List<ProcessCountCheck> pCountcheckList(int page, int rows);
 
     boolean pCountCheckInser(ProcessCountCheck processCountCheck);
+
+    boolean pCountCheckUpdateAll(ProcessCountCheck processCountCheck);
+
+    boolean pCountCheckDeleteBatch(String ids);
 }
