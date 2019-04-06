@@ -21,4 +21,6 @@ public interface DepartmentService {
     int update(Department department);
 
     int deleteDepartment(String[] ids);
+
+    Department getDepartmentById(String id);
 }

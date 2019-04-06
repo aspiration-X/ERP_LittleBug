@@ -131,13 +131,31 @@ public class EmployeeController {
     }
 
 
-    //根据部门编号查询
+    //根据员工编号查询
     @RequestMapping("/search_employee_by_employeeId")
     public @ResponseBody
     List<Employee> queryByEmployeeId(String searchValue) {
         List<Employee> employees = employeeService.queryByEmployeeId(searchValue);
         return employees;
     }
+
+
+    //根据员工名称查询
+    @RequestMapping("/search_employee_by_employeeName")
+    public @ResponseBody
+    List<Employee> queryByEmployeeName(String searchValue) {
+        List<Employee> employees = employeeService.queryByEmployeeName(searchValue);
+        return employees;
+    }
+
+    //根据部门名称查询
+    @RequestMapping("/search_employee_by_departmentName")
+    public @ResponseBody
+    List<Employee> queryByDepartmentName(String searchValue) {
+        List<Employee> employees = employeeService.queryByDepartmentName(searchValue);
+        return employees;
+    }
+
 
 
 

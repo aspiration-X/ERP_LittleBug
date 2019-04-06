@@ -20,5 +20,9 @@ public interface EmployeeService {
 
     List<Employee>  queryByEmployeeId(String empId);
 
+    List<Employee>  queryByEmployeeName(String empName);
+
+    List<Employee>  queryByDepartmentName(String departmentName);
+
 
 }

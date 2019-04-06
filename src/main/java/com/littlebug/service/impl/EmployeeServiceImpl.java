@@ -44,5 +44,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeMapper.queryByEmployeeId(empId);
     }
 
+    @Override
+    public List<Employee> queryByEmployeeName(String empName) {
+        return employeeMapper.queryByEmployeeName(empName);
+    }
+
+    @Override
+    public List<Employee> queryByDepartmentName(String departmentName) {
+        return employeeMapper.queryByDepartmentName(departmentName);
+    }
+
 
 }

@@ -30,6 +30,12 @@
     where emp_name like "%"#{empName}"%"
   </select>
 
+  <select id="queryByDepartmentName" resultMap="BaseResultMap">
+    select *
+    from employee, (select * from department where department_name = like "%"#{departmentName}"%") as department1
+    where employee.department_id = department1.department_id
+  </select>
+
   <select id="queryByEmployeeId" resultMap="BaseResultMap">
     select *
     from employee
