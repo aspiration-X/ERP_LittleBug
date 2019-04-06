@@ -3,6 +3,7 @@ package com.littlebug.controller;
 import com.github.pagehelper.PageInfo;
 import com.littlebug.bean.*;
 import com.littlebug.service.DeviceService;
+import com.littlebug.util.DuplicatedCodeUtil;
 import com.littlebug.util.PageWraper;
 import com.littlebug.util.UserMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,12 +58,7 @@ public class DeviceController {
     @ResponseBody
     public UserMessage addDeviceType3(DeviceType deviceType) {
         boolean b = deviceService.addDeviceType(deviceType);
-        UserMessage userMessage = new UserMessage();
-        if (b) {
-            userMessage.setMsg("ok");
-            userMessage.setStatus(200);
-        }
-        return userMessage;
+        return DuplicatedCodeUtil.consequenceMessageReturn(b);
     }
 
     @RequestMapping("deviceType/edit")
@@ -74,24 +70,14 @@ public class DeviceController {
     @ResponseBody
     public UserMessage deviceTypeEdit2(DeviceType deviceType, String deviceTypeId) {
         boolean b = deviceService.editDeviceType(deviceType, deviceTypeId);
-        UserMessage userMessage = new UserMessage();
-        if (b) {
-            userMessage.setMsg("ok");
-            userMessage.setStatus(200);
-        }
-        return userMessage;
+        return DuplicatedCodeUtil.consequenceMessageReturn(b);
     }
 
     @RequestMapping("deviceType/update_all")
     @ResponseBody
     public UserMessage deviceTypeEdit3(DeviceType deviceType, String deviceTypeId) {
         boolean b = deviceService.editDeviceType(deviceType, deviceTypeId);
-        UserMessage userMessage = new UserMessage();
-        if (b) {
-            userMessage.setMsg("ok");
-            userMessage.setStatus(200);
-        }
-        return userMessage;
+        return DuplicatedCodeUtil.consequenceMessageReturn(b);
     }
 
     @RequestMapping("deviceType/delete_batch")
@@ -99,12 +85,7 @@ public class DeviceController {
     public UserMessage deviceTypeDelete(String ids) {
         String[] strings = ids.split(",");
         boolean b = deviceService.deleteDeviceTypeByIds(strings);
-        UserMessage userMessage = new UserMessage();
-        if (b) {
-            userMessage.setMsg("ok");
-            userMessage.setStatus(200);
-        }
-        return userMessage;
+        return DuplicatedCodeUtil.consequenceMessageReturn(b);
     }
 
     @RequestMapping("deviceType/search_deviceType_by_deviceTypeId")
@@ -149,12 +130,7 @@ public class DeviceController {
     @ResponseBody
     public UserMessage addDevice2(Device device) {
         boolean b = deviceService.addDevice(device);
-        UserMessage userMessage = new UserMessage();
-        if (b) {
-            userMessage.setMsg("ok");
-            userMessage.setStatus(200);
-        }
-        return userMessage;
+        return DuplicatedCodeUtil.consequenceMessageReturn(b);
     }
 
     @RequestMapping("deviceList/edit")
@@ -166,12 +142,7 @@ public class DeviceController {
     @ResponseBody
     public UserMessage editDevice2(Device device) {
         boolean b = deviceService.editDeviceById(device);
-        UserMessage userMessage = new UserMessage();
-        if (b) {
-            userMessage.setMsg("ok");
-            userMessage.setStatus(200);
-        }
-        return userMessage;
+        return DuplicatedCodeUtil.consequenceMessageReturn(b);
     }
 
     @RequestMapping("deviceList/delete_batch")
@@ -179,12 +150,7 @@ public class DeviceController {
     public UserMessage deleteDeviceByIds(String ids) {
         String[] strings = ids.split(",");
         boolean b = deviceService.deleteDeviceByIds(strings);
-        UserMessage userMessage = new UserMessage();
-        if (b) {
-            userMessage.setMsg("ok");
-            userMessage.setStatus(200);
-        }
-        return userMessage;
+        return DuplicatedCodeUtil.consequenceMessageReturn(b);
     }
 
     @RequestMapping("deviceList/search_device_by_deviceId")
@@ -212,12 +178,7 @@ public class DeviceController {
     @ResponseBody
     public UserMessage updateDeviceNote(String deviceId, String note) {
         boolean b = deviceService.updateNoteByDeviceId(deviceId, note);
-        UserMessage userMessage = new UserMessage();
-        if (b) {
-            userMessage.setMsg("ok");
-            userMessage.setStatus(200);
-        }
-        return userMessage;
+        return DuplicatedCodeUtil.consequenceMessageReturn(b);
     }
 
     @RequestMapping("device/deviceFault")
@@ -243,24 +204,14 @@ public class DeviceController {
     @ResponseBody
     public UserMessage updateDeviceFaultNote(String deviceFaultId, String deviceFaultDetail) {
         boolean b = deviceService.updateDeviceFaultNote(deviceFaultId, deviceFaultDetail);
-        UserMessage userMessage = new UserMessage();
-        if (b) {
-            userMessage.setMsg("ok");
-            userMessage.setStatus(200);
-        }
-        return userMessage;
+        return DuplicatedCodeUtil.consequenceMessageReturn(b);
     }
 
     @RequestMapping("deviceList/update_all")
     @ResponseBody
     public UserMessage updateDeviceByDeviceId(Device device) {
         boolean b = deviceService.editDeviceById(device);
-        UserMessage userMessage = new UserMessage();
-        if (b) {
-            userMessage.setMsg("ok");
-            userMessage.setStatus(200);
-        }
-        return userMessage;
+        return DuplicatedCodeUtil.consequenceMessageReturn(b);
     }
 
     @RequestMapping("deviceFault/add")
@@ -279,12 +230,7 @@ public class DeviceController {
     @ResponseBody
     public UserMessage addDeviceFault2(DeviceFault deviceFault) {
         boolean b = deviceService.addDeviceFault(deviceFault);
-        UserMessage userMessage = new UserMessage();
-        if (b) {
-            userMessage.setMsg("ok");
-            userMessage.setStatus(200);
-        }
-        return userMessage;
+        return DuplicatedCodeUtil.consequenceMessageReturn(b);
     }
 
     @RequestMapping("deviceFault/edit")
@@ -296,12 +242,7 @@ public class DeviceController {
     @ResponseBody
     public UserMessage editDeviceFault2(DeviceFault deviceFault) {
         boolean b = deviceService.editDeviceFault(deviceFault);
-        UserMessage userMessage = new UserMessage();
-        if (b) {
-            userMessage.setMsg("ok");
-            userMessage.setStatus(200);
-        }
-        return userMessage;
+        return DuplicatedCodeUtil.consequenceMessageReturn(b);
     }
 
     @RequestMapping("deviceFault/delete_batch")
@@ -309,12 +250,7 @@ public class DeviceController {
     public UserMessage deleteDeviceFaultList(String ids) {
         String[] strings = ids.split(",");
         boolean b = deviceService.deleteDeviceFaultList(strings);
-        UserMessage userMessage = new UserMessage();
-        if (b) {
-            userMessage.setMsg("ok");
-            userMessage.setStatus(200);
-        }
-        return userMessage;
+        return DuplicatedCodeUtil.consequenceMessageReturn(b);
     }
 
     @RequestMapping("deviceFault/search_deviceFault_by_deviceFaultId")
@@ -352,12 +288,7 @@ public class DeviceController {
     @ResponseBody
     public UserMessage addDeviceCheck2(DeviceCheck deviceCheck) {
         boolean b = deviceService.addDeviceCheck(deviceCheck);
-        UserMessage userMessage = new UserMessage();
-        if (b) {
-            userMessage.setMsg("ok");
-            userMessage.setStatus(200);
-        }
-        return userMessage;
+        return DuplicatedCodeUtil.consequenceMessageReturn(b);
     }
 
     @RequestMapping("deviceCheck/edit")
@@ -369,12 +300,7 @@ public class DeviceController {
     @ResponseBody
     public UserMessage editDeviceCheck2(DeviceCheck deviceCheck) {
         boolean b = deviceService.editDeviceCheckById(deviceCheck);
-        UserMessage userMessage = new UserMessage();
-        if (b) {
-            userMessage.setMsg("ok");
-            userMessage.setStatus(200);
-        }
-        return userMessage;
+        return DuplicatedCodeUtil.consequenceMessageReturn(b);
     }
 
     @RequestMapping("deviceCheck/delete_batch")
@@ -382,12 +308,7 @@ public class DeviceController {
     public UserMessage deleteDeviceCheckList(String ids) {
         String[] strings = ids.split(",");
         boolean b = deviceService.deleteDeviceCheckList(strings);
-        UserMessage userMessage = new UserMessage();
-        if (b) {
-            userMessage.setMsg("ok");
-            userMessage.setStatus(200);
-        }
-        return userMessage;
+        return DuplicatedCodeUtil.consequenceMessageReturn(b);
     }
 
     @RequestMapping("deviceCheck/search_deviceCheck_by_deviceCheckId")
@@ -408,12 +329,7 @@ public class DeviceController {
     @ResponseBody
     public UserMessage updateDeviceCheck(DeviceCheck deviceCheck) {
         boolean b = deviceService.editDeviceCheckById(deviceCheck);
-        UserMessage userMessage = new UserMessage();
-        if (b) {
-            userMessage.setMsg("ok");
-            userMessage.setStatus(200);
-        }
-        return userMessage;
+        return DuplicatedCodeUtil.consequenceMessageReturn(b);
     }
 
     @RequestMapping("device/deviceMaintain")
@@ -437,12 +353,7 @@ public class DeviceController {
     @ResponseBody
     public UserMessage addDeviceMaintain2(DeviceMaintain deviceMaintain) {
         boolean b = deviceService.addDeviceMaintain(deviceMaintain);
-        UserMessage userMessage = new UserMessage();
-        if (b) {
-            userMessage.setMsg("ok");
-            userMessage.setStatus(200);
-        }
-        return userMessage;
+        return DuplicatedCodeUtil.consequenceMessageReturn(b);
     }
 
     @RequestMapping("deviceMaintain/edit")
@@ -454,12 +365,7 @@ public class DeviceController {
     @ResponseBody
     public UserMessage editDeviceMaintain(DeviceMaintain deviceMaintain) {
         boolean b = deviceService.editDeviceMaintain(deviceMaintain);
-        UserMessage userMessage = new UserMessage();
-        if (b) {
-            userMessage.setMsg("ok");
-            userMessage.setStatus(200);
-        }
-        return userMessage;
+        return DuplicatedCodeUtil.consequenceMessageReturn(b);
     }
 
     @RequestMapping("deviceMaintain/delete_batch")
@@ -467,24 +373,14 @@ public class DeviceController {
     public UserMessage deletetDeviceMaintainByIds(String ids) {
         String[] strings = ids.split(",");
         boolean b = deviceService.deleteDeviceMaintainByIds(strings);
-        UserMessage userMessage = new UserMessage();
-        if (b) {
-            userMessage.setMsg("ok");
-            userMessage.setStatus(200);
-        }
-        return userMessage;
+        return DuplicatedCodeUtil.consequenceMessageReturn(b);
     }
 
     @RequestMapping("deviceFault/update_all")
     @ResponseBody
     public UserMessage updateDeviceFault(DeviceFault deviceFault) {
         boolean b = deviceService.updateDeviceFault(deviceFault);
-        UserMessage userMessage = new UserMessage();
-        if (b) {
-            userMessage.setMsg("ok");
-            userMessage.setStatus(200);
-        }
-        return userMessage;
+        return DuplicatedCodeUtil.consequenceMessageReturn(b);
     }
 
     @RequestMapping("deviceMaintain/search_deviceMaintain_by_deviceMaintainId")
@@ -505,12 +401,7 @@ public class DeviceController {
     @ResponseBody
     public UserMessage updateDeviceMaintain(DeviceMaintain deviceMaintain) {
         boolean b = deviceService.updateDeviceMaintain(deviceMaintain);
-        UserMessage userMessage = new UserMessage();
-        if (b) {
-            userMessage.setMsg("ok");
-            userMessage.setStatus(200);
-        }
-        return userMessage;
+        return DuplicatedCodeUtil.consequenceMessageReturn(b);
     }
 
     @RequestMapping("deviceFault/get/{deviceFaultId}")
