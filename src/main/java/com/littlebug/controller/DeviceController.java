@@ -1,7 +1,9 @@
 package com.littlebug.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.littlebug.bean.*;
 import com.littlebug.service.DeviceService;
+import com.littlebug.util.PageWraper;
 import com.littlebug.util.UserMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,15 +28,16 @@ public class DeviceController {
 
     @RequestMapping("deviceType/list")
     @ResponseBody
-    public List<DeviceType> deviceType2() {
-        List<DeviceType> deviceType = deviceService.findAllDeviceTypes();
-        return deviceType;
+    public PageWraper<DeviceType> deviceType2(int page, int rows) {
+        PageInfo<DeviceType> pageInfo = deviceService.findAllDeviceTypes(page, rows);
+        PageWraper<DeviceType> deviceTypePageWraper = new PageWraper<>((int) (pageInfo.getTotal()), pageInfo.getList());
+        return deviceTypePageWraper;
     }
 
     @RequestMapping("deviceType/get_data")
     @ResponseBody
     public List<DeviceType> deviceType3() {
-        List<DeviceType> deviceType = deviceService.findAllDeviceTypes();
+        List<DeviceType> deviceType = deviceService.findAllDeviceTypeList();
         return deviceType;
     }
 

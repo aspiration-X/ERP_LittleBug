@@ -14,6 +14,13 @@ public class PageWraper<T> {
 
     private List<T> rows;
 
+    public PageWraper() {
+    }
+
+    public PageWraper(int total, List<T> rows) {
+        this.total = total;
+        this.rows = rows;
+    }
 
     public int getTotal() {
         return total;

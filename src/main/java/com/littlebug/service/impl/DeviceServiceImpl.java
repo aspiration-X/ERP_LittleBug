@@ -1,5 +1,7 @@
 package com.littlebug.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.littlebug.bean.*;
 import com.littlebug.dao.*;
 import com.littlebug.service.DeviceService;
@@ -30,7 +32,14 @@ public class DeviceServiceImpl implements DeviceService {
     DeviceMaintainMapper deviceMaintainMapper;
 
     @Override
-    public List<DeviceType> findAllDeviceTypes() {
+    public PageInfo<DeviceType> findAllDeviceTypes(int page, int rows) {
+        PageHelper.startPage(page, rows);
+        List<DeviceType> deviceTypeList = deviceTypeMapper.selectAllDeviceTypes();
+        return new PageInfo<>(deviceTypeList);
+    }
+
+    @Override
+    public List<DeviceType> findAllDeviceTypeList() {
         List<DeviceType> deviceTypeList = deviceTypeMapper.selectAllDeviceTypes();
         return deviceTypeList;
     }
