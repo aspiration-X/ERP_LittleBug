@@ -139,7 +139,7 @@
 	            <td>工艺:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="technologyId" data-options="valueField:'technologyId',
-	            		textField:'technologyName',url:'product/get_data', editable:false"/>
+	            		textField:'technologyName',url:'technology/get_data', editable:false"/>
     			</td>  
 	        </tr>
 	        <tr>
