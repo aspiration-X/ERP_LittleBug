@@ -15,7 +15,7 @@ public class Manufacture {
 
     private Date endDate;
 
-    private COrder order;
+    private COrder cOrder;
 
     private Technology technology;
 
@@ -67,13 +67,6 @@ public class Manufacture {
         this.endDate = endDate;
     }
 
-    public COrder getOrder() {
-        return order;
-    }
-
-    public void setOrder(COrder order) {
-        this.order = order;
-    }
 
     public Technology getTechnology() {
         return technology;
@@ -81,6 +74,15 @@ public class Manufacture {
 
     public void setTechnology(Technology technology) {
         this.technology = technology;
+    }
+
+
+    public COrder getcOrder() {
+        return cOrder;
+    }
+
+    public void setcOrder(COrder cOrder) {
+        this.cOrder = cOrder;
     }
 
     @Override
@@ -92,7 +94,7 @@ public class Manufacture {
                 ", launchQuantity=" + launchQuantity +
                 ", beginDate=" + beginDate +
                 ", endDate=" + endDate +
-                ", order=" + order +
+                ", cOrder=" + cOrder +
                 ", technology=" + technology +
                 '}';
     }

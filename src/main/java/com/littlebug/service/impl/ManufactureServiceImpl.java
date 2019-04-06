@@ -81,7 +81,7 @@ public class ManufactureServiceImpl implements ManufactureService {
         for (Manufacture m:manufactureList
         ) {
             m.setTechnology(technologyMapper.selectByPrimaryKey(m.getTechnologyId()));
-            m.setOrder(orderMapper.selectByPrimaryKey(m.getOrderId()));
+            m.setcOrder(orderMapper.selectByPrimaryKey(m.getOrderId()));
         }
         return manufactureList;
     }
@@ -101,7 +101,14 @@ public class ManufactureServiceImpl implements ManufactureService {
         if (rows >= 1){
             limit = offset + rows;
         }
-        return manufactureMapper.showAllManufacturesByIndexs(offset, limit);
+        List<Manufacture> manufactureList = manufactureMapper.showAllManufacturesByIndexs(offset, limit);
+        for (Manufacture m:manufactureList
+        ) {
+            m.setTechnology(technologyMapper.selectByPrimaryKey(m.getTechnologyId()));
+            m.setcOrder(orderMapper.selectByPrimaryKey(m.getOrderId()));
+        }
+        return manufactureList;
+
     }
 
     @Override
