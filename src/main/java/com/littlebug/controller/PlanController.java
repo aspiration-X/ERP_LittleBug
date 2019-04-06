@@ -191,8 +191,17 @@ public class PlanController {
         return orderList;
     }
 
+
+//    @ResponseBody
+//    @RequestMapping("order/get/{orderId}")
+//    public COrder getOrder(@PathVariable("orderId") String orderId) {
+//        COrder order = planService.selectOrderByOrderId(orderId);
+//        return order;
+//    }
+
+
     @ResponseBody
-    @RequestMapping("work/get/{orderId}")
+    @RequestMapping("order/get/{orderId}")
     public COrder selectOrderByOrderId(@PathVariable("orderId") String orderId) {
         return planService.selectOrderByOrderId(orderId);
     }

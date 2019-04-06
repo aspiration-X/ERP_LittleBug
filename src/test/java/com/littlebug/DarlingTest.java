@@ -42,17 +42,17 @@ public class DarlingTest {
 
 
     @Test
-    public void test2(){
+    public void test2() {
         int offset = 0;
         int limit = 3;
         String customName = "京东";
         List<COrder> orders = planService.selectOrderByCustom(customName, offset, limit);
         System.out.println(orders);
-        System.out.println("orderSize : ================================="+orders.size());
+        System.out.println("orderSize : =================================" + orders.size());
     }
 
     @Test
-    public void test3(){
+    public void test3() {
         int offset = 0;
         int limit = 3;
         String productName = "投影机";
@@ -62,26 +62,26 @@ public class DarlingTest {
     }
 
     @Test
-    public void test4(){
+    public void test4() {
         int offset = 0;
         int limit = 3;
         String orderName = "000009";
         List<COrder> orders = planService.selectOrderById(orderName, offset, limit);
-        System.out.println(orders.size()+"========================================");
+        System.out.println(orders.size() + "========================================");
         System.out.println(orders);
     }
 
 
     @Test
-    public void showAllOrders(){
+    public void showAllOrders() {
 
         List<COrder> orders = planService.showALLOrders();
-        System.out.println("-------------------------------------------"+orders.size());
+        System.out.println("-------------------------------------------" + orders.size());
 
     }
 
     @Test
-    public void customTest(){
+    public void customTest() {
         int offset = 0;
         int limit = 3;
         List<Custom> customs = planService.showAllCustomsByIndexs(offset, limit);
@@ -91,7 +91,7 @@ public class DarlingTest {
 
 
     @Test
-    public void pageHelperTest(){
+    public void pageHelperTest() {
 
         PageHelper.startPage(1, 3);
         List<Custom> customList = planService.showCustomList();
@@ -101,9 +101,9 @@ public class DarlingTest {
 
 
     @Test
-    public void customTest2(){
+    public void customTest2() {
 
-        int page= 1;
+        int page = 1;
         int rows = 10;
         PageWraper<Custom> pageWraper = new PageWraper<>();
         List<Custom> customList = planService.showAllCustomsByIndexs(page, rows);
@@ -115,7 +115,7 @@ public class DarlingTest {
     }
 
     @Test
-    public void addCustomTest(){
+    public void addCustomTest() {
 
         Custom custom = new Custom();
         custom.setCustomId("1111");
@@ -126,7 +126,7 @@ public class DarlingTest {
     }
 
     @Test
-    public void deleteBatchCustomByIdsTest(){
+    public void deleteBatchCustomByIdsTest() {
 
         Custom custom = new Custom();
         custom.setCustomId("1111");
@@ -138,7 +138,7 @@ public class DarlingTest {
 
 
     @Test
-    public void updateCustomTest(){
+    public void updateCustomTest() {
 
 
         Custom custom = new Custom();
@@ -151,30 +151,27 @@ public class DarlingTest {
     }
 
     @Test
-    public void selectCustomOnIdLikeTest(){
+    public void selectCustomOnIdLikeTest() {
         Custom custom = new Custom();
         custom.setCustomId("1111");
         custom.setNote("kjl;ddddddddddddddddddddd'");
         List<Custom> customs = planService.selectCustomOnCondition(custom, 0, 3);
-        System.out.println(custom+"-----------------------------------------------------------------------------");
+        System.out.println(custom + "-----------------------------------------------------------------------------");
     }
 
     @Test
-    public void selectCustomOnNameLikeTest(){
+    public void selectCustomOnNameLikeTest() {
         Custom custom = new Custom();
         custom.setCustomName("新浪");
 //        custom.setCustomId("1111");
         custom.setNote("kjl;ddddddddddddddddddddd'");
         List<Custom> customs = planService.selectCustomOnCondition(custom, 0, 3);
-        System.out.println(custom+"-----------------------------------------------------------------------------");
+        System.out.println(custom + "-----------------------------------------------------------------------------");
     }
 
 
-
-
-
     @Test
-    public void addProductTest(){
+    public void addProductTest() {
         Product product = new Product();
         product.setProductId("22222");
         product.setProductName("product_name");
@@ -185,15 +182,15 @@ public class DarlingTest {
     }
 
     @Test
-    public void deleteProduct(){
+    public void deleteProduct() {
 
-        String[] ids = {"11111","22222"};
+        String[] ids = {"11111", "22222"};
         boolean deleteBatchProducts = planService.deleteBatchProducts(ids);
         Assert.assertTrue(deleteBatchProducts);
     }
 
     @Test
-    public void updateProduct(){
+    public void updateProduct() {
 
         Product product = new Product();
         product.setProductId("22222");
@@ -205,7 +202,7 @@ public class DarlingTest {
     }
 
     @Test
-    public void selectAllProductsByIndexTest(){
+    public void selectAllProductsByIndexTest() {
 
         int offset = 1;
         int limit = 3;
@@ -218,7 +215,7 @@ public class DarlingTest {
 
 
     @Test
-    public void selectAllProductsOnNameLike(){
+    public void selectAllProductsOnNameLike() {
         int offset = 1;
         int limit = 3;
         Product product = new Product();
@@ -234,7 +231,7 @@ public class DarlingTest {
     }
 
     @Test
-    public void selectAllProductsOnIdLike(){
+    public void selectAllProductsOnIdLike() {
         int offset = 1;
         int limit = 3;
         Product product = new Product();
@@ -246,7 +243,7 @@ public class DarlingTest {
     }
 
     @Test
-    public void showAllProducts(){
+    public void showAllProducts() {
 
 
         List<Product> products = planService.showAllProductsByIndexs(1, 3);
@@ -255,17 +252,17 @@ public class DarlingTest {
 
 
     @Test
-    public void selectAllWorksByIndexs(){
+    public void selectAllWorksByIndexs() {
         int offset = 1;
         int limit = 3;
         List<Work> workList = planService.showAllWorksByIndexs(offset, limit);
         System.out.println(workList);
-        System.out.println("--------------------------------------------------"+workList.size());
+        System.out.println("--------------------------------------------------" + workList.size());
     }
 
 
     @Test
-    public void selectAllWorksOnCondition(){
+    public void selectAllWorksOnCondition() {
         int offset = 1;
         int limit = 3;
         Work work = new Work();
@@ -280,11 +277,10 @@ public class DarlingTest {
         System.out.println(workList);
 
 
-
     }
 
     @Test
-    public void countWorksOnCondition(){
+    public void countWorksOnCondition() {
         int offset = 1;
         int limit = 3;
         Work work = new Work();
@@ -294,7 +290,7 @@ public class DarlingTest {
     }
 
     @Test
-    public void selectManufacturesOnConditionTest(){
+    public void selectManufacturesOnConditionTest() {
 
         int offset = 1;
         int limit = 3;
@@ -305,14 +301,20 @@ public class DarlingTest {
         System.out.println(manufacture);
 
 
-
     }
 
 
+    @Test
+    public void workListTest() {
 
+        List<Manufacture> manufactureList = manufactureService.showManufactureList();
+        System.out.println("---------------------------------------------------------------------");
+        System.out.println(manufactureList);
+
+    }
 
     @Test
-    public void addTask(){
+    public void addTask() {
         int offset = 1;
         int limit = 3;
 
@@ -324,19 +326,19 @@ public class DarlingTest {
 
 
     @Test
-    public void selectTaskOnCondition(){
+    public void selectTaskOnCondition() {
         int offset = 1;
         int limit = 3;
 
         Task task = new Task();
         task.setManufactureSn("0007");
         List<Task> taskList = taskService.selectTasksOnCondition(task, offset, limit);
-        System.out.println("----------------------------------"+taskList.size());
+        System.out.println("----------------------------------" + taskList.size());
     }
 
 
     @Test
-    public void selectAllTasks(){
+    public void selectAllTasks() {
 
 
         Task task = new Task();
@@ -348,7 +350,7 @@ public class DarlingTest {
 
 
     @Test
-    public void updateTask(){
+    public void updateTask() {
 
 
         Task task = new Task();
@@ -360,7 +362,7 @@ public class DarlingTest {
     }
 
     @Test
-    public void deleteTask(){
+    public void deleteTask() {
 
 
         Task task = new Task();
@@ -371,10 +373,6 @@ public class DarlingTest {
         Assert.assertTrue(b);
 
     }
-
-
-
-
 
 
 }

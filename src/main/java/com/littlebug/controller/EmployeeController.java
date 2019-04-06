@@ -109,14 +109,6 @@ public class EmployeeController {
         return map;
     }
 
-
-    @RequestMapping("/get_data")
-    @ResponseBody
-    public List<Employee> getEmployeetData() {
-        List<Employee> employees = employeeService.findAllEmployee();
-        return employees;
-    }
-
     //删除
     @RequestMapping("/delete_judge")
     @ResponseBody
