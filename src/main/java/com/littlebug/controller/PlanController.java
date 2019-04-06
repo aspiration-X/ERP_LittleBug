@@ -34,6 +34,12 @@ public class PlanController {
 
 
     /*注意： 其他以find 作为路径结尾的请求可能也会被此方法拦截*/
+
+    /**
+     * 通用匹配前往订单模块各子模块find页面的请求
+     * @param application
+     * @return
+     */
     @RequestMapping("/{application}/find")
     public String goToFindPage(@PathVariable("application") String application){
         String resultPage = "";
@@ -62,6 +68,11 @@ public class PlanController {
         return resultPage;
     }
 
+    /**
+     * 通用匹配前往订单模块各子模块edit页面的请求
+     * @param application
+     * @return
+     */
     @RequestMapping("/{application}/edit")
     public String goToEditPage(@PathVariable("application") String application){
         String resultPage = "";
@@ -92,7 +103,11 @@ public class PlanController {
     }
 
 
-
+    /**
+     * 通用匹配前往订单模块各子模块add页面的请求
+     * @param application
+     * @return
+     */
     @RequestMapping("/{application}/add")
     public String goToAddPage(@PathVariable("application") String application){
         String resultPage = "";
@@ -169,6 +184,20 @@ public class PlanController {
         return userMessage;
     }
 
+    @ResponseBody
+    @RequestMapping("order/get_data")
+    public List<COrder> getOrderData(String id) {
+        List<COrder> orderList = planService.showALLOrders();
+        return orderList;
+    }
+
+    @ResponseBody
+    @RequestMapping("work/get/{orderId}")
+    public COrder selectOrderByOrderId(@PathVariable("orderId") String orderId) {
+        return planService.selectOrderByOrderId(orderId);
+    }
+
+
 
     @RequestMapping("order/edit")
     public String goEditOrderPage() {
@@ -239,6 +268,119 @@ public class PlanController {
 
 
     /*----------------------------------------------------- product ---------------------------------------------*/
+
+
+
+    @RequestMapping("product/list")
+    @ResponseBody
+    public PageWraper<Product> findProductByPage(@RequestParam("page") int page,
+                                               @RequestParam("rows") int rows) {
+        PageWraper<Product> pageWraper = new PageWraper<>();
+        List<Product> productList = planService.showAllProductsByIndexs(page, rows);
+        int productAmount = planService.countAllProducts();
+        pageWraper.setRows(productList);
+        pageWraper.setTotal(productAmount);
+        return pageWraper;
+    }
+
+
+    @RequestMapping("product/insert")
+    @ResponseBody
+    public UserMessage addProduct(Product product) {
+        boolean addProduct = planService.addProduct(product);
+        UserMessage userMessage = new UserMessage();
+        if (addProduct){
+            userMessage.setStatus(200);
+            userMessage.setMsg("OK");
+        }else {
+            userMessage.setStatus(500);
+            userMessage.setMsg("FALSE");
+        }
+        return userMessage;
+    }
+
+
+
+    @RequestMapping(value = "product/delete_batch",
+            method=RequestMethod.POST,
+            consumes="application/x-www-form-urlencoded")
+    @ResponseBody
+    public UserMessage deleteBatchProduct(String[] ids) {
+        boolean deleteBatchProducts = planService.deleteBatchProducts(ids);
+        UserMessage userMessage = new UserMessage();
+        if (deleteBatchProducts){
+            userMessage.setStatus(200);
+            userMessage.setMsg("OK");
+        }else {
+            userMessage.setStatus(500);
+            userMessage.setMsg("FALSE");
+        }
+        return userMessage;
+    }
+
+
+    @RequestMapping("product/update_all")
+    @ResponseBody
+    public UserMessage updateProduct(Product product) {
+
+
+        boolean addProduct = planService.updateProduct(product);
+        UserMessage userMessage = new UserMessage();
+        if (addProduct){
+            userMessage.setStatus(200);
+            userMessage.setMsg("OK");
+        }else {
+            userMessage.setStatus(500);
+            userMessage.setMsg("FALSE");
+        }
+        return userMessage;
+
+    }
+
+
+
+    @RequestMapping("product/search_product_by_productId")
+    @ResponseBody
+    public PageWraper<Product> searchProductByProductName(Product product,
+                                                       @RequestParam("page") int page,
+                                                       @RequestParam("rows") int rows) {
+        PageWraper<Product> pageWraper = new PageWraper<>();
+        List<Product> productList = planService.selectProductsOnCondition(product, page, rows);
+        int productsAmount = planService.countAllProductsOnCondition(product);
+        pageWraper.setRows(productList);
+        pageWraper.setTotal(productsAmount);
+        return pageWraper;
+
+    }
+
+    @RequestMapping("product/search_product_by_productName")
+    @ResponseBody
+    public PageWraper<Product> searchProductByProductId(Product product,
+                                                     @RequestParam("page") int page,
+                                                     @RequestParam("rows") int rows) {
+        PageWraper<Product> pageWraper = new PageWraper<>();
+        List<Product> productList = planService.selectProductsOnCondition(product, page, rows);
+        int productsAmount = planService.countAllProductsOnCondition(product);
+        pageWraper.setRows(productList);
+        pageWraper.setTotal(productsAmount);
+        return pageWraper;
+
+    }
+
+    @RequestMapping("product/search_product_by_productType")
+    @ResponseBody
+    public PageWraper<Product> searchProductByProductType(Product product,
+                                                         @RequestParam("page") int page,
+                                                         @RequestParam("rows") int rows) {
+        PageWraper<Product> pageWraper = new PageWraper<>();
+        List<Product> productList = planService.selectProductsOnCondition(product, page, rows);
+        int productsAmount = planService.countAllProductsOnCondition(product);
+        pageWraper.setRows(productList);
+        pageWraper.setTotal(productsAmount);
+        return pageWraper;
+
+    }
+
 
 
     @ResponseBody
@@ -384,6 +526,8 @@ public class PlanController {
 
 
 
+/*-------------------------------------------------------- work -------------------------------------------------------*/
+
 
 
 
@@ -396,30 +540,168 @@ public class PlanController {
 
     @RequestMapping("work/list")
     @ResponseBody
-    public List<Work> showWorkList() {
-        ArrayList<Work> list = new ArrayList<>();
+    public PageWraper<Work> findWorkByPage(@RequestParam("page") int page,
+                                                 @RequestParam("rows") int rows) {
+        PageWraper<Work> pageWraper = new PageWraper<>();
+        List<Work> workList = planService.showAllWorksByIndexs(page, rows);
+        int workAmount = planService.countAllWorks();
 
-
-        return list;
+        pageWraper.setRows(workList);
+        pageWraper.setTotal(workAmount);
+        return pageWraper;
     }
 
 
-    @RequestMapping("manufacture/list")
+    @RequestMapping("work/insert")
     @ResponseBody
-    public List<Manufacture> showManufactureList() {
-        ArrayList<Manufacture> list = new ArrayList<>();
-
-
-        return list;
+    public UserMessage addProduct(Work work) {
+        boolean addWork = planService.addWork(work);
+        UserMessage userMessage = new UserMessage();
+        if (addWork){
+            userMessage.setStatus(200);
+            userMessage.setMsg("OK");
+        }else {
+            userMessage.setStatus(500);
+            userMessage.setMsg("FALSE");
+        }
+        return userMessage;
     }
 
 
-    @RequestMapping("task/list")
+
+    @RequestMapping(value = "work/delete_batch",
+            method=RequestMethod.POST,
+            consumes="application/x-www-form-urlencoded")
     @ResponseBody
-    public List<Task> showTaskList() {
-        ArrayList<Task> list = new ArrayList<>();
-
-
-        return list;
+    public UserMessage deleteBatchWorks(String[] ids) {
+        boolean deleteBatchWorks = planService.deleteBatchWorks(ids);
+        UserMessage userMessage = new UserMessage();
+        if (deleteBatchWorks){
+            userMessage.setStatus(200);
+            userMessage.setMsg("OK");
+        }else {
+            userMessage.setStatus(500);
+            userMessage.setMsg("FALSE");
+        }
+        return userMessage;
     }
+
+
+    @RequestMapping("work/update_all")
+    @ResponseBody
+    public UserMessage updateWork(Work work) {
+
+
+        boolean updateWork = planService.updateWork(work);
+        UserMessage userMessage = new UserMessage();
+        if (updateWork){
+            userMessage.setStatus(200);
+            userMessage.setMsg("OK");
+        }else {
+            userMessage.setStatus(500);
+            userMessage.setMsg("FALSE");
+        }
+        return userMessage;
+
+    }
+
+
+/************************ 以下四个方法可以使用正则表达式优化 **************************** */
+
+    @RequestMapping("work/search_work_by_workId")
+    @ResponseBody
+    public PageWraper<Work> searchWorkByWorkId(Work work,
+                                                          @RequestParam("page") int page,
+                                                          @RequestParam("rows") int rows) {
+        PageWraper<Work> pageWraper = new PageWraper<>();
+        List<Work> workList = planService.selectWorksOnCondition(work, page, rows);
+        int worksAmount = planService.countAllWorksOnCondition(work);
+        pageWraper.setRows(workList);
+        pageWraper.setTotal(worksAmount);
+        return pageWraper;
+
+    }
+
+    @RequestMapping("work/search_work_by_workProduct")
+    @ResponseBody
+    public PageWraper<Work> searchWorkByWorkProduct(Work work,
+                                                        @RequestParam("page") int page,
+                                                        @RequestParam("rows") int rows) {
+        PageWraper<Work> pageWraper = new PageWraper<>();
+        List<Work> workList = planService.selectWorksOnCondition(work, page, rows);
+        int worksAmount = planService.countAllWorksOnCondition(work);
+        pageWraper.setRows(workList);
+        pageWraper.setTotal(worksAmount);
+        return pageWraper;
+
+    }
+
+    @RequestMapping("work/search_work_by_workDevice")
+    @ResponseBody
+    public PageWraper<Work> searchWorkByWorkDevice(Work work,
+                                                          @RequestParam("page") int page,
+                                                          @RequestParam("rows") int rows) {
+        PageWraper<Work> pageWraper = new PageWraper<>();
+        List<Work> workList = planService.selectWorksOnCondition(work, page, rows);
+        int worksAmount = planService.countAllWorksOnCondition(work);
+        pageWraper.setRows(workList);
+        pageWraper.setTotal(worksAmount);
+        return pageWraper;
+
+    }
+
+
+
+
+    @RequestMapping("work/search_work_by_workProcess")
+    @ResponseBody
+    public PageWraper<Work> searchWorkByWorkProcess(Work work,
+                                                       @RequestParam("page") int page,
+                                                       @RequestParam("rows") int rows) {
+        PageWraper<Work> pageWraper = new PageWraper<>();
+        List<Work> workList = planService.selectWorksOnCondition(work, page, rows);
+        int worksAmount = planService.countAllWorksOnCondition(work);
+        pageWraper.setRows(workList);
+        pageWraper.setTotal(worksAmount);
+        return pageWraper;
+
+    }
+
+
+    @ResponseBody
+    @RequestMapping("work/get_data")
+    public List<Work> getWorkData() {
+        List<Work> workList = planService.showWorkList();
+
+        return workList;
+    }
+
+    @ResponseBody
+    @RequestMapping("work/get/{workId}")
+    public Work selectWorkByWorkId(@PathVariable("workId") String workId) {
+        return planService.selectWorkByWorkId(workId);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

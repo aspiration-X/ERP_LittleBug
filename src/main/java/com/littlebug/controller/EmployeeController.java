@@ -51,7 +51,7 @@ public class EmployeeController {
         return employees;
     }
 
-    @RequestMapping("get_data")
+    @RequestMapping("get_data2")
     @ResponseBody
     public List<Employee> deviceType3() {
         List<Employee> employeeList = employeeService.findEmployeeList();

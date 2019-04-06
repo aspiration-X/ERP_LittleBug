@@ -19,6 +19,16 @@ public class FinalMeasuretCheck {
 
     private String note;
 
+    private String empName;
+
+    public String getEmpName() {
+        return empName;
+    }
+
+    public void setEmpName(String empName) {
+        this.empName = empName;
+    }
+
     public String getfMeasureCheckId() {
         return fMeasureCheckId;
     }
@@ -82,4 +92,6 @@ public class FinalMeasuretCheck {
     public void setNote(String note) {
         this.note = note == null ? null : note.trim();
     }
+
+
 }

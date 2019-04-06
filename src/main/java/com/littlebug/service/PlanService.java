@@ -30,14 +30,7 @@ public interface PlanService {
 
     List<COrder> showAllOrdersByIndexs(int start, int end);
 
-
-
-    /*--------------------------------------------------- product ------------------------------------------------------*/
-
-
-    List<Product> showProductList();
-
-    Product selectProductByProductId(String productId);
+    List<COrder> showALLOrders();
 
 
     /*--------------------------------------------------- custom ------------------------------------------------------*/
@@ -63,11 +56,88 @@ public interface PlanService {
     boolean updateCustom(Custom custom);
 
 
-//
-//    List<Work> showWorkList(@Param("page") int page, @Param("rows") int rows);
-//    List<Task> showTaskList(@Param("page") int page, @Param("rows") int rows);
-//    List<Manufacture> showManufactureList(@Param("page") int page, @Param("rows") int rows);
-//
-//    PageModel findByPage(@Param("page") int page, @Param("rows") int rows);
+
+    /*--------------------------------------------------- product ------------------------------------------------------*/
+
+    int countAllProducts();
+
+    List<Product> showAllProductsByIndexs(int page, int rows);
+
+    List<Product> showProductList();
+
+    Product selectProductByProductId(String productId);
+
+    List<Product> selectProductsOnCondition(Product product, int page, int rows);
+
+    int countAllProductsOnCondition(Product product);
+
+    boolean addProduct(Product product);
+
+    boolean deleteBatchProducts(String[] productIds);
+
+    boolean updateProduct(Product product);
+
+
+
+
+
+
+
+
+    /*--------------------------------------------------- work ------------------------------------------------------*/
+
+
+    boolean addWork(Work work);
+
+    boolean deleteBatchWorks(String[] ids);
+
+    boolean updateWork(Work work);
+
+    int countAllWorks();
+
+    List<Work> showAllWorksByIndexs(int page, int rows);
+
+    List<Work> selectWorksOnCondition(Work work, int page, int rows);
+
+    int countAllWorksOnCondition(Work work);
+
+//    List<Work> showWorkList();
+
+    Work selectWorkByWorkId(String workId);
+
+    List<Work> showWorkList();
+
+    COrder selectOrderByOrderId(String orderId);
+
+
+
+
+
+
+
+
+    /*--------------------------------------------------- work ------------------------------------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

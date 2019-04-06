@@ -79,4 +79,20 @@
       quota = #{quota,jdbcType=INTEGER}
     where process_id = #{processId,jdbcType=VARCHAR}
   </update>
+
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from process;
+  </select>
+
+  <select id="getProcessByProcessId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from process
+    <where>
+      process_id = #{processId}
+    </where>
+  </select>
 </mapper>

@@ -60,4 +60,16 @@ public class Product {
     public void setStatus(Integer status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productId='" + productId + '\'' +
+                ", productName='" + productName + '\'' +
+                ", productType='" + productType + '\'' +
+                ", image='" + image + '\'' +
+                ", note='" + note + '\'' +
+                ", status=" + status +
+                '}';
+    }
 }

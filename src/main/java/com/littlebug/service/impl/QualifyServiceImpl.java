@@ -1,9 +1,11 @@
 package com.littlebug.service.impl;
 
 import com.littlebug.bean.Employee;
+import com.littlebug.bean.ProcessCountCheck;
 import com.littlebug.bean.Product;
 import com.littlebug.bean.UnqualifyApply;
 import com.littlebug.dao.EmployeeMapper;
+import com.littlebug.dao.ProcessCountCheckMapper;
 import com.littlebug.dao.ProductMapper;
 import com.littlebug.dao.UnqualifyApplyMapper;
 import com.littlebug.service.QualifyService;
@@ -18,8 +20,10 @@ import java.util.List;
  */
 @Service
 public class QualifyServiceImpl implements QualifyService {
+    //不合格品管理
     @Autowired
     UnqualifyApplyMapper unqualifyApplyMapper;
+
 
     @Autowired
     ProductMapper productMapper;
@@ -83,6 +87,10 @@ public class QualifyServiceImpl implements QualifyService {
     @Override
     public Employee getEmployeeByempId(String empId) {
        return employeeMapper.getEmployeeByEmployeeId(empId);
-
     }
+
+
+
+
+
 }

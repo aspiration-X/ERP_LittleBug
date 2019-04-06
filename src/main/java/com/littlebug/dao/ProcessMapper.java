@@ -2,6 +2,8 @@ package com.littlebug.dao;
 
 import com.littlebug.bean.Process;
 
+import java.util.List;
+
 public interface ProcessMapper {
     int deleteByPrimaryKey(String processId);
 
@@ -14,4 +16,8 @@ public interface ProcessMapper {
     int updateByPrimaryKeySelective(Process record);
 
     int updateByPrimaryKey(Process record);
+
+    List<Process> selectAll();
+
+    Process getProcessByProcessId(String processId);
 }

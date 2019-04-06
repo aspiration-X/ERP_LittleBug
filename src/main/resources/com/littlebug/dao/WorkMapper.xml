@@ -9,6 +9,27 @@
     <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
     <result column="rating" jdbcType="INTEGER" property="rating" />
   </resultMap>
+
+    <!--<resultMap id="productResultMap" type="com.littlebug.bean.Product">-->
+        <!--<id column="product_id" jdbcType="VARCHAR" property="productId" />-->
+        <!--<result column="product_name" jdbcType="VARCHAR" property="productName" />-->
+        <!--<result column="product_type" jdbcType="VARCHAR" property="productType" />-->
+        <!--<result column="image" jdbcType="VARCHAR" property="image" />-->
+        <!--<result column="note" jdbcType="VARCHAR" property="note" />-->
+        <!--<result column="status" jdbcType="INTEGER" property="status" />-->
+    <!--</resultMap>-->
+
+
+    <!--<resultMap id="deviceResultMap" type="com.littlebug.bean.Device">-->
+
+
+    <!--</resultMap>-->
+
+    <!--<resultMap id="processResultMap" type="com.littlebug.bean.Process">-->
+
+
+    <!--</resultMap>-->
+
   <sql id="Base_Column_List">
     work_id, process_number, product_id, process_id, device_id, rating
   </sql>
@@ -103,4 +124,73 @@
       rating = #{rating,jdbcType=INTEGER}
     where work_id = #{workId,jdbcType=VARCHAR}
   </update>
+
+
+
+
+
+    <sql id="selectOnConditionSql">
+        1 = 1
+        <if test="work.workId != null">
+            and work_id LIKE CONCAT('%',#{work.workId,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="work.productId != null">
+            and product_id like CONCAT('%',#{work.productId,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="work.deviceId != null">
+            and device_id like CONCAT('%',#{work.deviceId,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="work.processId != null">
+            and process_id like CONCAT('%',#{work.processId,jdbcType=VARCHAR},'%')
+        </if>
+    </sql>
+
+
+    <sql id="countOnConditionSql">
+        1 = 1
+        <if test="work.workId != null">
+            and work_id LIKE CONCAT('%',#{work.workId,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="work.productId != null">
+            and product_id like CONCAT('%',#{work.productId,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="work.deviceId != null">
+            and device_id like CONCAT('%',#{work.deviceId,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="work.processId != null">
+            and process_id like CONCAT('%',#{work.processId,jdbcType=VARCHAR},'%')
+        </if>
+    </sql>
+
+
+    <select id="countAllWorksOnConditions" resultType="integer">
+        select count(work_id) from `work`
+        where
+        <include refid="countOnConditionSql"/>
+    </select>
+
+    <select id="selectWorksOnCondition" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from `work`
+        where
+        <include refid="selectOnConditionSql"/>
+        limit #{param2},#{param3}
+    </select>
+
+    <select id="countAllWorks" resultType="integer">
+        select count(work_id) from `work`
+    </select>
+
+    <select id="showAllWorksByIndexs" resultMap="BaseResultMap">
+        select * from `work`
+        limit #{offset}, #{limit}
+    </select>
+
+    <select id="showAllWorks" resultMap="BaseResultMap">
+        select * from `work`
+    </select>
+
+
+
 </mapper>

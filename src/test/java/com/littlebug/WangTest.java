@@ -1,17 +1,25 @@
 package com.littlebug;
 
+import com.littlebug.bean.FinalMeasuretCheck;
+import com.littlebug.bean.ProcessCountCheck;
+import com.littlebug.bean.ProcessMeasureCheck;
 import com.littlebug.bean.UnqualifyApply;
+import com.littlebug.dao.FinalMeasuretCheckMapper;
+import com.littlebug.dao.ProcessCountCheckMapper;
+import com.littlebug.dao.ProcessMeasureCheckMapper;
 import com.littlebug.dao.UnqualifyApplyMapper;
+import com.littlebug.service.FinalMeasuretCheckService;
+import com.littlebug.service.ProcessMeasureCheckService;
 import com.littlebug.service.QualifyService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import sun.rmi.runtime.Log;
+
 
 import java.util.List;
-import java.util.logging.Logger;
+
 
 /**
  * created by spir
@@ -25,6 +33,16 @@ public class WangTest {
     UnqualifyApplyMapper unqualifyApplyMapper;
     @Autowired
     QualifyService qualifyService;
+    @Autowired
+    FinalMeasuretCheckMapper finalMeasuretCheckMapper;
+    @Autowired
+    FinalMeasuretCheckService finalMeasuretCheckService;
+    @Autowired
+    ProcessMeasureCheckMapper processMeasureCheckMapper;
+    @Autowired
+    ProcessMeasureCheckService processMeasureCheckService;
+    @Autowired
+    ProcessCountCheckMapper processCountCheckMapper;
 
     @Test
     public void testSelectPagination(){
@@ -41,6 +59,33 @@ public class WangTest {
     public void searchUnqualifyByProductName(){
         List<UnqualifyApply> unqualifyApplies = qualifyService.searchUnqualifyByProductName("椅子", 1, 10);
     }
+
+
+    /*--------------------------------------------成品计量质检-----------------------------------------------------------*/
+
+    @Test
+    public void selectPaginationMeasure(){
+        List<FinalMeasuretCheck> finalMeasuretCheckList = finalMeasuretCheckMapper.selectPagination(10, 0);
+    }
+
+    @Test
+    public void searchMeasureByFMeasureCheckId(){
+        finalMeasuretCheckService.searchMeasureByFMeasureCheckId("19", 1, 10);
+    }
+
+    @Test
+    public void selectPaginationProcessMeasure(){
+        List<ProcessMeasureCheck> processMeasureCheckMappers = processMeasureCheckMapper.selectPagination(10, 0);
+        List<ProcessMeasureCheck> processMeasureChecks = processMeasureCheckService.selectPagination(1, 10);
+    }
+
+    @Test
+    public void pCountcheckList(){
+        List<ProcessCountCheck> processCountChecks = processCountCheckMapper.pCountcheckList(10, 0);
+    }
+
+
+
 }
 
 

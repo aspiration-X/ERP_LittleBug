@@ -15,6 +15,10 @@ public class Manufacture {
 
     private Date endDate;
 
+    private COrder order;
+
+    private Technology technology;
+
     public String getManufactureSn() {
         return manufactureSn;
     }
@@ -61,5 +65,35 @@ public class Manufacture {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public COrder getOrder() {
+        return order;
+    }
+
+    public void setOrder(COrder order) {
+        this.order = order;
+    }
+
+    public Technology getTechnology() {
+        return technology;
+    }
+
+    public void setTechnology(Technology technology) {
+        this.technology = technology;
+    }
+
+    @Override
+    public String toString() {
+        return "Manufacture{" +
+                "manufactureSn='" + manufactureSn + '\'' +
+                ", orderId='" + orderId + '\'' +
+                ", technologyId='" + technologyId + '\'' +
+                ", launchQuantity=" + launchQuantity +
+                ", beginDate=" + beginDate +
+                ", endDate=" + endDate +
+                ", order=" + order +
+                ", technology=" + technology +
+                '}';
     }
 }
