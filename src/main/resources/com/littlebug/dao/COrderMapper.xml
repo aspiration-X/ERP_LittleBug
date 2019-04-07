@@ -11,7 +11,7 @@
     <result column="quantity" jdbcType="INTEGER" property="quantity" />
     <result column="unit_price" jdbcType="DECIMAL" property="unitPrice" />
     <result column="unit" jdbcType="VARCHAR" property="unit" />
-    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="order_image" jdbcType="VARCHAR" property="image" />
     <result column="file" jdbcType="VARCHAR" property="file" />
     <result column="status" jdbcType="INTEGER" property="status" />
       <association property="custom" resultMap="customMap"/>
@@ -43,13 +43,13 @@
 
   <sql id="Base_Column_List">
     order_id, custom_id, product_id, order_date, request_date, note, quantity, unit_price, 
-    unit, image, file, status
+    unit, image as order_image, file, status
   </sql>
 
     <sql id="OrderResultSet">
         order_id, c.custom_id,c.custom_name,c.full_name,c.address,c.fax,c.email,c.owner_name,c.owner_tel,c.status,c.note,
         p.product_id,p.product_name,p.product_type,p.image,p.note,p.status,
-        order_date, request_date, o.note, quantity, unit_price,unit, o.image, file, o.status
+        order_date, request_date, o.note, quantity, unit_price,unit, o.image as order_image, file, o.status
     </sql>
 
     <sql id="ProductResultSet">
@@ -260,7 +260,7 @@
         select
         order_id, c.custom_id,c.custom_name,c.full_name,c.address,c.fax,c.email,c.owner_name,c.owner_tel,c.status,c.note,
         p.product_id,p.product_name,p.product_type,p.image,p.note,p.status,
-        order_date, request_date, o.note, quantity, unit_price,unit, o.image, file, o.status
+        order_date, request_date, o.note, quantity, unit_price,unit, o.image as order_image, file, o.status
         from c_order o left join custom c on
         o.custom_id = c.custom_id
         left join product p on
@@ -274,7 +274,8 @@
     <!--</select>-->
 
     <select id="showAllOrders" resultMap="BaseResultMap">
-        select * from c_order
+        select <include refid="OrderResultSet"/>
+         from c_order
     </select>
 
 

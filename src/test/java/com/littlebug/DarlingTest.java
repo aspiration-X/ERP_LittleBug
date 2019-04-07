@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.io.*;
 import java.util.List;
 
 
@@ -371,6 +372,54 @@ public class DarlingTest {
         String[] ids = {"001"};
         boolean b = taskService.deleteBatchTasks(ids);
         Assert.assertTrue(b);
+
+    }
+
+    @Test
+    public void FileUploadTest() throws IOException {
+
+
+
+
+        File file = new File("Z:\\fileTest\\mobile.txt");
+        String realPath = "Z:\\fileTest\\aimDir";
+
+        String fileName = file.getName();
+
+        int hashCode=file.getName().hashCode();
+        String dir1=Integer.toHexString(hashCode&0XF);//计算第一级目录
+        String dir2=Integer.toHexString((hashCode>>4)&0XF);//计算第二级目录
+
+        String aimDir = realPath+"/"+dir1;
+
+        if(!new File(aimDir).exists()){
+            new File(aimDir).mkdir();
+        }
+
+        aimDir=aimDir+"/"+dir2;
+        if(!new File(aimDir).exists()){
+            new File(aimDir).mkdir();
+        }
+
+        FileInputStream is = new FileInputStream(file);
+
+//        String extName=fileName.substring(fileName.lastIndexOf("."));
+        String savaFileName = aimDir+"/";
+
+        savaFileName += fileName;
+        FileOutputStream fos=new FileOutputStream(new File(savaFileName));
+        long fileSize=is.available();
+        int length=-1;
+        byte []buff=new byte[1024*1024];
+        while((length=is.read(buff))!=-1){
+            fos.write(buff, 0, length);
+        }
+        fos.close();
+        is.close();
+        file.delete();//清空缓存文件
+
+        System.out.println("---------------------------------------------" +savaFileName+"---------------------------------------------");
+
 
     }
 

@@ -41,9 +41,15 @@ public class PictureUploadController {
 
         Map<String, String> map = new HashMap<>();
 
-        String url = FileUploader.singleFileUpload(uploadFile, imgRealPath).get("pic");
+        String picType = "pic";
 
-        if (url != null) {
+        String picName = FileUploader.singleFileUpload(uploadFile, imgRealPath, picType).get("pic");
+
+
+        if (picName != null) {
+
+            String url = "/pic/" + picName;
+
             fileMessage.setError(0);
             fileMessage.setUrl(url);
         }
@@ -66,14 +72,15 @@ public class PictureUploadController {
         String filePath = imgPath + picName;
 
         File file = new File(filePath);
-        deleteMessage.setDate("false");
+        deleteMessage.setData("false");
         if (file.exists()) {
             if (file.delete()) {
-                deleteMessage.setDate("success");
+                deleteMessage.setData("success");
             }
         }else {
-            deleteMessage.setDate("success");
+            deleteMessage.setData("success");
         }
+
         return deleteMessage;
     }
 

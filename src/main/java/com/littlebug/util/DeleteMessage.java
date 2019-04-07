@@ -8,21 +8,20 @@ package com.littlebug.util;
  */
 public class DeleteMessage {
 
-    private String date;
+    private String data;
 
-    public String getDate() {
-        return date;
+    public String getData() {
+        return data;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setData(String data) {
+        this.data = data;
     }
 
     @Override
     public String toString() {
         return "DeleteMessage{" +
-                "date='" + date + '\'' +
+                "data='" + data + '\'' +
                 '}';
     }
-
 }
