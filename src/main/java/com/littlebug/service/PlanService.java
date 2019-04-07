@@ -32,6 +32,7 @@ public interface PlanService {
 
     List<COrder> showALLOrders();
 
+    COrder selectOrderByOrderId(String orderId);
 
     /*--------------------------------------------------- custom ------------------------------------------------------*/
 
@@ -107,7 +108,6 @@ public interface PlanService {
 
     List<Work> showWorkList();
 
-    COrder selectOrderByOrderId(String orderId);
 
 
 

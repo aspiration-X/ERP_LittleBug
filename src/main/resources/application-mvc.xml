@@ -37,4 +37,14 @@
             </set>
         </property>
     </bean>
+
+    <!-- 文件/图片上传处理器 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 设置默认编码 utf-8 -->
+        <property name="defaultEncoding" value="UTF-8"/>
+        <!-- 设置最大上传大小 5m -->
+        <property name="maxUploadSize" value="5242440"/>
+    </bean>
+
+
 </beans>

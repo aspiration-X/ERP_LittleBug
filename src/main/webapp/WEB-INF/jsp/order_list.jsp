@@ -125,7 +125,7 @@
 </div>
 <div id="orderProductInfo" class="easyui-dialog" title="产品信息" data-options="modal:true,closed:true,resizable:true,
 		iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
-    <form id="orderProductEditForm" method="post">
+    <form id="orderProductEditForm" method="post" enctype="multipart/form-data>
         <input type="hidden" name="productId"/>
         <table cellpadding="5">
             <tr>

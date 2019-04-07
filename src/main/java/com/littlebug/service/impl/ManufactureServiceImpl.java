@@ -88,7 +88,10 @@ public class ManufactureServiceImpl implements ManufactureService {
 
     @Override
     public Manufacture selectManufactureByManufactureId(String manufactureId) {
-        return manufactureMapper.selectByPrimaryKey(manufactureId);
+        Manufacture manufacture = manufactureMapper.selectByPrimaryKey(manufactureId);
+        manufacture.setcOrder(orderMapper.selectByPrimaryKey(manufacture.getOrderId()));
+        manufacture.setTechnology(technologyMapper.selectByPrimaryKey(manufacture.getTechnologyId()));
+        return manufacture;
     }
 
     @Override

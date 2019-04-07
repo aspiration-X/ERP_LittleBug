@@ -5,17 +5,23 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.littlebug.bean.*;
 import com.littlebug.service.PlanService;
+import com.littlebug.util.FileUploader;
 import com.littlebug.util.PageWraper;
 import com.littlebug.util.UserMessage;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -233,7 +239,8 @@ public class PlanController {
 
     @RequestMapping("order/insert")
     @ResponseBody
-    public UserMessage addOrder(COrder order) {
+    public UserMessage addOrder(COrder order, MultipartFile[] files, HttpServletRequest request) {
+
         boolean addOrder = planService.addOrder(order);
         UserMessage userMessage = new UserMessage();
         if (addOrder){
@@ -243,6 +250,7 @@ public class PlanController {
             userMessage.setStatus(500);
             userMessage.setMsg("FALSE");
         }
+
         return userMessage;
     }
 
@@ -688,7 +696,8 @@ public class PlanController {
     @ResponseBody
     @RequestMapping("work/get/{workId}")
     public Work selectWorkByWorkId(@PathVariable("workId") String workId) {
-        return planService.selectWorkByWorkId(workId);
+        Work work = planService.selectWorkByWorkId(workId);
+        return work;
     }
 
 

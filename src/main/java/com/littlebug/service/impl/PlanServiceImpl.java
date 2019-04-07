@@ -357,9 +357,14 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public Work selectWorkByWorkId(String workId) {
-        return workMapper.selectByPrimaryKey(workId);
+        Work work = workMapper.selectByPrimaryKey(workId);
+        work.setProduct(productMapper.selectByPrimaryKey(work.getProductId()));
+        work.setProcess(processMapper.selectByPrimaryKey(work.getProcessId()));
+        work.setDevice(deviceMapper.selectByPrimaryKey(work.getDeviceId()));
+        return work;
     }
 
+    @Override
     public List<Work> showWorkList(){
         List<Work> workList = workMapper.showAllWorks();
         for (Work w:workList
