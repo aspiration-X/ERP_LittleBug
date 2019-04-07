@@ -51,13 +51,6 @@ public class EmployeeController {
         return employees;
     }
 
-    @RequestMapping("get_data2")
-    @ResponseBody
-    public List<Employee> deviceType3() {
-        List<Employee> employeeList = employeeService.findEmployeeList();
-        return employeeList;
-    }
-
     //增加
     //抓包看到响应报文为空的json
     @RequestMapping("/add_judge")
@@ -109,6 +102,14 @@ public class EmployeeController {
         return map;
     }
 
+
+    @RequestMapping("/get_data")
+    @ResponseBody
+    public List<Employee> getEmployeetData() {
+        List<Employee> employees = employeeService.findAllEmployee();
+        return employees;
+    }
+
     //删除
     @RequestMapping("/delete_judge")
     @ResponseBody
@@ -130,11 +131,32 @@ public class EmployeeController {
     }
 
 
-    //根据部门编号查询
+    //根据员工编号查询
     @RequestMapping("/search_employee_by_employeeId")
     public @ResponseBody
     List<Employee> queryByEmployeeId(String searchValue) {
         List<Employee> employees = employeeService.queryByEmployeeId(searchValue);
         return employees;
     }
+
+
+    //根据员工名称查询
+    @RequestMapping("/search_employee_by_employeeName")
+    public @ResponseBody
+    List<Employee> queryByEmployeeName(String searchValue) {
+        List<Employee> employees = employeeService.queryByEmployeeName(searchValue);
+        return employees;
+    }
+
+    //根据部门名称查询
+    @RequestMapping("/search_employee_by_departmentName")
+    public @ResponseBody
+    List<Employee> queryByDepartmentName(String searchValue) {
+        List<Employee> employees = employeeService.queryByDepartmentName(searchValue);
+        return employees;
+    }
+
+
+
+
 }

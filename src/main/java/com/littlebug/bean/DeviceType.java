@@ -1,12 +1,20 @@
 package com.littlebug.bean;
 
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class DeviceType {
+    @Size(max = 6, message = "设备类型Id请限制在六个字符内")
     private String deviceTypeId;
 
+    @NotNull
     private String deviceTypeName;
 
+    @Pattern(regexp = "[A-E]", message = "设备类型型号限制A-E")
     private String deviceTypeModel;
 
     private String deviceTypeSpec;

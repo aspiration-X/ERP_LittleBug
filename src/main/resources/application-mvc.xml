@@ -23,8 +23,12 @@
 
 
     <!--mvc的配置-->
-    <mvc:annotation-driven conversion-service="conversionService"/>
+    <mvc:annotation-driven conversion-service="conversionService" validator="validator"/>
 
+    <!--校验器-->
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+    </bean>
 
     <!--springmvc的视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

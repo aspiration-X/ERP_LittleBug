@@ -53,5 +53,10 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departmentMapper.deleteDepartment(ids);
     }
 
+    @Override
+    public Department getDepartmentById(String id) {
+        return departmentMapper.getDepartmentById(id);
+    }
+
 
 }

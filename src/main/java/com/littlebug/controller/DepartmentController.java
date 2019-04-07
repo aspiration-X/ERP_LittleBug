@@ -4,6 +4,7 @@ import com.littlebug.bean.Department;
 import com.littlebug.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -148,6 +149,13 @@ public class DepartmentController {
         List<Department> departments = departmentService.findAllDepartment();
         return departments;
     }
+
+    @RequestMapping("/get/{id}")
+    @ResponseBody
+    public Department getDepartment(@PathVariable("id") String id){
+        return departmentService.getDepartmentById(id);
+    }
+
 
 
 

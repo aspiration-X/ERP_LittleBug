@@ -22,7 +22,7 @@
     <!-- bean definitions here -->
     <!--来源于mybatis对spring的支持包-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <!--<property name="configLocation" value="classpath:mybatis.xml"/>-->
+        <property name="configLocation" value="classpath:mybatis.xml"/>
         <property name="typeAliasesPackage" value="com.littlebug.bean"/>
         <property name="dataSource" ref="datasource"/>
     </bean>

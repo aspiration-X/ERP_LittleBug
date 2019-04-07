@@ -1,5 +1,6 @@
 package com.littlebug.service;
 
+import com.github.pagehelper.PageInfo;
 import com.littlebug.bean.*;
 
 import java.util.List;
@@ -9,7 +10,9 @@ import java.util.List;
  * Date 2019/4/3 Times 19:34
  */
 public interface DeviceService {
-    List<DeviceType> findAllDeviceTypes();
+    PageInfo<DeviceType> findAllDeviceTypes(int page, int rows);
+
+    List<DeviceType> findAllDeviceTypeList();
 
     boolean editDeviceType(DeviceType deviceType, String deviceTypeId);
 

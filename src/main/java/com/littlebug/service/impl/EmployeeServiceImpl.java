@@ -25,11 +25,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> findEmployeeList() {
-        List<Employee> employeeList = employeeMapper.selectEmployeeList();
-        return employeeList;
-    }
-
     public int insertEmployee(Employee employee, String departmentId) {
         return employeeMapper.insertEmployee(employee, departmentId);
     }
@@ -48,5 +43,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Employee> queryByEmployeeId(String empId) {
         return employeeMapper.queryByEmployeeId(empId);
     }
+
+    @Override
+    public List<Employee> queryByEmployeeName(String empName) {
+        return employeeMapper.queryByEmployeeName(empName);
+    }
+
+    @Override
+    public List<Employee> queryByDepartmentName(String departmentName) {
+        return employeeMapper.queryByDepartmentName(departmentName);
+    }
+
 
 }
